@@ -15,6 +15,7 @@ class Run(models.Model):
     second = models.IntegerField(null=False, blank=False)
     distance = models.IntegerField(blank=False, null=False)
     complete = models.BooleanField(blank=False, null=False, default=True)
+    treadmill = models.BooleanField(blank=False, null=False, default=True)
 
 
     class Meta:
