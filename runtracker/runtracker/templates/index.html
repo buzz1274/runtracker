@@ -1,0 +1,18 @@
+<table border="1" width="100%">
+    <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Route</th>
+        <th>Time(hh:mm:ss)</th>
+        <th>Distance(km)</th>
+    </tr>
+    {% for run in runs %}
+        <tr>
+            <td>{{run.date}}</td>
+            <td>{{run.type}}</td>
+            <td>{{run.route}}</td>
+            <td>{{run.duration}}</td>
+            <td>{{run.km}}</td>
+        </tr>
+    {% endfor %}
+</table>

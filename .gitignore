@@ -1,4 +1,6 @@
 .idea
+runserver.sh
+manage.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

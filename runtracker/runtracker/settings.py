@@ -22,8 +22,6 @@ SECRET_KEY = 'n_8y_-t^__3i&42%@8k!coez0k8p-ewoto0bjy8@afjf18bru5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -36,6 +34,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'runtracker',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,14 +51,44 @@ ROOT_URLCONF = 'runtracker.urls'
 
 WSGI_APPLICATION = 'runtracker.wsgi.application'
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            BASE_DIR + '/runtracker/templates/',
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+
+    },
+]
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'runtracker',
+        'USER': 'runtracker',
+        'HOST': os.environ['POSTGRES_PORT_5432_TCP_ADDR'],
+        'PORT': 5432,
+        'PASSWORD': 'runtracker'
     }
 }
 
