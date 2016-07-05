@@ -1,4 +1,4 @@
-<table border="1" width="100%">
+<table border="1" width="100%" cellpadding="3">
     <tr>
         <th>Date</th>
         <th>Type</th>
@@ -14,11 +14,11 @@
             <td>{{run.date}}</td>
             <td>{{run.type}}</td>
             <td>{{run.route}}</td>
-            <td>{{run.duration}}</td>
-            <td>{{run.km}}</td>
-            <td>{{run.min_per_km}}</td>
-            <td>{{run.five_k_time}}</td>
-            <td>
+            <td style="text-align:right;">{{run.duration}}</td>
+            <td style="text-align:right;">{{run.km}}</td>
+            <td style="text-align:right;">{{run.min_per_km}}</td>
+            <td style="text-align:right;">{{run.five_k_time}}</td>
+            <td style="text-align:center;">
                 {% if run.complete %}
                     yes
                 {% else %}

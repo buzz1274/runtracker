@@ -34,11 +34,16 @@ class Run(models.Model):
     def km(self):
         return "{0:.3f}".format(float(self.distance) / 1000)
 
-    def min_per_km(self):
-        return (float(self.second) / 60) /\
-               (float(self.distance) / 1000)
+    def min_per_km(self, format_for_display=True):
+        minutes = (float(self.second) / 60) /\
+                  (float(self.distance) / 1000)
+
+        if format_for_display:
+            return "{0:.2f}".format(minutes)
+        else:
+            return minutes
 
     def five_k_time(self):
-        return self.duration(self.min_per_km() * 5 * 60)
+        return self.duration(self.min_per_km(False) * 5 * 60)
 
 admin.site.register(Run)
