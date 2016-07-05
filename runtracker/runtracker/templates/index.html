@@ -1,24 +1,33 @@
+{% load templatetags %}
+
 <table border="1" width="100%" cellpadding="3">
     <tr>
         <th>Date</th>
         <th>Type</th>
+        <th>Treadmill</th>
         <th>Route</th>
         <th>Time(hh:mm:ss)</th>
         <th>Distance(km)</th>
         <th>Average Pace(min/km)</th>
         <th>5K Time(hh:mm:ss)</th>
         <th>Complete</th>
-        <th>Treadmill</th>
     </tr>
     {% for run in runs %}
         <tr>
             <td>{{run.date}}</td>
             <td>{{run.type}}</td>
+            <td style="text-align:center;">
+                {% if run.treadmill %}
+                yes
+                {% else %}
+                no
+                {% endif %}
+            </td>
             <td>{{run.route}}</td>
-            <td style="text-align:right;">{{run.duration}}</td>
-            <td style="text-align:right;">{{run.km}}</td>
+            <td style="text-align:right;">{{run.seconds|convert_seconds}}</td>
+            <td style="text-align:right;">{{run.metres|convert_metres}}</td>
             <td style="text-align:right;">{{run.min_per_km}}</td>
-            <td style="text-align:right;">{{run.five_k_time}}</td>
+            <td style="text-align:right;">{{run.five_k_time|convert_seconds}}</td>
             <td style="text-align:center;">
                 {% if run.complete %}
                     yes
@@ -26,13 +35,17 @@
                     no
                 {% endif %}
             </td>
-            <td style="text-align:center;">
-                {% if run.treadmill %}
-                    yes
-                {% else %}
-                    no
-                {% endif %}
-            </td>
         </tr>
     {% endfor %}
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td style="text-align:right;">{{total_time|convert_seconds}}</td>
+        <td style="text-align:right;">{{total_distance|convert_metres}}</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
 </table>
