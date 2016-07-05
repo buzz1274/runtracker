@@ -42,10 +42,18 @@
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
-        <td style="text-align:right;">{{total_time|convert_seconds}}</td>
-        <td style="text-align:right;">{{total_distance|convert_metres}}</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td style="text-align:right;">
+            <strong>{{total_time|convert_seconds}}</strong>
+        </td>
+        <td style="text-align:right;">
+            <strong>{{total_distance|convert_metres}}</strong>
+        </td>
+        <td style="text-align:right;">
+            <strong>{{average_pace|two_decimals}}</strong>
+        </td>
+        <td style="text-align:right;">
+            <strong>{{average_5k|convert_seconds}}</strong>
+        </td>
         <td>&nbsp;</td>
     </tr>
 </table>

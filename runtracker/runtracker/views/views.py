@@ -21,8 +21,18 @@ def index(request):
     else:
         total_time = 0
 
+    if total_distance and total_time:
+        average_pace = (float(total_time) / 60) / \
+                       (float(total_distance) / 1000)
+        average_5k = average_pace * 5 * 60
+    else:
+        average_pace = 0
+        average_5k = 0
+
     return render_to_response('index.html',
                               {'runs': runs,
                                'total_distance': total_distance,
-                               'total_time': total_time},
+                               'total_time': total_time,
+                               'average_pace': average_pace,
+                               'average_5k': average_5k},
                               RequestContext(request))
