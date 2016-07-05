@@ -26,7 +26,7 @@
             <td>{{run.route}}</td>
             <td style="text-align:right;">{{run.seconds|convert_seconds}}</td>
             <td style="text-align:right;">{{run.metres|convert_metres}}</td>
-            <td style="text-align:right;">{{run.min_per_km}}</td>
+            <td style="text-align:right;">{{run.min_per_km|two_decimals}}</td>
             <td style="text-align:right;">{{run.five_k_time|convert_seconds}}</td>
             <td style="text-align:center;">
                 {% if run.complete %}
