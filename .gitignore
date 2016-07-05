@@ -1,5 +1,6 @@
 .idea
 runserver.sh
+runtracker/static/admin/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
