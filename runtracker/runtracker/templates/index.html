@@ -5,6 +5,9 @@
         <th>Route</th>
         <th>Time(hh:mm:ss)</th>
         <th>Distance(km)</th>
+        <th>Average Pace(min/km)</th>
+        <th>5K Time(hh:mm:ss)</th>
+        <th>Complete</th>
     </tr>
     {% for run in runs %}
         <tr>
@@ -13,6 +16,15 @@
             <td>{{run.route}}</td>
             <td>{{run.duration}}</td>
             <td>{{run.km}}</td>
+            <td>{{run.min_per_km}}</td>
+            <td>{{run.five_k_time}}</td>
+            <td>
+                {% if run.complete %}
+                    yes
+                {% else %}
+                    no
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
 </table>
