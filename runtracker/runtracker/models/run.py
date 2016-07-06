@@ -14,6 +14,7 @@ class Run(models.Model):
     date =  models.DateField(null=False, blank=False)
     seconds = models.IntegerField(null=False, blank=False)
     metres = models.IntegerField(blank=False, null=False)
+    run = models.BooleanField(blank=False, null=False, default=True)
     complete = models.BooleanField(blank=False, null=False, default=True)
     treadmill = models.BooleanField(blank=False, null=False, default=True)
 
