@@ -29,7 +29,7 @@ class Run(models.Model):
                (float(self.metres) / 1000)
 
     def km_per_hr(self):
-        return (60 / (float(self.seconds) / 60)) * (self.metres / 1000)
+        return self.min_per_km() / 60
 
 
     def five_k_time(self):

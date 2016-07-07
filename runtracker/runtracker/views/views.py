@@ -31,8 +31,7 @@ def index(request):
         average_pace = (float(total_time) / 60) / \
                        (float(total_distance) / 1000)
         average_5k = average_pace * 5 * 60
-        average_km_per_hr =  (60 / (float(total_time) / 60)) * \
-                             (total_distance / 1000)
+        average_km_per_hr =  60 / average_pace
     else:
         average_pace = 0
         average_5k = 0
