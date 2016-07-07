@@ -7,7 +7,13 @@ def index(request):
     """
     index
     """
-    runs = Run.objects.all()
+    year="2016"
+    month="07"
+    runs = Run.objects.all().filter(run=True,
+                                    date__year__gte=year,
+                                    date__month__gte=month,
+                                    date__year__lte=year,
+                                    date__month__lte=month)
     total_distance = runs.aggregate(total_distance=Sum(F('metres')))
     total_time = runs.aggregate(total_time=Sum(F('seconds')))
 
