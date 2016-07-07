@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 from django.db import models
-from django.contrib import admin
 
 
 class Run(models.Model):
@@ -18,10 +17,12 @@ class Run(models.Model):
     complete = models.BooleanField(blank=False, null=False, default=True)
     treadmill = models.BooleanField(blank=False, null=False, default=True)
 
-
     class Meta:
         db_table = 'run'
         ordering = ['date', 'run_id']
+
+    def seconds_for_display(self):
+        return self.complete
 
     def min_per_km(self):
         return (float(self.seconds) / 60) /\
@@ -30,4 +31,5 @@ class Run(models.Model):
     def five_k_time(self):
         return self.min_per_km() * 5 * 60
 
-admin.site.register(Run)
+    seconds_for_display.short_description = 'Time(hh:mm:ss)'
+
