@@ -22,7 +22,7 @@ class Run(models.Model):
                             choices=run_type, max_length=10)
     route = models.TextField(blank=False, null=False, default='')
     date =  models.DateField(null=False, blank=False)
-    seconds = models.CharField(null=False, blank=False, max_length=8)
+    seconds = models.IntegerField(null=False, blank=False)
     metres = models.IntegerField(blank=False, null=False)
     run = models.BooleanField(blank=False, null=False, default=True)
     complete = models.BooleanField(blank=False, null=False, default=True)
