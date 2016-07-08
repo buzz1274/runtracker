@@ -6,12 +6,23 @@ class Run(models.Model):
     """
     run model
     """
+    people = (('', '-------'),
+              ('david', 'David'),
+              ('claire', 'Claire'))
+
+    run_type = (('', '-------'),
+                ('couch25k', 'Couch25K'),
+                ('hike', 'Hike'),
+                ('walk', 'Walk'))
+
     run_id = models.AutoField(primary_key=True)
-    who = models.TextField(blank=False, null=False, default='')
-    type = models.TextField(blank=False, null=False, default='')
+    who = models.CharField(blank=False, null=False, default='',
+                           choices=people, max_length=6)
+    type = models.CharField(blank=False, null=False, default='',
+                            choices=run_type, max_length=10)
     route = models.TextField(blank=False, null=False, default='')
     date =  models.DateField(null=False, blank=False)
-    seconds = models.IntegerField(null=False, blank=False)
+    seconds = models.CharField(null=False, blank=False, max_length=8)
     metres = models.IntegerField(blank=False, null=False)
     run = models.BooleanField(blank=False, null=False, default=True)
     complete = models.BooleanField(blank=False, null=False, default=True)
@@ -31,9 +42,5 @@ class Run(models.Model):
     def km_per_hr(self):
         return 60 / self.min_per_km()
 
-
     def five_k_time(self):
         return self.min_per_km() * 5 * 60
-
-    seconds_for_display.short_description = 'Time(hh:mm:ss)'
-
