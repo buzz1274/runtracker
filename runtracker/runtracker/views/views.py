@@ -2,18 +2,31 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.db.models import F, Sum
 from ..models.run import Run
+from datetime import datetime
 
 def index(request):
     """
     index
     """
-    year="2016"
-    month="07"
-    runs = Run.objects.all().filter(run=True,
-                                    date__year__gte=year,
-                                    date__month__gte=month,
-                                    date__year__lte=year,
-                                    date__month__lte=month)
+    runs = Run.objects.all().filter()
+    this_month = request.GET.get('this_month', False)
+    run = request.GET.get('run', False)
+
+    if this_month:
+        year = datetime.now().year
+        month = datetime.now().month
+
+        runs = runs.filter(date__year__gte=year,
+                           date__month__gte=month,
+                           date__year__lte=year,
+                           date__month__lte=month)
+
+    if run:
+        runs = runs.filter(run=True)
+
+
+
+
     total_distance = runs.aggregate(total_distance=Sum(F('metres')))
     total_time = runs.aggregate(total_time=Sum(F('seconds')))
 

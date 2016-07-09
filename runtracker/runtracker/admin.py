@@ -14,7 +14,7 @@ class RunAdmin(admin.ModelAdmin):
     fields = ['who', 'type', 'route', 'date', 'time',
               'metres', 'run', 'treadmill', 'complete']
     list_display = ('who', 'date', 'run', 'treadmill', 'type', 'route',
-                    'duration', 'distance', 'complete',)
+                    'duration', 'distance', 'km_per_hr', 'complete',)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(RunAdmin, self).get_form(request, obj, **kwargs)
@@ -55,6 +55,9 @@ class RunAdmin(admin.ModelAdmin):
             seconds = 0
 
         return self.format_duration(seconds)
+
+    def km_per_hr(self, obj):
+        return "{0:.2f}".format(obj.km_per_hr())
 
     def distance(self, obj):
         return "{0:.3f}".format(float(obj.metres) / 1000)
