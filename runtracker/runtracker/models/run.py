@@ -12,6 +12,7 @@ class Run(models.Model):
 
     run_type = (('', '-------'),
                 ('couch25k', 'Couch25K'),
+                ('trail', 'Trail Running'),
                 ('hike', 'Hike'),
                 ('walk', 'Walk'))
 
