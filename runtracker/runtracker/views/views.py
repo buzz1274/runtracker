@@ -4,13 +4,16 @@ from django.db.models import F, Sum
 from ..models.run import Run
 from datetime import datetime
 
-def index(request):
+def index(request, who=None):
     """
     index
     """
     runs = Run.objects.all().filter()
     this_month = request.GET.get('this_month', False)
     run = request.GET.get('run', False)
+
+    if who:
+        runs = runs.filter(who=who)
 
     if this_month:
         year = datetime.now().year
@@ -23,9 +26,6 @@ def index(request):
 
     if run:
         runs = runs.filter(run=True)
-
-
-
 
     total_distance = runs.aggregate(total_distance=Sum(F('metres')))
     total_time = runs.aggregate(total_time=Sum(F('seconds')))
@@ -51,7 +51,8 @@ def index(request):
         average_km_per_hr = 0
 
     return render_to_response('index.html',
-                              {'runs': runs,
+                              {'who': who,
+                               'runs': runs,
                                'total_distance': total_distance,
                                'total_time': total_time,
                                'average_pace': average_pace,
