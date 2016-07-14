@@ -4,8 +4,8 @@ var webpack = require('webpack'),
 module.exports = {
     entry: './knockout/app.js',
     output: {
-        path: './public/js/',
-        filename: 'bundle.js'
+        path: './public/',
+        filename: 'main.js'
     },
     module: {
         loaders: [

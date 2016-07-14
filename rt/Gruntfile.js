@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         },
         watch: {
             app: {
-                files: ["app/**/*{.js,.css,.less,.jsx}", "public/**/*.html"],
+                files: ["knockout/**/*{.js,.css,.less,.jsx}", "public/**/*.html"],
                 tasks: ["webpack:build_dev"],
                 options: {
                     spawn: false
