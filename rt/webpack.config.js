@@ -9,11 +9,22 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.html$/, loader: 'html' },
+            {
+                test: /\.html$/,
+                loader: 'html'
+            },
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel'
+                loader: 'babel',
+                query: {
+                    cacheDirectory: '/tmp/babel_cache/',
+                    presets: ['es2015']
+                }
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
             }
         ]
     },
