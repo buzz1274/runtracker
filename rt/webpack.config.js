@@ -24,18 +24,16 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
             }
         ]
     },
-    externals: {
-        'ko': 'ko'
-    },
     plugins: [
         new webpack.ProvidePlugin({
-            jQuery: "jquery",
-            $: "jquery"
+            jQuery: 'jquery',
+            $: 'jquery',
+            ko: 'knockout',
         }),
-        new ExtractTextPlugin("main.css", {allChunks: true})
+        new ExtractTextPlugin('main.css', {allChunks: true})
     ]
 };
