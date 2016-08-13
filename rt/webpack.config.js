@@ -4,7 +4,7 @@ var webpack = require('webpack'),
 module.exports = {
     entry: './knockout/app.js',
     output: {
-        path: './public/',
+        path: './public/assets/build',
         filename: 'main.js'
     },
     module: {
@@ -13,6 +13,7 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'html'
             },
+            /*
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
@@ -22,6 +23,7 @@ module.exports = {
                     presets: ['es2015']
                 }
             },
+            */
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader')

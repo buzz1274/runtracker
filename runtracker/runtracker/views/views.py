@@ -3,30 +3,44 @@ from django.template import RequestContext
 from django.db.models import F, Sum
 from ..models.run import Run
 from datetime import datetime
+from datetime import date
+import dateutil.relativedelta
 
 def index(request, who=None):
     """
     index
     """
     runs = Run.objects.all().filter()
-    this_month = request.GET.get('this_month', False)
-    run = request.GET.get('run', False)
+    run = int(request.GET.get('run', 0))
+    month = request.GET.get('month', False)
+    year = request.GET.get('year', False)
+    now = datetime.now()
+
+    if month and year:
+        try:
+            results_date = date(int(year), int(month), 1)
+        except ValueError:
+            year = False
+            month = False
 
     if who:
         runs = runs.filter(who=who)
 
-    if this_month:
-        year = datetime.now().year
-        month = datetime.now().month
+    if not month or not year:
+        results_date = datetime.now()
+        year = now.year
+        month = now.month
 
-        runs = runs.filter(date__year__gte=year,
-                           date__month__gte=month,
-                           date__year__lte=year,
-                           date__month__lte=month)
+    runs = runs.filter(date__year__gte=year,
+                       date__month__gte=month,
+                       date__year__lte=year,
+                       date__month__lte=month)
 
     if run:
         runs = runs.filter(run=True)
 
+    previous_date = results_date + dateutil.relativedelta.relativedelta(months=-1)
+    next_date = results_date + dateutil.relativedelta.relativedelta(months=+1)
     total_distance = runs.aggregate(total_distance=Sum(F('metres')))
     total_time = runs.aggregate(total_time=Sum(F('seconds')))
 
@@ -52,6 +66,11 @@ def index(request, who=None):
 
     return render_to_response('index.html',
                               {'who': who,
+                               'previous_year': previous_date.year,
+                               'previous_month': previous_date.month,
+                               'next_month': next_date.month,
+                               'next_year': next_date.year,
+                               'run': run,
                                'runs': runs,
                                'total_distance': total_distance,
                                'total_time': total_time,

@@ -12,12 +12,23 @@
 <ul>
     <li><a href="/{{who}}/">Everything</a></li>
     <li><a href="/{{who}}/?run=1">Runs</a></li>
-    <li><a href="/{{who}}/?this_month=1">This month</a></li>
-    <li><a href="/{{who}}/?this_month=1&run=1">Run this month</a></li>
 </ul>
 
-
 <table border="1" width="100%" cellpadding="3">
+    <tr>
+        <th colspan="11">
+            <span style="float:right">
+                <a href="/{{who}}/?run={{run}}&month={{next_month}}&year={{next_year}}">
+                    next
+                </a>
+            </span>
+            <span style="float:left">
+                <a href="/{{who}}/?run={{run}}&month={{previous_month}}&year={{previous_year}}">
+                    previous
+                </a>
+            </span>
+        </th>
+    </tr>
     <tr>
         <th>Date</th>
         <th>Type</th>
@@ -31,61 +42,67 @@
         <th>5K Time(hh:mm:ss)</th>
         <th>Complete</th>
     </tr>
-    {% for run in runs %}
+    {% if not runs %}
         <tr>
-            <td>{{run.date}}</td>
-            <td>{{run.type}}</td>
-            <td style="text-align:center;">
-                {% if run.run %}
-                    yes
-                {% else %}
-                    no
-                {% endif %}
-            </td>
-            <td style="text-align:center;">
-                {% if run.treadmill %}
-                    yesls -la
-
-                {% else %}
-                    no
-                {% endif %}
-            </td>
-            <td>{{run.route}}</td>
-            <td style="text-align:right;">{{run.seconds|convert_seconds}}</td>
-            <td style="text-align:right;">{{run.metres|convert_metres}}</td>
-            <td style="text-align:right;">{{run.km_per_hr|two_decimals}}</td>
-            <td style="text-align:right;">{{run.min_per_km|two_decimals}}</td>
-            <td style="text-align:right;">{{run.five_k_time|convert_seconds}}</td>
-            <td style="text-align:center;">
-                {% if run.complete %}
-                    yes
-                {% else %}
-                    no
-                {% endif %}
-            </td>
+            <td colspan="11">No Results Found.</td>
         </tr>
-    {% endfor %}
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td style="text-align:right;">
-            <strong>{{total_time|convert_seconds}}</strong>
-        </td>
-        <td style="text-align:right;">
-            <strong>{{total_distance|convert_metres}}</strong>
-        </td>
-        <td style="text-align:right;">
-            <strong>{{average_km_per_hr|two_decimals}}</strong>
-        </td>
-        <td style="text-align:right;">
-            <strong>{{average_pace|two_decimals}}</strong>
-        </td>
-        <td style="text-align:right;">
-            <strong>{{average_5k|convert_seconds}}</strong>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
+    {% else %}
+        {% for run in runs %}
+            <tr>
+                <td>{{run.date}}</td>
+                <td>{{run.type}}</td>
+                <td style="text-align:center;">
+                    {% if run.run %}
+                        yes
+                    {% else %}
+                        no
+                    {% endif %}
+                </td>
+                <td style="text-align:center;">
+                    {% if run.treadmill %}
+                        yes
+
+                    {% else %}
+                        no
+                    {% endif %}
+                </td>
+                <td>{{run.route}}</td>
+                <td style="text-align:right;">{{run.seconds|convert_seconds}}</td>
+                <td style="text-align:right;">{{run.metres|convert_metres}}</td>
+                <td style="text-align:right;">{{run.km_per_hr|two_decimals}}</td>
+                <td style="text-align:right;">{{run.min_per_km|two_decimals}}</td>
+                <td style="text-align:right;">{{run.five_k_time|convert_seconds}}</td>
+                <td style="text-align:center;">
+                    {% if run.complete %}
+                        yes
+                    {% else %}
+                        no
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td style="text-align:right;">
+                <strong>{{total_time|convert_seconds}}</strong>
+            </td>
+            <td style="text-align:right;">
+                <strong>{{total_distance|convert_metres}}</strong>
+            </td>
+            <td style="text-align:right;">
+                <strong>{{average_km_per_hr|two_decimals}}</strong>
+            </td>
+            <td style="text-align:right;">
+                <strong>{{average_pace|two_decimals}}</strong>
+            </td>
+            <td style="text-align:right;">
+                <strong>{{average_5k|convert_seconds}}</strong>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    {% endif %}
 </table>
