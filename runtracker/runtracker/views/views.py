@@ -31,6 +31,13 @@ def index(request, who=None):
         year = now.year
         month = now.month
 
+    longest_runs = runs.filter(run=True,
+                               date__year__gte=2016).order_by('-metres')[:5]
+    fastest_runs = runs.filter(run=True,
+                               date__year__gte=2016).\
+                        annotate(speed=1.0*F('metres') / F('seconds')).\
+                        order_by('-speed')[:5]
+
     runs = runs.filter(date__year__gte=year,
                        date__month__gte=month,
                        date__year__lte=year,
@@ -59,6 +66,8 @@ def index(request, who=None):
                        (float(total_distance) / 1000)
         average_5k = average_pace * 5 * 60
         average_km_per_hr =  60 / average_pace
+        average_time = total_time / len(runs)
+        average_distance = total_distance / len(runs)
     else:
         average_pace = 0
         average_5k = 0
@@ -66,6 +75,10 @@ def index(request, who=None):
 
     return render_to_response('index.html',
                               {'who': who,
+                               'average_time': average_time,
+                               'longest_runs': longest_runs,
+                               'fastest_runs': fastest_runs,
+                               'average_distance': average_distance,
                                'previous_year': previous_date.year,
                                'previous_month': previous_date.month,
                                'next_month': next_date.month,

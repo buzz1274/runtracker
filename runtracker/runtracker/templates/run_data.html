@@ -1,0 +1,33 @@
+{% load templatetags %}
+
+<tr>
+    <td>{{run.date}}</td>
+    <td>{{run.type}}</td>
+    <td style="text-align:center;">
+        {% if run.run %}
+            yes
+        {% else %}
+            no
+        {% endif %}
+    </td>
+    <td style="text-align:center;">
+        {% if run.treadmill %}
+            yes
+        {% else %}
+            no
+        {% endif %}
+    </td>
+    <td>{{run.route}}</td>
+    <td style="text-align:right;">{{run.seconds|convert_seconds}}</td>
+    <td style="text-align:right;">{{run.metres|convert_metres}}</td>
+    <td style="text-align:right;">{{run.km_per_hr|two_decimals}}</td>
+    <td style="text-align:right;">{{run.min_per_km|two_decimals}}</td>
+    <td style="text-align:right;">{{run.five_k_time|convert_seconds}}</td>
+    <td style="text-align:center;">
+        {% if run.complete %}
+            yes
+        {% else %}
+            no
+        {% endif %}
+    </td>
+</tr>
