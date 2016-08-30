@@ -62,12 +62,15 @@ def index(request, who=None):
         total_time = 0
 
     if total_distance and total_time:
-        average_pace = (float(total_time) / 60) / \
+        average_pace = float(total_time) / \
                        (float(total_distance) / 1000)
-        average_5k = average_pace * 5 * 60
-        average_km_per_hr =  60 / average_pace
+        average_5k = average_pace * 5
+        average_km_per_hr =  60 / (average_pace / 60)
         average_time = total_time / len(runs)
         average_distance = total_distance / len(runs)
+        average_pace = float(total_time) / \
+                       (float(total_distance) / 1000)
+
     else:
         average_pace = 0
         average_5k = 0

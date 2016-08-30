@@ -38,7 +38,7 @@
         <th>Time(hh:mm:ss)</th>
         <th>Distance(km)</th>
         <th>Average Pace(km/hr)</th>
-        <th>Average Pace(min/km)</th>
+        <th>Average Pace(hh:mm:ss/km)</th>
         <th>5K Time(hh:mm:ss)</th>
         <th>Complete</th>
     </tr>
@@ -66,7 +66,7 @@
                 <strong>{{average_km_per_hr|two_decimals}}</strong>
             </td>
             <td style="text-align:right;">
-                <strong>{{average_pace|two_decimals}}</strong>
+                <strong>{{average_pace|convert_seconds}}</strong>
             </td>
             <td style="text-align:right;">
                 <strong>{{average_5k|convert_seconds}}</strong>
