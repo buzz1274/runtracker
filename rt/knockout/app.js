@@ -1,16 +1,19 @@
 require( 'bootstrap-webpack!./styles/bootstrap.config.js');
 require('./styles/main.css');
 
-var Application = function() {
+var Header = require('./views/header.js');
+
+var Application = (function() {
     'use strict';
 
-    this.headerNav = function() {
-        
-    };
+    function Application() {
+        this.page = 'home';
+        this.header = new Header();
+    }
 
-    return this;
+    return Application;
 
-};
+})();
 
 $(function() {
     'use strict';
@@ -20,9 +23,7 @@ $(function() {
     console.log(app);
 
     ko.applyBindings(app, $('html')[0]);
-
-    console.log("DONE");
-
+    
 });
 
 module.exports = Application;
