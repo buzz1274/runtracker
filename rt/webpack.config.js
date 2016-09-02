@@ -2,7 +2,7 @@ var webpack = require('webpack'),
     ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-    entry: './knockout/app.js',
+    entry: './knockout/main.js',
     output: {
         path: './public/assets/build',
         filename: 'main.js'
@@ -13,7 +13,6 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'html'
             },
-            /*
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
@@ -23,7 +22,6 @@ module.exports = {
                     presets: ['es2015']
                 }
             },
-            */
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader')

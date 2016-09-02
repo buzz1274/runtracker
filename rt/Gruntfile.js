@@ -3,8 +3,8 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-webpack');
 
-    var webpack = require("webpack");
-    var webpackConfig = require("./webpack.config.js");
+    var webpack = require('webpack');
+    var webpackConfig = require('./webpack.config.js');
 
     grunt.initConfig({
         webpack: {
@@ -26,8 +26,8 @@ module.exports = function(grunt) {
         },
         watch: {
             app: {
-                files: ["knockout/**/*{.js,.css,.less,.jsx}", "public/**/*.html"],
-                tasks: ["webpack:build_dev"],
+                files: ['knockout/**/*{.js,.css,.less,.jsx}', 'public/**/*.html'],
+                tasks: ['webpack:build_dev'],
                 options: {
                     spawn: false
                 }
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask("dev", ["webpack:build_dev", "watch:app"]);
-    grunt.registerTask("build", ["webpack:build"]);
+    grunt.registerTask('dev', ['webpack:build_dev', 'watch:app']);
+    grunt.registerTask('build', ['webpack:build']);
 
 };
