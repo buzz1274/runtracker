@@ -61,6 +61,9 @@ div#home_text div#links a {
     font-weight:bold;
     font-size:1.05em;
 }
+div#home_text > div#links {
+    text-align:center;
+}
 div#main {
     clear:both;
     min-height:500px;

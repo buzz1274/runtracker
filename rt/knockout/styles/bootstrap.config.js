@@ -10,10 +10,10 @@ module.exports = {
         'tables': true,
         'mixins': true,
         'navs': true,
-        "scaffolding": true,
-        "grid": true,
-        "buttons": true,
-        "typography": true,
-        "forms": true
+        'scaffolding': true,
+        'grid': true,
+        'buttons': true,
+        'typography': true,
+        'forms': true
     }
 };
