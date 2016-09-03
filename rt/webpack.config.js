@@ -32,7 +32,7 @@ module.exports = {
         new webpack.ProvidePlugin({
             jQuery: 'jquery',
             $: 'jquery',
-            ko: 'knockout',
+            ko: 'knockout-es5',
         }),
         new ExtractTextPlugin('main.css', {allChunks: true})
     ]

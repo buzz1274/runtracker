@@ -2,7 +2,7 @@ var Header = (function () {
     'use strict';
 
     function Header() {
-        //ko.track(this);
+        ko.track(this);
     }
 
     return Header;

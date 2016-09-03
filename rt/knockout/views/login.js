@@ -3,6 +3,7 @@ var Login = (function () {
 
     function Login() {
         this.component = 'login';
+        ko.track(this);
     }
 
     return Login;

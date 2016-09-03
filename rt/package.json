@@ -22,6 +22,7 @@
     "jit-grunt": "^0.10.0",
     "jquery": "^3.1.0",
     "knockout": "^3.4.0",
+    "knockout-es5": "^0.4.5",
     "laravel-elixir": "^5.0.0",
     "page": "^1.7.1",
     "postcss-loader": "^0.9.1",

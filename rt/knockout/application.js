@@ -14,9 +14,12 @@ module.exports = (function() {
             'home': new Index(),
             'register': new Register(),
             'login': new Login()
-        }
-
+        };
+        
         this.header = new Header();
+
+        ko.track(this);
+
     }
 
     return Application;

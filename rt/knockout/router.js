@@ -16,20 +16,14 @@ module.exports = (function () {
 
         page('', function (ctx, next) {
             app.page = 'home';
-            next();
         });
 
         page('register', function (ctx, next) {
             app.page = 'register';
-            next();
         });
 
         page('login', function (ctx, next) {
-
-
-
             app.page = 'login';
-            next();
         });
 
         /*
