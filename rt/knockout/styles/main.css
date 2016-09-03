@@ -67,6 +67,36 @@ div#home_text > div#links {
 div#main {
     clear:both;
     min-height:500px;
+    padding:10px;
+}
+div.form {
+    width:50%;
+    margin:0 auto;
+}
+div.form fieldset {
+    padding:15px;
+    border:1px solid #000;
+}
+div.form legend {
+    width:inherit;
+    padding:0px 10px;
+    border-bottom:none;
+    font-size:1.15em;
+}
+div.form div.buttons {
+    float:right;
+}
+div.form form {
+    padding:0px 50px 35px 50px;
+}
+div.form div.error {
+    color:#FF0000;
+}
+p.form-warning {
+    margin-top:20px;
+    padding:5px;
+    border:1px solid #a94442;
+    width:350px;
 }
 #footer {
     clear:both;

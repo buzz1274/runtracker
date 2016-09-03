@@ -8,8 +8,8 @@ rt/Homestead.yaml
 rt/Homestead.json
 rt/.env
 bundle.js
-main.css
-main.js
+rt/public/main.css
+rt/public/main.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
