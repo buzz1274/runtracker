@@ -23,6 +23,7 @@
     "jquery": "^3.1.0",
     "knockout": "^3.4.0",
     "laravel-elixir": "^5.0.0",
+    "page": "^1.7.1",
     "postcss-loader": "^0.9.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",

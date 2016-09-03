@@ -10,7 +10,7 @@ var Header = (function () {
 })();
 
 ko.components.register('header-nav', {
-    template: require('../templates/header-nav.html'),
+    template: require('../templates/partials/header-nav.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';

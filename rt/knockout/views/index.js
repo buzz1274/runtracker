@@ -2,15 +2,15 @@ var Index = (function () {
     'use strict';
 
     function Index() {
-        //ko.track(this);
+        this.component = 'index';
     }
 
     return Index;
 
 })();
 
-ko.components.register('index-main', {
-    template: require('../templates/index.html'),
+ko.components.register('index', {
+    template: require('../templates/views/index.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';
