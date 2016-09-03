@@ -4,7 +4,7 @@ var webpack = require('webpack'),
 module.exports = {
     entry: './knockout/main.js',
     output: {
-        path: './public/assets/build',
+        path: './public/',
         filename: 'main.js'
     },
     module: {

@@ -3,6 +3,7 @@ var Index = (function () {
 
     function Index() {
         this.component = 'index';
+
         ko.track(this);
     }
 

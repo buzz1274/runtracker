@@ -15,7 +15,7 @@ module.exports = (function() {
             'register': new Register(),
             'login': new Login()
         };
-        
+
         this.header = new Header();
 
         ko.track(this);

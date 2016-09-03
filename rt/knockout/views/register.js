@@ -3,6 +3,7 @@ var Register = (function () {
 
     function Register() {
         this.component = 'register';
+
         ko.track(this);
     }
 

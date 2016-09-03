@@ -5,7 +5,7 @@ module.exports = (function () {
 
     function Router(app) {
         this.app = app;
-        page.base($('base').attr('href'));
+        page.base('/');
 
         /*
         page('*', function (ctx, next) {
@@ -14,15 +14,15 @@ module.exports = (function () {
         });
         */
 
-        page('', function (ctx, next) {
+        page('', function() {
             app.page = 'home';
         });
 
-        page('register', function (ctx, next) {
+        page('register', function() {
             app.page = 'register';
         });
 
-        page('login', function (ctx, next) {
+        page('login', function() {
             app.page = 'login';
         });
 
