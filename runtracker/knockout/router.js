@@ -7,13 +7,6 @@ module.exports = (function () {
         this.app = app;
         page.base('/');
 
-        /*
-        page('*', function (ctx, next) {
-            app.href = ctx.pathname.substr(1);
-            next();
-        });
-        */
-
         page('', function() {
             app.page = 'home';
         });
@@ -26,15 +19,17 @@ module.exports = (function () {
             app.page = 'login';
         });
 
-        /*
-        page('*', function (ctx, next) {
-            var errorPage = app.pages['error'];
-            errorPage.code = 404;
-            errorPage.message = 'Route Not Found';
+        page('reset_password', function() {
+            app.page = 'reset_password';
+        });
+
+        page('*', function() {
+            var error = app.pages.error;
+
+            error.code = 404;
+            error.message = 'Page Not Found';
             app.page = 'error';
         });
-        */
-
 
         page();
 
