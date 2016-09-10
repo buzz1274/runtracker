@@ -1,15 +1,13 @@
 .idea
-runserver.sh
-runtracker/runtracker/static/admin/*
-runtracker/vendor
-runtracker/node_modules
-runtracker/public/storage
-runtracker/Homestead.yaml
-runtracker/Homestead.json
-runtracker/.env
+vendor
+node_modules
+public/storage
+Homestead.yaml
+Homestead.json
+.env
 bundle.js
-runtracker/public/main.css
-runtracker/public/main.js
+public/main.css
+public/main.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
