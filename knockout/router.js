@@ -23,6 +23,10 @@ module.exports = (function () {
             app.page = 'reset_password';
         });
 
+        page('runs', function() {
+            app.page = 'runs';
+        });
+
         page('*', function() {
             var error = app.pages.error;
 
