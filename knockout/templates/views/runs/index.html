@@ -1,5 +1,5 @@
 <div>
-    <table border="1" width="100%" cellpadding="3">
+    <table border="1" width="25%" cellpadding="3">
         <tbody>
             <tr>
                 <th colspan="11">
@@ -16,29 +16,27 @@
                 </th>
             </tr>
             <tr>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Run</th>
-                <th>Treadmill</th>
-                <th>Route</th>
-                <th>Time(hh:mm:ss)</th>
-                <th>Distance(km)</th>
-                <th>Avg Pace(km/hr)</th>
-                <th>Avg Pace(hh:mm:ss/km)</th>
-                <th>5K Time(hh:mm:ss)</th>
+                <th style="text-align:center;">
+                    Date
+                </th>
+                <th style="text-align:center;">
+                    Time<br />(hh:mm:ss)
+                </th>
+                <th style="text-align:center;">
+                    Distance<br />(km)
+                </th>
+                <th style="text-align:center;">
+                    Avg Pace<br />(hh:mm:ss/km)
+                </th>
             </tr>
+            <!-- ko foreach: runs -->
             <tr>
-                <td>Sept. 1, 2016</td>
-                <td>couch25k</td>
-                <td style="text-align:center;">yes</td>
-                <td style="text-align:center;">yes</td>
-                <td>C210K Week3 Day 3</td>
-                <td style="text-align:right;">00:27:01</td>
-                <td style="text-align:right;">4.030</td>
-                <td style="text-align:right;">8.95</td>
-                <td style="text-align:right;">00:06:42</td>
-                <td style="text-align:right;">00:33:31</td>
+                <td data-bind="text: date"></td>
+                <td data-bind="text: seconds" style="text-align:right;"></td>
+                <td data-bind="text: metres" style="text-align:right;"></td>
+                <td data-bind="text: date" style="text-align:right;"></td>
             </tr>
+            <!-- /ko -->
         </tbody>
     </table>
 </div>

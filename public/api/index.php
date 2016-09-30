@@ -47,6 +47,10 @@ $app = require_once __DIR__.'/../../bootstrap/app.php';
 |
 */
 
+/*FIX ME:: This needs removing*/
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
