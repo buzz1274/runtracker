@@ -69,6 +69,66 @@ div#main {
     min-height:500px;
     padding:10px;
 }
+div#left_container {
+    width:380px;
+}
+div#control_panel {
+    margin-bottom:10px;
+}
+div.table_title {
+    width:50%;
+    margin:auto;
+    text-align:center;
+    font-weight:bold;
+}
+table.runs td.blanked {
+    background-color:#000;
+    border:1px solid #000;
+}
+table.runs tr.table_nav i {
+    color:#FFF;
+}
+table.runs tr.table_nav {
+    background-color:#000;
+    color:#FFF;
+}
+table.runs td {
+    line-height:13px;
+}
+table.runs td:not(:last-child) {
+    border-right:1px solid #ddd;
+}
+table.runs tbody tr {
+    cursor:pointer;
+}
+table.runs tbody tr > td.run {
+    text-align:right;
+}
+table.runs tbody tr > td.success {
+    color:#32CD32;
+    font-weight:bold;
+}
+table.runs tbody tr > td.danger {
+    color:#FF0000;
+    font-weight:bold;
+}
+table.runs td.date_width {
+    width:40%;
+}
+table.runs td.weight_width_20 {
+    width:20%;
+}
+table.runs td.weight_width_28 {
+    width:28%;
+}
+table.runs td.stats_title {
+    width:30%;
+    font-weight:bold;
+}
+tr.table_nav {
+    background-color:#000;
+    color:#FFF;
+}
 div.form {
     width:50%;
     margin:0 auto;

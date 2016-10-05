@@ -1,42 +1,78 @@
-<div>
-    <table border="1" width="25%" cellpadding="3">
-        <tbody>
-            <tr>
-                <th colspan="11">
-                <span style="float:right">
-                    <a href="/david/?run=1&amp;month=10&amp;year=2016">
-                        next
-                    </a>
-                </span>
-                <span style="float:left">
-                    <a href="/david/?run=1&amp;month=8&amp;year=2016">
-                        previous
-                    </a>
-                </span>
-                </th>
-            </tr>
-            <tr>
-                <th style="text-align:center;">
-                    Date
-                </th>
-                <th style="text-align:center;">
-                    Time<br />(hh:mm:ss)
-                </th>
-                <th style="text-align:center;">
-                    Distance<br />(km)
-                </th>
-                <th style="text-align:center;">
-                    Avg Pace<br />(hh:mm:ss/km)
-                </th>
-            </tr>
-            <!-- ko foreach: runs -->
-            <tr>
-                <td data-bind="text: date"></td>
-                <td data-bind="text: seconds" style="text-align:right;"></td>
-                <td data-bind="text: metres" style="text-align:right;"></td>
-                <td data-bind="text: date" style="text-align:right;"></td>
-            </tr>
-            <!-- /ko -->
-        </tbody>
-    </table>
+<div id="left_container">
+    <div id="control_panel">
+        <table class="runs table table-condensed table-hover">
+            <thead>
+                <tr class="table_nav">
+                    <td colspan="2">
+                        <div class="table_title">Personal Bests</div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="stats_title">Longest run</td>
+                    <td>
+                        6k on 23rd September at 00:05:00 per km
+                    </td>
+                </tr>
+                <tr>
+                    <td class="stats_title">Fastest run</td>
+                    <td>
+                        6k on 23rd September at 00:05:00 per km
+                    </td>
+                </tr>
+                <tr>
+                    <td class="stats_title">Longest walk</td>
+                    <td>
+                        27k on 23rd September
+                    </td>
+                </tr>
+                <tr>
+                    <td class="stats_title">Longest hike</td>
+                    <td>
+                        19k on 23rd September
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table class="runs table table-condensed table-hover">
+            <thead>
+                <tr class="table_nav">
+                    <td colspan="5">
+                        <i id="add_run" class="glyphicon glyphicon-plus pull-right"></i>
+                        <div class="table_title">
+                            <span title="Previous Page" class="pull-left">
+                                &laquo;&laquo;
+                            </span>
+                            Runs
+                            <span title="Next Page" class="pull-right">
+                                &raquo;&raquo;
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="date_width" style="width:40%;"><strong>Date</strong></td>
+                    <td class="weight_width_20" style="width:28%;"><strong>Type</strong></td>
+                    <td class="weight_width_28" style="width:20%;"><strong>Distance(Km)</strong></td>
+                    <td class="text-center" style="width:12%;">-</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: runs -->
+                    <tr>
+                        <td>September 23rd, 2016</td>
+                        <td>Treadmill walk</td>
+                        <td>6.01</td>
+                        <td>
+                            <i class="glyphicon glyphicon-edit" title="Add run"></i>
+                            <i class="glyphicon glyphicon-trash" title="Delete run"></i>
+                        </td>
+                    </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
 </div>

@@ -11,6 +11,8 @@ var Runs = (function () {
             that.runs = data;
         });
 
+        console.log(that.runs);
+
         ko.track(this);
 
     }
@@ -27,9 +29,6 @@ ko.components.register('runs', {
 
             return params instanceof Runs ? params : ko.unwrap(params.option);
         }
-    },
-    derp: {
-
     }
 });
 
