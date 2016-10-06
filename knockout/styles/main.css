@@ -115,11 +115,15 @@ table.runs tbody tr > td.danger {
 table.runs td.date_width {
     width:40%;
 }
-table.runs td.weight_width_20 {
+table.runs td.width_20 {
     width:20%;
 }
-table.runs td.weight_width_28 {
+table.runs td.width_28 {
     width:28%;
+}
+table.runs td.width_12 {
+    width:12%;
+    text-align:center;
 }
 table.runs td.stats_title {
     width:30%;
@@ -128,6 +132,14 @@ table.runs td.stats_title {
 tr.table_nav {
     background-color:#000;
     color:#FFF;
+}
+div#graph {
+    float:right;
+    width:680px;
+    min-height:500px;
+    border:1px solid #00000;
+    margin:0px 0 10px 5px;
+    position:relative;
 }
 div.form {
     width:50%;

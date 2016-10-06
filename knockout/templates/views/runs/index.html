@@ -1,3 +1,6 @@
+<div id="graph">
+    data goes here
+</div>
 <div id="left_container">
     <div id="control_panel">
         <table class="runs table table-condensed table-hover">
@@ -46,7 +49,7 @@
                             <span title="Previous Page" class="pull-left">
                                 &laquo;&laquo;
                             </span>
-                            Runs
+                            Activities
                             <span title="Next Page" class="pull-right">
                                 &raquo;&raquo;
                             </span>
@@ -54,18 +57,18 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="date_width" style="width:40%;"><strong>Date</strong></td>
-                    <td class="weight_width_20" style="width:28%;"><strong>Type</strong></td>
-                    <td class="weight_width_28" style="width:20%;"><strong>Distance(Km)</strong></td>
-                    <td class="text-center" style="width:12%;">-</td>
+                    <td class="date_width"><strong>Date</strong></td>
+                    <td class="width_28"><strong>Type</strong></td>
+                    <td class="width_20"><strong>Distance(Km)</strong></td>
+                    <td class="width_12">-</td>
                 </tr>
             </thead>
             <tbody>
                 <!-- ko foreach: runs -->
                     <tr>
-                        <td>September 23rd, 2016</td>
-                        <td>Treadmill walk</td>
-                        <td>6.01</td>
+                        <td data-bind="text: date"></td>
+                        <td data-bind="text: type"></td>
+                        <td data-bind="text: metres"></td>
                         <td>
                             <i class="glyphicon glyphicon-edit" title="Add run"></i>
                             <i class="glyphicon glyphicon-trash" title="Delete run"></i>
