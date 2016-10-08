@@ -16,6 +16,8 @@ module.exports = {
         'typography': true,
         'forms': true,
         'utilities': true,
-        'glyphicons': true
+        'glyphicons': true,
+        "type": true
+
     }
 };

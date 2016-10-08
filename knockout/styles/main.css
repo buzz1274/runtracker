@@ -92,6 +92,14 @@ table.runs tr.table_nav {
     background-color:#000;
     color:#FFF;
 }
+table.runs tr.table_nav td {
+    vertical-align: middle;
+    font-weight: bold;
+}
+table.runs tr.table_nav a {
+    font-color:#00000;
+    text-decoration: underline;
+}
 table.runs td {
     line-height:13px;
 }
@@ -128,6 +136,11 @@ table.runs td.width_12 {
 table.runs td.stats_title {
     width:30%;
     font-weight:bold;
+}
+table.runs td.rotate {
+    transform: rotate(-90.0deg);
+    width:1%;
+    text-align:center;
 }
 tr.table_nav {
     background-color:#000;
