@@ -96,8 +96,8 @@ table.runs tr.table_nav td {
     vertical-align: middle;
     font-weight: bold;
 }
-table.runs tr.table_nav a {
-    font-color:#00000;
+table.runs td > a {
+    color:#000000;
     text-decoration: underline;
 }
 table.runs td {
@@ -150,9 +150,14 @@ div#graph {
     float:right;
     width:680px;
     min-height:500px;
-    border:1px solid #00000;
     margin:0px 0 10px 5px;
     position:relative;
+}
+div#activity_graph {
+    width:100%;
+    background-color:lightgray;
+    margin-bottom:10px;
+    height:400px;
 }
 div.form {
     width:50%;
