@@ -3,18 +3,30 @@ var Runs = (function () {
 
     function Runs() {
         this.component = 'runs';
-        this.runs = ko.observableArray();;
-
-        var that = this;
-
-        $.getJSON('http://dev.runtracker.zz50.co.uk/api/', function(data) {
-            that.runs = data;
-        });
-
-        console.log(that.runs);
+        this.runs = ko.observableArray();
+        this.runs = this.loadData();
 
         ko.track(this);
 
+    }
+
+    Runs.prototype.loadData = function() {
+        var activities = null;
+
+        $.getJSON('http://dev.runtracker.zz50.co.uk/api/', function(data) {
+            activities = data;
+        });
+
+        return activities;
+
+    }
+
+    Runs.prototype.toggleActivityData = function() {
+        $('.activity_2015').show();
+    }
+
+    Runs.prototype.toggleActivityData = function() {
+        $('.activity_2015').show();
     }
 
     return Runs;
@@ -27,7 +39,7 @@ ko.components.register('runs', {
         createViewModel: function (params) {
             'use strict';
 
-            return params instanceof Runs ? params : ko.unwrap(params.option);
+            return params instanceof Runs ? params : params.option;
         }
     }
 });
