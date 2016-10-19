@@ -1,7 +1,9 @@
 .idea
 vendor
 node_modules
-storage
+storage/app/*.php
+storage/framework/*/*.php
+storage/logs/*.log
 Homestead.yaml
 Homestead.json
 .env
