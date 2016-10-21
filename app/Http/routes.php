@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/', 'RunsController@index');
+Route::get('/', 'ActivityController@index');

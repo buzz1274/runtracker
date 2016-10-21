@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Run;
-use Illuminate\Http\Request as Request;
+use Illuminate\Http\Request;
 
-class RunsController extends Controller {
+use App\Http\Requests;
+use App\Activity;
+
+class ActivityController extends Controller {
 
     public function index(Request $request) {
         return response()->json(array('api'));
