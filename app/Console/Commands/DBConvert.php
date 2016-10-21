@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\User;
 use App\Activity;
+use App\ActivityType;
+use App\Route;
 
 class DBConvert extends Command {
 
@@ -38,16 +40,18 @@ class DBConvert extends Command {
         $runs = \DB::select('SELECT * FROM run ORDER BY date ASC');
 
         foreach($runs as $run) {
-            $activityTypeID = $this->getActivityTypeID($run->type,
-                                                       $run->treadmill);
-            $routeID = $this->getRouteID($run->route);
-
             $activity = new Activity;
 
             $activity->user_id = $this->getUserID($run->who);
+            $activity->route_id = $this->getRouteID($run->route);
+            $activity->seconds = $run->seconds;
+            $activity->metres = $run->metres;
+            $activity->activity_date = $run->date;
+            $activity->activity_id = $this->getActivityTypeID($run->type,
+                                                              $run->treadmill,
+                                                              $run->run);
 
-
-            die();
+            $activity->save();
 
         }
 
@@ -61,7 +65,7 @@ class DBConvert extends Command {
             $user = new User;
 
             $user->name = ucfirst($who);
-            $user->email = '';
+            $user->email = $who;
             $user->password = '';
             $user->save();
 
@@ -71,12 +75,49 @@ class DBConvert extends Command {
 
     }
 
-    private function getActivityTypeID($type, $treadmill) {
-        return 1;
+    private function getActivityTypeID($type, $treadmill, $run) {
+        if($type == 'couch25k' && !$treadmill) {
+            $activityType = 'Street running';
+        } elseif($type == 'hike') {
+            $activityType = 'Hiking';
+        } elseif($type == 'walk') {
+            $activityType = 'Walking';
+        } elseif($type == 'trail') {
+            $activityType = 'Trail running';
+        } elseif($type == 'couch25k' && $treadmill && $run) {
+            $activityType = 'Treadmill running';
+        } else {
+            $activityType = 'Treadmill walking';
+        }
+
+        $at = ActivityType::where('activity_type',
+                                  $activityType)->first();
+
+        if(!$at || !$at->count()) {
+            $at = new activityType;
+
+            $at->activity_type = $activityType;
+            $at->save();
+
+        }
+
+        return $at->id;
+
     }
 
-    private function getRouteID() {
-        return 1;
+    private function getRouteID($route) {
+        $rt = Route::where('route', $route)->first();
+
+        if(!$rt || !$rt->count()) {
+            $rt = new Route;
+
+            $rt->route = $route;
+            $rt->save();
+
+        }
+
+        return $rt->id;
+
     }
 
 }

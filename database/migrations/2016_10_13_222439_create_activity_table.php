@@ -23,6 +23,7 @@ class CreateActivityTable extends Migration
             $table->date('activity_date');
             $table->unsignedSmallInteger('seconds');
             $table->unsignedSmallInteger('metres');
+            $table->timestamps();
         });
     }
 

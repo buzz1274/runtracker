@@ -17,6 +17,7 @@ class CreateActivityTypeTable extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->string('activity_type')->unique();
             $table->foreign('parent_id')->references('id')->on('activity_type');
+            $table->timestamps();
         });
     }
 
