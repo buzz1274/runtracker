@@ -5,127 +5,30 @@
     <table class="runs table table-condensed table-hover">
         <thead>
             <tr class="table_nav">
-                <td class="text-center">-</td>
+                <td class="text-center" style="width:10%">-</td>
                 <td>Activity</td>
                 <td>Count</td>
-                <td>Time</td>
-                <td>Distance(Km)</td>
+                <td>Time<br >(hh:mm:ss/km)</td>
+                <td>Distance<br />(Km)</td>
                 <td>Average Pace<br />(hh:mm:ss/km)</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody data-bind="foreach: runs">
+        <!-- ko foreach: activities -->
             <tr>
-                <td rowspan="2">
-                    <a href="/runs/?year=2016">2016</a>
-                    <i class="glyphicon glyphicon-menu-up pull-right"></i>
-                </td>
+                <!-- ko if: $index() === 0 -->
+                    <td data-bind="attr: {rowspan: function(){return $parent.activities.length;}()}">
+                        <a data-bind="text: $parent.date" href="/runs/?year=$year"></a>
+                        <i class="glyphicon glyphicon-menu-up pull-right"></i>
+                    </td>
+                <!-- /ko -->
+                <td data-bind="text: activity"></td>
+                <td data-bind="text: activity_count"></td>
+                <td data-bind="text: seconds"></td>
+                <td data-bind="text: km" style="text-align:right;"></td>
+                <td data-bind="text: $index()"></td>
             </tr>
-            <tr style="display:none;">
-                <td>Treadmill Running</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr style="display:none;">
-                <td>Trail running</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr style="display:none;">
-                <td>Street running</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr style="display:none;">
-                <td>Treadmill walking</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr style="display:none;">
-                <td>Walking</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr style="display:none;">
-                <td>Hiking</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr>
-                <td>All</td>
-                <td class="text-right">20</td>
-                <td class="text-right">02:36:29</td>
-                <td class="text-right">24.968</td>
-                <td class="text-right">00:06:02</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <td rowspan="8">
-                    2015
-                    <i data-bind="click:toggleActivityData"
-                       class="glyphicon glyphicon-menu-up pull-right"></i>
-                </td>
-            </tr>
-            <tr class="activity_2015" style="display:none;">
-                <td>Treadmill Running</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr class="activity_2015" style="display:none;">
-                <td>Trail running</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr class="activity_2015" style="display:none;">
-                <td>Street running</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr class="activity_2015" style="display:none;">
-                <td>Treadmill walking</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr class="activity_2015" style="display:none;">
-                <td>Walking</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr class="activity_2015" style="display:none;">
-                <td>Hiking</td>
-                <td>20</td>
-                <td>02:36:29</td>
-                <td>24.968</td>
-                <td>00:06:02</td>
-            </tr>
-            <tr class="activity_2015">
-                <td>All</td>
-                <td class="text-right">20</td>
-                <td class="text-right">02:36:29</td>
-                <td class="text-right">24.968</td>
-                <td class="text-right">00:06:02</td>
-            </tr>
+        <!-- /ko -->
         </tbody>
     </table>
 </div>
@@ -198,17 +101,15 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- ko foreach: runs -->
                     <tr>
-                        <td data-bind="text: date"></td>
-                        <td data-bind="text: type"></td>
-                        <td data-bind="text: metres"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
                             <i class="glyphicon glyphicon-edit" title="Add run"></i>
                             <i class="glyphicon glyphicon-trash" title="Delete run"></i>
                         </td>
                     </tr>
-                <!-- /ko -->
             </tbody>
         </table>
     </div>

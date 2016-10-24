@@ -4,12 +4,22 @@ var Runs = (function () {
     function Runs() {
         this.component = 'runs';
         this.runs = ko.observableArray();
-        this.runs = this.loadData();
+
+        var that = this;
+
+        $.getJSON('http://dev.runtracker.zz50.co.uk/api/', function(data) {
+            that.runs = data;
+            console.log(data);
+        });
+
+        //this.runs = this.loadData();
+
+        console.log(that.runs);
 
         ko.track(this);
 
     }
-
+    /*
     Runs.prototype.loadData = function() {
         var activities = null;
 
@@ -20,7 +30,9 @@ var Runs = (function () {
         return activities;
 
     }
+    */
 
+    /*
     Runs.prototype.toggleActivityData = function() {
         $('.activity_2015').show();
     }
@@ -28,6 +40,7 @@ var Runs = (function () {
     Runs.prototype.toggleActivityData = function() {
         $('.activity_2015').show();
     }
+    */
 
     return Runs;
 
