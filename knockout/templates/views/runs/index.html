@@ -5,12 +5,13 @@
     <table class="runs table table-condensed table-hover">
         <thead>
             <tr class="table_nav">
-                <td class="text-center" style="width:10%">-</td>
+                <td style="width:20%">Date</td>
                 <td>Activity</td>
-                <td>Count</td>
-                <td>Time<br >(hh:mm:ss/km)</td>
-                <td>Distance<br />(Km)</td>
+                <td style="width:10%">Count</td>
+                <td>Time<br />(hh:mm:ss)</td>
+                <td>Distance<br />(km)</td>
                 <td>Average Pace<br />(hh:mm:ss/km)</td>
+                <td>Average Speed<br />(km/hr)</td>
             </tr>
         </thead>
         <tbody data-bind="foreach: runs">
@@ -18,15 +19,18 @@
             <tr>
                 <!-- ko if: $index() === 0 -->
                     <td data-bind="attr: {rowspan: function(){return $parent.activities.length;}()}">
-                        <a data-bind="text: $parent.date" href="/runs/?year=$year"></a>
+                        <span data-bind="text: $parent.date"></span>
                         <i class="glyphicon glyphicon-menu-up pull-right"></i>
                     </td>
                 <!-- /ko -->
-                <td data-bind="text: activity"></td>
-                <td data-bind="text: activity_count"></td>
-                <td data-bind="text: seconds"></td>
-                <td data-bind="text: km" style="text-align:right;"></td>
-                <td data-bind="text: $index()"></td>
+                <td>
+                    <a data-bind="text: activity" href="/runs/?year=$year"></a>
+                </td>
+                <td data-bind="text: activity_count" class="text-right"></td>
+                <td data-bind="text: display_seconds" class="text-right"></td>
+                <td data-bind="text: km" class="text-right"></td>
+                <td data-bind="text: display_average_pace" class="text-right"></td>
+                <td data-bind="text: display_average_pace" class="text-right"></td>
             </tr>
         <!-- /ko -->
         </tbody>

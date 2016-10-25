@@ -41,6 +41,8 @@ class ActivityController extends Controller {
                         ['activity' => $a->activity_type,
                          'activity_count' => $a->activity_count,
                          'km' => $a->km,
+                         'display_average_pace' => activity::averagePace($a->duration, $a->km),
+                         'display_seconds' => activity::convertSecondsToDisplayTime($a->duration),
                          'seconds' => $a->duration];
 
                 $totals[$a->dt]['seconds'] += $a->duration;
@@ -53,7 +55,9 @@ class ActivityController extends Controller {
                 $activities[$lookup[$key]]['activities'][] =
                     ['activity' => 'All',
                      'activity_count' => $total['activity_count'],
-                     'km' => $total['km'],
+                     'km' => number_format($total['km'], 3),
+                     'display_average_pace' => activity::averagePace($total['seconds'], $total['km']),
+                     'display_seconds' => activity::convertSecondsToDisplayTime($total['seconds']),
                      'seconds' => $total['seconds']];
             }
 
