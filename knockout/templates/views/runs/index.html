@@ -28,7 +28,8 @@
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
                     <a data-bind="text: activity,
-                                  attr: {href: 'runs/?activity='+activity}"></a>
+                                  attr: {href: 'runs/'+$parent.date+'/'+
+                                                       activity_id}"></a>
                 </td>
                 <td data-bind="visible: activity == 'All',
                                attr: {'class': 'date_'+$parent.date,

@@ -6,6 +6,10 @@ module.exports = (function () {
 
     function Router(app) {
         this.app = app;
+        this.runs = new Runs();
+
+        var that = this;
+
         page.base('/');
 
         page('', function() {
@@ -24,10 +28,16 @@ module.exports = (function () {
             app.page = 'reset_password';
         });
 
-        page('runs', function() {
-            var runs = new Runs('Hiking');
-            app.pages['runs'] = runs;
+        page('runs/:date?/:activity_id?/', function(ctx) {
+            app.pages['runs'].loadData(ctx.params.activity_id,
+                                       ctx.params.date).done(function() {
+
+            }).fail(function() {
+                alert("FAILURE");
+            });
+
             app.page = 'runs';
+
         });
 
         page('*', function() {

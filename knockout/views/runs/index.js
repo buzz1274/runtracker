@@ -1,33 +1,39 @@
-var Runs = (function (activity) {
+var Runs = (function () {
     'use strict';
 
-    function Runs(date, activity) {
+    function Runs() {
         this.component = 'runs';
         this.runs = ko.observableArray();
 
-        console.log(activity);
-        console.log("DERP");
-
-        var that = this;
-
-        $.getJSON('http://dev.runtracker.zz50.co.uk/api/?activity=1', function(data) {
-            that.runs = data;
-        });
-
-        this.toggleActivityData = function(date) {
-            $(".date_"+date).each(function() {
-                if($(this).data('activity') != 'All') {
-                    if ($(this).is(':visible')) {
-                        $(this).hide();
-                    } else {
-                        $(this).show();
-                    }
-                }
-            });
-        }
-
         ko.track(this);
 
+    }
+
+    Runs.prototype.toggleActivityData = function(date) {
+        $(".date_"+date).each(function() {
+            if($(this).data('activity') != 'All') {
+                if ($(this).is(':visible')) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            }
+        });
+    }
+
+    Runs.prototype.loadData = function(activity_id, date) {
+        var that = this;
+
+        return $.ajax({url: 'http://dev.runtracker.zz50.co.uk/api/',
+            type: 'get',
+            dataType: 'json',
+            async: true,
+            data: {date: date,
+                   activity_id: activity_id},
+            success: function(data) {
+                that.runs = data;
+            }
+        });
     }
 
     return Runs;

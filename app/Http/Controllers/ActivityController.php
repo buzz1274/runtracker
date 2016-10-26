@@ -11,6 +11,17 @@ class ActivityController extends Controller {
 
     public function index(Request $request) {
 
+        error_log($request->query('activity_id'));
+
+        if($request->query('activity_id') && (int)$request->query('activity_id') > 0) {
+            $activityQuery =
+                "AND a.activity_id = ".$request->query('activity_id')." ";
+        } else {
+            $activityQuery = '';
+        }
+
+        error_log($activityQuery);
+
         $sql = "SELECT    at.id, at.activity_type, ".
                "          COUNT(a.id) AS activity_count, ".
                "          TO_CHAR(CAST(SUM(metres) AS FLOAT) / 1000, ".
@@ -20,7 +31,8 @@ class ActivityController extends Controller {
                "          FROM      activity_type at ".
                "LEFT JOIN activity a ON (a.activity_id = at.id) ".
                "WHERE     a.user_id = 1 ".
-               //"AND       a.activity_id = ".$request->query('activity')." ".
+               //"AND       a.activity_date BETWEEN '2016-09-01' AND '2016-09-30' ".
+               $activityQuery.
                "GROUP BY  at.id, at.activity_type, dt ".
                "ORDER BY  dt ASC, at.activity_type ASC";
 
@@ -41,6 +53,7 @@ class ActivityController extends Controller {
 
                 $activities[$lookup[$a->dt]]['activities'][] =
                         ['activity' => $a->activity_type,
+                         'activity_id' => $a->id,
                          'activity_count' => $a->activity_count,
                          'km' => $a->km,
                          'display_average_pace_time' =>
@@ -60,6 +73,7 @@ class ActivityController extends Controller {
             foreach($totals as $key => $total) {
                 $activities[$lookup[$key]]['activities'][] =
                     ['activity' => 'All',
+                     'activity_id' => '',
                      'activity_count' => $total['activity_count'],
                      'km' => number_format($total['km'], 3),
                      'display_average_pace_time' =>
