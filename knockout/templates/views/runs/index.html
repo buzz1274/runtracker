@@ -20,17 +20,41 @@
                 <!-- ko if: $index() === 0 -->
                     <td data-bind="attr: {rowspan: function(){return $parent.activities.length;}()}">
                         <span data-bind="text: $parent.date"></span>
-                        <i class="glyphicon glyphicon-menu-up pull-right"></i>
+                        <i data-bind="click: $component.toggleActivityData.bind($data, $parent.date)"
+                           class="glyphicon glyphicon-menu-up pull-right"></i>
                     </td>
                 <!-- /ko -->
-                <td>
-                    <a data-bind="text: activity" href="/runs/?year=$year"></a>
+                <td data-bind="visible: activity == 'All',
+                               attr: {'class': 'date_'+$parent.date,
+                                      'data-activity': activity}">
+                    <a data-bind="text: activity,
+                                  attr: {href: 'runs/?activity='+activity}"></a>
                 </td>
-                <td data-bind="text: activity_count" class="text-right"></td>
-                <td data-bind="text: display_seconds" class="text-right"></td>
-                <td data-bind="text: km" class="text-right"></td>
-                <td data-bind="text: display_average_pace" class="text-right"></td>
-                <td data-bind="text: display_average_pace" class="text-right"></td>
+                <td data-bind="visible: activity == 'All',
+                               attr: {'class': 'date_'+$parent.date,
+                                      'data-activity': activity}">
+                    <div class="text-right" data-bind="text: activity_count"></div>
+                </td>
+                <td data-bind="visible: activity == 'All',
+                               attr: {'class': 'date_'+$parent.date,
+                                      'data-activity': activity}">
+                    <div class="text-right" data-bind="text: display_seconds"></div>
+                </td>
+                <td data-bind="visible: activity == 'All',
+                               attr: {'class': 'date_'+$parent.date,
+                                      'data-activity': activity}">
+                    <div class="text-right" data-bind="text: km"></div>
+                </td>
+                <td data-bind="visible: activity == 'All',
+                               attr: {'class': 'date_'+$parent.date,
+                                      'data-activity': activity}">
+                    <div class="text-right" data-bind="text: display_average_pace_time"></div>
+                </td>
+                <td data-bind="visible: activity == 'All',
+                               attr: {'class': 'date_'+$parent.date,
+                                      'data-activity': activity}">
+                    <div class="text-right" data-bind="text: display_average_pace_distance"></div>
+                </td>
             </tr>
         <!-- /ko -->
         </tbody>

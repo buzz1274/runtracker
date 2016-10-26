@@ -120,6 +120,9 @@ table.runs tbody tr > td.danger {
     color:#FF0000;
     font-weight:bold;
 }
+tbody tr:hover td[rowspan] {
+    background-color: #FFFFFF;
+}
 table.runs td.date_width {
     width:40%;
 }

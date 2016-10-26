@@ -10,6 +10,7 @@ use App\Activity;
 class ActivityController extends Controller {
 
     public function index(Request $request) {
+
         $sql = "SELECT    at.id, at.activity_type, ".
                "          COUNT(a.id) AS activity_count, ".
                "          TO_CHAR(CAST(SUM(metres) AS FLOAT) / 1000, ".
@@ -19,6 +20,7 @@ class ActivityController extends Controller {
                "          FROM      activity_type at ".
                "LEFT JOIN activity a ON (a.activity_id = at.id) ".
                "WHERE     a.user_id = 1 ".
+               //"AND       a.activity_id = ".$request->query('activity')." ".
                "GROUP BY  at.id, at.activity_type, dt ".
                "ORDER BY  dt ASC, at.activity_type ASC";
 
@@ -41,8 +43,12 @@ class ActivityController extends Controller {
                         ['activity' => $a->activity_type,
                          'activity_count' => $a->activity_count,
                          'km' => $a->km,
-                         'display_average_pace' => activity::averagePace($a->duration, $a->km),
-                         'display_seconds' => activity::convertSecondsToDisplayTime($a->duration),
+                         'display_average_pace_time' =>
+                             activity::averagePaceTime($a->duration, $a->km),
+                         'display_average_pace_distance' =>
+                             activity::averagePaceDistance($a->duration, $a->km),
+                         'display_seconds' =>
+                             activity::convertSecondsToDisplayTime($a->duration),
                          'seconds' => $a->duration];
 
                 $totals[$a->dt]['seconds'] += $a->duration;
@@ -56,8 +62,12 @@ class ActivityController extends Controller {
                     ['activity' => 'All',
                      'activity_count' => $total['activity_count'],
                      'km' => number_format($total['km'], 3),
-                     'display_average_pace' => activity::averagePace($total['seconds'], $total['km']),
-                     'display_seconds' => activity::convertSecondsToDisplayTime($total['seconds']),
+                     'display_average_pace_time' =>
+                         activity::averagePaceTime($total['seconds'], $total['km']),
+                     'display_average_pace_distance' =>
+                         activity::averagePaceDistance($total['seconds'], $total['km']),
+                     'display_seconds' =>
+                         activity::convertSecondsToDisplayTime($total['seconds']),
                      'seconds' => $total['seconds']];
             }
 

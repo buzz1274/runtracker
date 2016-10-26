@@ -1,4 +1,5 @@
-var page = require('page');
+var page = require('page'),
+    Runs = require('./views/runs/index.js');
 
 module.exports = (function () {
     'use strict';
@@ -24,6 +25,8 @@ module.exports = (function () {
         });
 
         page('runs', function() {
+            var runs = new Runs('Hiking');
+            app.pages['runs'] = runs;
             app.page = 'runs';
         });
 

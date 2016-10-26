@@ -16,9 +16,12 @@ class activity extends Model {
 
     }
 
-    public static function averagePace($seconds, $distance) {
+    public static function averagePaceTime($seconds, $distance) {
         return self::convertSecondsToDisplayTime($seconds / $distance);
     }
 
+    public static function averagePaceDistance($seconds, $distance) {
+        return number_format(60 / (($seconds / $distance) / 60), 3);
+    }
 
 }
