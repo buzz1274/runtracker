@@ -12,6 +12,13 @@ var Runs = (function () {
     }
 
     Runs.prototype.toggleActivityData = function(date) {
+        if($("#toggle_date_"+date).hasClass('glyphicon-menu-up')) {
+            $("#toggle_date_"+date).removeClass('glyphicon-menu-up');
+            $("#toggle_date_"+date).addClass('glyphicon-menu-down');
+        } else {
+            $("#toggle_date_"+date).removeClass('glyphicon-menu-down');
+            $("#toggle_date_"+date).addClass('glyphicon-menu-up');
+        }
         $(".date_"+date).each(function() {
             if($(this).data('activity') != 'All') {
                 if ($(this).is(':visible')) {
