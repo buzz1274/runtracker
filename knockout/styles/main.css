@@ -145,6 +145,11 @@ table.runs td.rotate {
     width:1%;
     text-align:center;
 }
+table.runs th.title {
+    text-align:center;
+    height:35px;
+    vertical-align: middle;
+}
 tr.table_nav {
     background-color:#000;
     color:#FFF;

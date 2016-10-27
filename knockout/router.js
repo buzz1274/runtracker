@@ -6,9 +6,6 @@ module.exports = (function () {
 
     function Router(app) {
         this.app = app;
-        this.runs = new Runs();
-
-        var that = this;
 
         page.base('/');
 
@@ -29,14 +26,20 @@ module.exports = (function () {
         });
 
         page('runs/:date?/:activity_id?/', function(ctx) {
+
             app.pages['runs'].loadData(ctx.params.activity_id,
                                        ctx.params.date).done(function() {
 
-            }).fail(function() {
-                alert("FAILURE");
-            });
+                app.page = 'runs';
 
-            app.page = 'runs';
+            }).fail(function() {
+                var error = app.pages.error;
+
+                error.code = 500;
+                error.message = 'An error occurred';
+                app.page = 'error';
+
+            });
 
         });
 
@@ -44,8 +47,9 @@ module.exports = (function () {
             var error = app.pages.error;
 
             error.code = 404;
-            error.message = 'Page Not Found';
+            error.message = 'Page not found';
             app.page = 'error';
+
         });
 
         page();

@@ -3,11 +3,13 @@ module.exports = {
         extract('style-loader', 'css-loader!postcss-loader!less-loader'),
     scripts: {
         'transition': true,
+        'dropdown': true,
         'button': true,
     },
     styles: {
         'normalize': true,
         'tables': true,
+        'dropdowns': true,
         'mixins': true,
         'navs': true,
         'scaffolding': true,

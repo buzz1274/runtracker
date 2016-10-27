@@ -11,8 +11,6 @@ class ActivityController extends Controller {
 
     public function index(Request $request) {
 
-        error_log($request->query('activity_id'));
-
         if($request->query('activity_id') && (int)$request->query('activity_id') > 0) {
             $activityQuery =
                 "AND a.activity_id = ".$request->query('activity_id')." ";
@@ -20,7 +18,17 @@ class ActivityController extends Controller {
             $activityQuery = '';
         }
 
-        error_log($activityQuery);
+        error_log($request->query('year'));
+
+        if($request->query('year') && (int)$request->query('year') > 2000) {
+            $dateQuery =
+                "AND a.activity_date BETWEEN '".$request->query('year')."-01-01' ".
+                "                        AND '".$request->query('year')."-12-31' ";
+        } else {
+            $dateQuery = '';
+        }
+
+        error_log($dateQuery);
 
         $sql = "SELECT    at.id, at.activity_type, ".
                "          COUNT(a.id) AS activity_count, ".
@@ -31,7 +39,7 @@ class ActivityController extends Controller {
                "          FROM      activity_type at ".
                "LEFT JOIN activity a ON (a.activity_id = at.id) ".
                "WHERE     a.user_id = 1 ".
-               //"AND       a.activity_date BETWEEN '2016-09-01' AND '2016-09-30' ".
+               $dateQuery.
                $activityQuery.
                "GROUP BY  at.id, at.activity_type, dt ".
                "ORDER BY  dt ASC, at.activity_type ASC";
