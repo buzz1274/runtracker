@@ -45,7 +45,12 @@
                 </th>
             </tr>
             <tr class="table_nav">
-                <th style="width:20%">Date</th>
+                <th style="width:20%">
+                    Date
+                    <i data-bind="click: $component.toggleActivityData.bind(false, 'all'),
+                                  attr: {id: 'toggle_date_all'}"
+                       class="glyphicon glyphicon-menu-down pull-right"></i>
+                </th>
                 <th style="width:20%">Activity</th>
                 <th style="width:10%">Count</th>
                 <th>Time<br />(hh:mm:ss)</th>
@@ -75,12 +80,14 @@
                 <td data-bind="visible: activity == 'All',
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
-                    <div class="text-right" data-bind="text: activity_count"></div>
+                    <div class="text-right"
+                         data-bind="text: activity_count"></div>
                 </td>
                 <td data-bind="visible: activity == 'All',
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
-                    <div class="text-right" data-bind="text: display_seconds"></div>
+                    <div class="text-right"
+                         data-bind="text: display_seconds"></div>
                 </td>
                 <td data-bind="visible: activity == 'All',
                                attr: {'class': 'date_'+$parent.date,
@@ -90,12 +97,14 @@
                 <td data-bind="visible: activity == 'All',
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
-                    <div class="text-right" data-bind="text: display_average_pace_time"></div>
+                    <div class="text-right"
+                         data-bind="text: display_average_pace_time"></div>
                 </td>
                 <td data-bind="visible: activity == 'All',
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
-                    <div class="text-right" data-bind="text: display_average_pace_distance"></div>
+                    <div class="text-right"
+                         data-bind="text: display_average_pace_distance"></div>
                 </td>
             </tr>
         <!-- /ko -->
@@ -171,15 +180,15 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <i class="glyphicon glyphicon-edit" title="Add run"></i>
-                            <i class="glyphicon glyphicon-trash" title="Delete run"></i>
-                        </td>
-                    </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <i class="glyphicon glyphicon-edit" title="Add run"></i>
+                        <i class="glyphicon glyphicon-trash" title="Delete run"></i>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

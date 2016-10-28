@@ -19,7 +19,30 @@ var Runs = (function () {
             $("#toggle_date_"+date).removeClass('glyphicon-menu-down');
             $("#toggle_date_"+date).addClass('glyphicon-menu-up');
         }
-        $(".date_"+date).each(function() {
+
+        if(date == 'all') {
+            var elements = $("td[class^='date_']"),
+                add_class = '',
+                remove_class = '';
+
+            if($("#toggle_date_all").hasClass('glyphicon-menu-up')) {
+                add_class = 'glyphicon-menu-up';
+                remove_class = 'glyphicon-menu-down';
+            } else {
+                add_class = 'glyphicon-menu-down';
+                remove_class = 'glyphicon-menu-up';
+            }
+
+            $("i[id^='toggle_date_']").each(function() {
+                $(this).removeClass(remove_class);
+                $(this).addClass(add_class);
+            });
+
+        } else {
+            var elements = $(".date_"+date);
+        }
+
+        elements.each(function() {
             if($(this).data('activity') != 'All') {
                 if ($(this).is(':visible')) {
                     $(this).hide();
@@ -28,6 +51,36 @@ var Runs = (function () {
                 }
             }
         });
+
+        var arrow_direction = '';
+
+        $("i[id^='toggle_date_']").each(function() {
+            if(this.id != 'toggle_date_all') {
+                if(arrow_direction === '') {
+                    if($(this).hasClass('glyphicon-menu-down')) {
+                        arrow_direction = 'glyphicon-menu-down';
+                    } else {
+                        arrow_direction = 'glyphicon-menu-up';
+                    }
+                } else {
+                    if(arrow_direction && !$(this).hasClass(arrow_direction)) {
+                        arrow_direction = false;
+                    }
+                }
+            }
+        });
+
+        if(arrow_direction) {
+            if(arrow_direction == 'glyphicon-menu-up') {
+                $("#toggle_date_all").removeClass('glyphicon-menu-down');
+                $("#toggle_date_all").addClass('glyphicon-menu-up');
+            } else {
+                $("#toggle_date_all").removeClass('glyphicon-menu-up');
+                $("#toggle_date_all").addClass('glyphicon-menu-down');
+            }
+
+        }
+
     }
 
     Runs.prototype.loadData = function(activity_id, date) {
