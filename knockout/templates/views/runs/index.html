@@ -6,26 +6,34 @@
         <thead>
             <tr class="table_nav">
                 <th class="title" colspan="7">
-                    <!-- ko if: $component.year || $component.month -->
+                    <!-- ko if: $component.year || $component.month || $component.activity_id -->
                         <div class="dropdown pull-right">
                             <button class="btn btn-xs btn-default dropdown-toggle"
                                     type="button" id="action_dropdown" data-toggle="dropdown">
-                                Filters&nbsp;<span class="caret"></span>
+                                Actions&nbsp;<span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="action_dropdown">
                                 <!-- ko if: $component.month -->
                                     <li>
-                                        <a role="menuitem" href="">
-                                            Monthly Summary
+                                        <a role="menuitem"
+                                           data-bind="attr: {href: 'runs/'+$component.year+'/'}">
+                                            Monthly summary
                                         </a>
                                     </li>
                                 <!-- /ko -->
                                 <!-- ko if: $component.year && !$component.month -->
-                                <li>
-                                    <a role="menuitem" href="runs/">
-                                        Annual Activity Summary
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a role="menuitem" href="runs/">
+                                            Annual activity summary
+                                        </a>
+                                    </li>
+                                <!-- /ko -->
+                                <!-- ko if: $component.activity_id -->
+                                    <li>
+                                        <a role="menuitem" href="runs/">
+                                            Remove activity filter
+                                        </a>
+                                    </li>
                                 <!-- /ko -->
                             </ul>
                         </div>
@@ -40,6 +48,7 @@
                         <!-- /ko -->
                         <!-- ko if: $component.year && $component.month -->
                             Monthly Activities
+                            (<span data-bind="text: $component.year+'-'+$component.month"></span>)
                         <!-- /ko -->
                     </div>
                 </th>
@@ -47,9 +56,11 @@
             <tr class="table_nav">
                 <th style="width:20%">
                     Date
-                    <i data-bind="click: $component.toggleActivityData.bind(false, 'all'),
-                                  attr: {id: 'toggle_date_all'}"
-                       class="glyphicon glyphicon-menu-down pull-right"></i>
+                    <!-- ko if: $component.flattenedActivityDisplay('All') -->
+                        <i data-bind="click: $component.toggleActivityData.bind(false, 'all'),
+                                      attr: {id: 'toggle_date_all'}"
+                           class="glyphicon glyphicon-menu-down pull-right"></i>
+                    <!-- /ko -->
                 </th>
                 <th style="width:20%">Activity</th>
                 <th style="width:10%">Count</th>
@@ -65,42 +76,49 @@
                 <!-- ko if: $index() === 0 -->
                     <td data-bind="attr: {rowspan: function(){return $parent.activities.length;}()}">
                         <span data-bind="text: $parent.date"></span>
-                        <i data-bind="click: $component.toggleActivityData.bind($data, $parent.date),
-                                      attr: {id: 'toggle_date_'+$parent.date}"
-                           class="glyphicon glyphicon-menu-down pull-right"></i>
+                        <!-- ko if: $component.flattenedActivityDisplay('All') -->
+                            <i data-bind="click: $component.toggleActivityData.bind($data, $parent.date),
+                                          attr: {id: 'toggle_date_'+$parent.date}"
+                               class="glyphicon glyphicon-menu-down pull-right"></i>
+                        <!-- /ko -->
                     </td>
                 <!-- /ko -->
-                <td data-bind="visible: activity == 'All',
+                <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
-                    <a data-bind="text: activity,
-                                  attr: {href: 'runs/'+$parent.date+'/'+
-                                                       activity_id}"></a>
+                    <!-- ko if: !$component.month -->
+                        <a data-bind="text: activity,
+                                      attr: {href: 'runs/'+$parent.date+'/'+
+                                                           activity_id}"></a>
+                    <!-- /ko -->
+                    <!-- ko if: $component.month -->
+                        <span data-bind="text: activity"></span>
+                    <!-- /ko -->
                 </td>
-                <td data-bind="visible: activity == 'All',
+                <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
                     <div class="text-right"
                          data-bind="text: activity_count"></div>
                 </td>
-                <td data-bind="visible: activity == 'All',
+                <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
                     <div class="text-right"
                          data-bind="text: display_seconds"></div>
                 </td>
-                <td data-bind="visible: activity == 'All',
+                <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
                     <div class="text-right" data-bind="text: km"></div>
                 </td>
-                <td data-bind="visible: activity == 'All',
+                <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
                     <div class="text-right"
                          data-bind="text: display_average_pace_time"></div>
                 </td>
-                <td data-bind="visible: activity == 'All',
+                <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
                     <div class="text-right"

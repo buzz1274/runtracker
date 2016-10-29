@@ -6,6 +6,7 @@ var Runs = (function () {
         this.runs = ko.observableArray();
         this.year = false;
         this.month = false;
+        this.activity_id = false;
 
         ko.track(this);
 
@@ -83,15 +84,29 @@ var Runs = (function () {
 
     }
 
+    Runs.prototype.flattenedActivityDisplay = function(activity) {
+        if(this.year && this.month) {
+            if (activity == 'All') {
+                return false;
+            } else {
+                return true;
+            }
+        } else if(this.activity_id && activity != 'All') {
+            return true;
+        } else if(activity == 'All' && !this.activity_id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     Runs.prototype.loadData = function(activity_id, date) {
         var that = this;
 
         date = date ? date.split("-") : false;
         this.year = date[0] ? date[0] : '';
         this.month = this.year && date[1] ? date[1] : '';
-
-        console.log(this.year);
-        console.log(this.month);
+        this.activity_id = activity_id;
 
         return $.ajax({url: 'http://dev.runtracker.zz50.co.uk/api/',
             type: 'get',

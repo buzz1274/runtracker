@@ -19,12 +19,27 @@ class ActivityController extends Controller {
         }
 
         error_log($request->query('year'));
+        error_log($request->query('month'));
 
         if($request->query('year') && (int)$request->query('year') > 2000) {
-            $dateQuery =
-                "AND a.activity_date BETWEEN '".$request->query('year')."-01-01' ".
-                "                        AND '".$request->query('year')."-12-31' ";
+            if($request->query('month') && (int)$request->query('month') >= 1 &&
+               (int)$request->query('month') <= 12) {
+                $dateType = 'month';
+                $extractQuery = "a.activity_date AS dt ";
+                $dateQuery =
+                    "AND a.activity_date BETWEEN '".$request->query('year')."-10-01' " .
+                    "                        AND '".$request->query('year')."-10-31' ";
+
+            } else {
+                $dateType = 'year';
+                $extractQuery = "EXTRACT(MONTH FROM a.activity_date) AS dt ";
+                $dateQuery =
+                    "AND a.activity_date BETWEEN '".$request->query('year')."-01-01' " .
+                    "                        AND '".$request->query('year')."-12-31' ";
+            }
         } else {
+            $dateType = 'all';
+            $extractQuery = "EXTRACT(YEAR FROM a.activity_date) AS dt ";
             $dateQuery = '';
         }
 
@@ -35,7 +50,7 @@ class ActivityController extends Controller {
                "          TO_CHAR(CAST(SUM(metres) AS FLOAT) / 1000, ".
                "                  'FM999999999.000') AS km, ".
                "          SUM(seconds) AS duration, ".
-               "          EXTRACT(YEAR FROM a.activity_date) AS dt ".
+               $extractQuery.
                "          FROM      activity_type at ".
                "LEFT JOIN activity a ON (a.activity_id = at.id) ".
                "WHERE     a.user_id = 1 ".
@@ -52,8 +67,16 @@ class ActivityController extends Controller {
             foreach($as as $a) {
                 if(!isset($lookup[$a->dt])) {
                     $lookup[$a->dt] = count($lookup);
+
+                    if($dateType == 'all' || $dateType == 'month') {
+                        $date = $a->dt;
+                    } elseif($dateType == 'year') {
+                        $date = $request->query('year').'-'.
+                                str_pad($a->dt, 2, 0, STR_PAD_LEFT);
+                    }
+
                     $activities[] = ['activities' => [],
-                                     'date' => $a->dt];
+                                     'date' => $date];
                     $totals[$a->dt] = ['seconds' => 0,
                                        'km' => 0,
                                        'activity_count' => 0];
