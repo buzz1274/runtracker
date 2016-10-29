@@ -28,13 +28,6 @@
                                         </a>
                                     </li>
                                 <!-- /ko -->
-                                <!-- ko if: $component.activity_id -->
-                                    <li>
-                                        <a role="menuitem" href="runs/">
-                                            Remove activity filter
-                                        </a>
-                                    </li>
-                                <!-- /ko -->
                             </ul>
                         </div>
                     <!-- /ko -->
@@ -63,7 +56,9 @@
                     <!-- /ko -->
                 </th>
                 <th style="width:20%">Activity</th>
-                <th style="width:10%">Count</th>
+                <!-- ko if: !$component.month -->
+                    <th style="width:10%">Count</th>
+                <!-- /ko -->
                 <th>Time<br />(hh:mm:ss)</th>
                 <th>Distance<br />(km)</th>
                 <th>Avg Pace<br />(hh:mm:ss/km)</th>
@@ -95,12 +90,14 @@
                         <span data-bind="text: activity"></span>
                     <!-- /ko -->
                 </td>
-                <td data-bind="visible: $component.flattenedActivityDisplay(activity),
-                               attr: {'class': 'date_'+$parent.date,
-                                      'data-activity': activity}">
-                    <div class="text-right"
-                         data-bind="text: activity_count"></div>
-                </td>
+                <!-- ko if: !$component.month -->
+                    <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                   attr: {'class': 'date_'+$parent.date,
+                                          'data-activity': activity}">
+                        <div class="text-right"
+                             data-bind="text: activity_count"></div>
+                    </td>
+                <!-- /ko -->
                 <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                attr: {'class': 'date_'+$parent.date,
                                       'data-activity': activity}">
