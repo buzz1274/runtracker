@@ -1,3 +1,5 @@
+var Moment = require('moment');
+
 var Runs = (function () {
     'use strict';
 
@@ -10,6 +12,19 @@ var Runs = (function () {
         this.activity_id = false;
 
         ko.track(this);
+
+    }
+
+    Runs.prototype.formatDate = function(date) {
+        var d = date.split('-');
+
+        if(d.length == 1) {
+            return date;
+        } else if(d.length == 2) {
+            return Moment(date).format('MMMM YYYY');
+        } else {
+            return Moment(date).format('MMMM D, YYYY');
+        }
 
     }
 

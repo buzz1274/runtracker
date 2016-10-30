@@ -37,11 +37,11 @@
                         <!-- /ko -->
                         <!-- ko if: $component.year && !$component.month -->
                             Monthly Activity Summary
-                            (<span data-bind="text: $component.year"></span>)
+                            (<span data-bind="text: $component.formatDate($component.year)"></span>)
                         <!-- /ko -->
                         <!-- ko if: $component.year && $component.month -->
                             Monthly Activities
-                            (<span data-bind="text: $component.year+'-'+$component.month"></span>)
+                            (<span data-bind="text: $component.formatDate($component.year+'-'+$component.month)"></span>)
                         <!-- /ko -->
                     </div>
                 </th>
@@ -104,11 +104,11 @@
                     <!-- ko if: $index() === 0 -->
                         <td data-bind="attr: {rowspan: function(){return $parent.activities.length;}()}">
                             <!-- ko if: !$component.month -->
-                                <a data-bind="text: $parent.date,
+                                <a data-bind="text: $component.formatDate($parent.date),
                                               attr: {href: 'runs/'+$parent.date+'/'}"></a>
                             <!-- /ko -->
                             <!-- ko if: $component.month -->
-                                <span data-bind="text: $parent.date"></span>
+                                <span data-bind="text: $component.formatDate($parent.date)"></span>
                             <!-- /ko -->
                             <!-- ko if: $component.flattenedActivityDisplay('All') -->
                                 <i data-bind="click: $component.toggleActivityData.bind($data, $parent.date),

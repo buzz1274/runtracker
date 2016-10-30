@@ -29,6 +29,7 @@
     "knockout-es5": "^0.4.5",
     "laravel-elixir": "^5.0.0",
     "less-loader": "^2.2.3",
+    "moment": "^2.15.2",
     "page": "^1.7.1",
     "postcss-loader": "^0.9.1",
     "style-loader": "^0.13.1",
