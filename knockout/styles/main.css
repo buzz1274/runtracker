@@ -140,10 +140,9 @@ table.runs td.stats_title {
     width:30%;
     font-weight:bold;
 }
-table.runs td.rotate {
-    transform: rotate(-90.0deg);
-    width:1%;
-    text-align:center;
+table.runs th {
+    vertical-align:middle;
+    border:1px solid #FFF;
 }
 table.runs th.title {
     text-align:center;

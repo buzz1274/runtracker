@@ -3,6 +3,7 @@ var Runs = (function () {
 
     function Runs() {
         this.component = 'runs';
+        this.has_data = false;
         this.runs = ko.observableArray();
         this.year = false;
         this.month = false;
@@ -116,6 +117,12 @@ var Runs = (function () {
                    month: that.month,
                    activity_id: activity_id},
             success: function(data) {
+                if(data.length) {
+                    that.has_data = true;
+                } else {
+                    that.has_data = false;
+                }
+
                 that.runs = data;
             }
         });
