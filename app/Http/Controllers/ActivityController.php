@@ -11,6 +11,12 @@ class ActivityController extends Controller {
 
     public function index(Request $request) {
 
+        if($request->query('year') && $request->query('month')) {
+            return response()->json(activity::activities(USER_ID, $request->query('year'),
+                                                         $request->query('month'),
+                                                         $request->query('activities')));
+        }
+
         if($request->query('activity_id') && (int)$request->query('activity_id') > 0) {
             $activityQuery =
                 "AND a.activity_id = ".$request->query('activity_id')." ";
@@ -18,32 +24,31 @@ class ActivityController extends Controller {
             $activityQuery = '';
         }
 
-        error_log($request->query('year'));
-        error_log($request->query('month'));
-
         if($request->query('year') && (int)$request->query('year') > 2000) {
             if($request->query('month') && (int)$request->query('month') >= 1 &&
                (int)$request->query('month') <= 12) {
+
                 $dateType = 'month';
                 $extractQuery = "a.activity_date AS dt ";
-                $dateQuery =
-                    "AND a.activity_date BETWEEN '".$request->query('year')."-10-01' " .
-                    "                        AND '".$request->query('year')."-10-31' ";
+                $startDate = date('Y-m-d', strtotime($request->query('year').'-'.
+                                                     $request->query('month').'-01'));
+                $endDate = date('Y-m-t', strtotime($startDate));
 
             } else {
                 $dateType = 'year';
                 $extractQuery = "EXTRACT(MONTH FROM a.activity_date) AS dt ";
-                $dateQuery =
-                    "AND a.activity_date BETWEEN '".$request->query('year')."-01-01' " .
-                    "                        AND '".$request->query('year')."-12-31' ";
+                $startDate = date('Y-m-d', strtotime($request->query('year').'-01-01'));
+                $endDate = date('Y-m-d', strtotime($request->query('year').'-12-31'));
             }
+
+            $dateQuery = "AND a.activity_date BETWEEN '".$startDate."' ".
+                         "                        AND '".$endDate."' ";
+
         } else {
             $dateType = 'all';
             $extractQuery = "EXTRACT(YEAR FROM a.activity_date) AS dt ";
             $dateQuery = '';
         }
-
-        error_log($dateQuery);
 
         $sql = "SELECT    at.id, at.activity_type, ".
                "          COUNT(a.id) AS activity_count, ".
@@ -56,7 +61,8 @@ class ActivityController extends Controller {
                "WHERE     a.user_id = 1 ".
                $dateQuery.
                $activityQuery.
-               "GROUP BY  at.id, at.activity_type, dt ".
+               "GROUP BY  at.id, ".($dateType != 'month' ? "at.activity_type, dt " :
+                                                           "a.activity_date ").
                "ORDER BY  dt ASC, at.activity_type ASC";
 
         $as = \DB::select($sql);
@@ -95,25 +101,29 @@ class ActivityController extends Controller {
                              activity::convertSecondsToDisplayTime($a->duration),
                          'seconds' => $a->duration];
 
-                $totals[$a->dt]['seconds'] += $a->duration;
-                $totals[$a->dt]['activity_count'] += $a->activity_count;
-                $totals[$a->dt]['km'] += $a->km;
+                if($dateType != 'month') {
+                    $totals[$a->dt]['seconds'] += $a->duration;
+                    $totals[$a->dt]['activity_count'] += $a->activity_count;
+                    $totals[$a->dt]['km'] += $a->km;
+                }
 
             }
 
-            foreach($totals as $key => $total) {
-                $activities[$lookup[$key]]['activities'][] =
-                    ['activity' => 'All',
-                     'activity_id' => '',
-                     'activity_count' => $total['activity_count'],
-                     'km' => number_format($total['km'], 3),
-                     'display_average_pace_time' =>
-                         activity::averagePaceTime($total['seconds'], $total['km']),
-                     'display_average_pace_distance' =>
-                         activity::averagePaceDistance($total['seconds'], $total['km']),
-                     'display_seconds' =>
-                         activity::convertSecondsToDisplayTime($total['seconds']),
-                     'seconds' => $total['seconds']];
+            if($dateType != 'month') {
+                foreach($totals as $key => $total) {
+                    $activities[$lookup[$key]]['activities'][] =
+                        ['activity' => 'All',
+                         'activity_id' => '',
+                         'activity_count' => $total['activity_count'],
+                         'km' => number_format($total['km'], 3),
+                         'display_average_pace_time' =>
+                             activity::averagePaceTime($total['seconds'], $total['km']),
+                         'display_average_pace_distance' =>
+                             activity::averagePaceDistance($total['seconds'], $total['km']),
+                         'display_seconds' =>
+                             activity::convertSecondsToDisplayTime($total['seconds']),
+                         'seconds' => $total['seconds']];
+                }
             }
 
         }

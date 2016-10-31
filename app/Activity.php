@@ -7,6 +7,60 @@ use Illuminate\Database\Eloquent\Model;
 class activity extends Model {
     protected $table = 'activity';
 
+    public function activity() {
+        return $this->hasOne('App\ActivityType', 'id', 'activity_id');
+    }
+
+    public static function activities($userID, $year, $month, $activityID) {
+        $query = self::where('user_id', $userID);
+
+        if($activityID) {
+            $query = $query->where('activity_id', $activityID);
+        }
+
+        if($year) {
+            if($month) {
+                $startDate = date('Y-m-d', strtotime($year.'-'.$month.'-01'));
+                $endDate = date('Y-m-t', strtotime($startDate));
+            } else {
+                $startDate = date('Y-m-d', strtotime($year.'-01-01'));
+                $endDate = date('Y-m-t', strtotime($year.'-12-31'));
+            }
+
+            $query = $query->whereBetween('activity_date',
+                                          [$startDate, $endDate]);
+
+        }
+
+        $query = $query->get();
+
+        if(!$query) {
+            return false;
+        }
+
+        foreach($query as $activity) {
+            $km = number_format($activity->metres / 1000, 3);
+
+            $activities[] =
+                ['date' => $activity->activity_date,
+                 'activities' =>
+                     [['activity_id' => $activity->id,
+                       'activity_count' => 1,
+                       'activity' => $activity->activity->activity_type,
+                       'seconds' => $activity->seconds,
+                       'km' => $km,
+                       'display_average_pace_time' =>
+                           self::averagePaceTime($activity->seconds, $km),
+                       'display_average_pace_distance' =>
+                           self::averagePaceDistance($activity->seconds, $km),
+                       'display_seconds' =>
+                           self::convertSecondsToDisplayTime($activity->seconds)]]];
+        }
+
+        return $activities;
+
+    }
+
     public static function convertSecondsToDisplayTime($seconds) {
         $seconds = (int)$seconds;
 
