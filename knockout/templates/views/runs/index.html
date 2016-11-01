@@ -24,7 +24,7 @@
                                 <!-- ko if: $component.year && !$component.month -->
                                     <li>
                                         <a role="menuitem" href="runs/">
-                                            Annual activity summary
+                                            Annual summary
                                         </a>
                                     </li>
                                 <!-- /ko -->
@@ -65,8 +65,9 @@
                             </span>
                             <ul class="dropdown-menu" aria-labelledby="filter_dropdown">
                                 <li>
-                                    <a role="menuitem">
-                                        <input id="1" type="checkbox" />
+                                    <a role="menuitem"
+                                       data-bind="click: function(data, event) { $component.filterActivities(5);}"     >
+                                        <input id="activity_filter_checkbox_5" type="checkbox" />
                                         Treadmill running
                                     </a>
                                 </li>
@@ -74,6 +75,12 @@
                                     <a role="menuitem">
                                         <input id="2" type="checkbox" />
                                         Treadmill walking
+                                    </a>
+                                </li>
+                                <li>
+                                    <a role="menuitem" style="padding-left:35px;"
+                                       data-bind="click: function(data, event) { $component.filterActivities(false);}">
+                                        <strong>Clear all filters</strong>
                                     </a>
                                 </li>
                             </ul>

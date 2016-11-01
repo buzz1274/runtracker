@@ -1,5 +1,4 @@
-var page = require('page'),
-    Runs = require('./views/runs/index.js');
+var page = require('page');
 
 module.exports = (function () {
     'use strict';
@@ -25,7 +24,7 @@ module.exports = (function () {
             app.page = 'reset_password';
         });
 
-        page('runs/:date?/:activity_id?/', function(ctx) {
+        page('runs/:date?/', function(ctx) {
 
             app.pages['runs'].loadData(ctx.params.activity_id,
                                        ctx.params.date).done(function() {
