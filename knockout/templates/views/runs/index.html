@@ -64,19 +64,16 @@
                                 <span class="glyphicon glyphicon-filter pull-right"></span>
                             </span>
                             <ul class="dropdown-menu" aria-labelledby="filter_dropdown">
+                                <!-- ko foreach: $component.activity_types -->
                                 <li>
                                     <a role="menuitem"
-                                       data-bind="click: function(data, event) { $component.filterActivities(5);}"     >
-                                        <input id="activity_filter_checkbox_5" type="checkbox" />
-                                        Treadmill running
+                                       data-bind="click: function(data, event) { $component.filterActivities(id);}"     >
+                                        <input type="checkbox"
+                                               data-bind="attr: {id: 'activity_filter_checkbox_' + id}" />
+                                        <span data-bind="text: activity_type"></span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a role="menuitem">
-                                        <input id="2" type="checkbox" />
-                                        Treadmill walking
-                                    </a>
-                                </li>
+                                <!-- /ko -->
                                 <li>
                                     <a role="menuitem" style="padding-left:35px;"
                                        data-bind="click: function(data, event) { $component.filterActivities(false);}">

@@ -10,9 +10,10 @@ var Runs = (function () {
         this.year = '';
         this.month = '';
         this.activity_id = false;
-
+        this.activity_types = false;
+        
         this.filterActivities = function(activity_id) {
-            console.log("FILTER Act");
+            console.log("FILTER Act "+activity_id);
             this.loadData(activity_id, false);
 
             return true;
@@ -25,9 +26,6 @@ var Runs = (function () {
             date = date ? date.split("-") : false;
             this.year = date[0] ? date[0] : '';
             this.month = this.year && date[1] ? date[1] : '';
-
-            console.log()
-
             this.activity_id = activity_id;
 
             return $.ajax({url: 'http://dev.runtracker.zz50.co.uk/api/',
@@ -35,8 +33,8 @@ var Runs = (function () {
                 dataType: 'json',
                 async: true,
                 data: {year: that.year,
-                    month: that.month,
-                    activity_id: activity_id},
+                       month: that.month,
+                       activity_id: activity_id},
                 success: function(data) {
                     if(data.length) {
                         that.has_data = true;
@@ -149,6 +147,23 @@ var Runs = (function () {
             }
 
         }
+
+        this.loadActivityTypes = function() {
+            var that = this;
+
+            $.ajax({url: 'http://dev.runtracker.zz50.co.uk/api/activities/type',
+                type: 'get',
+                dataType: 'json',
+                async: true,
+                success: function(data) {
+                    that.activity_types = data;
+                }
+            });
+
+
+        }
+
+        this.loadActivityTypes();
 
         ko.track(this);
 

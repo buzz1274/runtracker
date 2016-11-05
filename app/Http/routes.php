@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'ActivityController@index');
+Route::get('/activities/type', 'ActivityTypeController@type');
