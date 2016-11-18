@@ -7,6 +7,7 @@ var Runs = (function () {
         this.component = 'runs';
         this.has_data = false;
         this.runs = ko.observableArray();
+        this.selected_activites = ko.observableArray([1, 2, 3, 4, 5, 6]);
         this.year = '';
         this.month = '';
         this.activity_id = false;
@@ -14,10 +15,31 @@ var Runs = (function () {
         
         this.filterActivities = function(activity_id) {
             console.log("FILTER Act "+activity_id);
-            this.loadData(activity_id, false);
+
+            if(!activity_id) {
+                this.activity_id = false;
+            } else {
+                $('#activity_filter_dropdown').dropdown('toggle');
+
+                this.activity_id = activity_id;
+
+            }
+
+            this.loadData(this.activity_id, false);
 
             return true;
 
+        }
+
+        this.activityFilterChecked = function(activity_id) {
+            console.log("Activity Filter");
+            console.log(this.activity_id + "   " + activity_id);
+            if(this.activity_id && activity_id == this.activity_id) {
+                console.log("CHECKED");
+                return true;
+            } else {
+                return false;
+            }
         }
 
         this.loadData = function(activity_id, date) {
@@ -28,7 +50,7 @@ var Runs = (function () {
             this.month = this.year && date[1] ? date[1] : '';
             this.activity_id = activity_id;
 
-            return $.ajax({url: 'http://dev.runtracker.zz50.co.uk/api/',
+            return $.ajax({url: '//'+window.location.hostname+'/api/',
                 type: 'get',
                 dataType: 'json',
                 async: true,
