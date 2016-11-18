@@ -173,7 +173,7 @@ var Runs = (function () {
         this.loadActivityTypes = function() {
             var that = this;
 
-            $.ajax({url: 'http://dev.runtracker.zz50.co.uk/api/activities/type',
+            $.ajax({url: '//'+window.location.hostname+'/api/activities/type',
                 type: 'get',
                 dataType: 'json',
                 async: true,
