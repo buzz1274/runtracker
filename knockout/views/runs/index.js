@@ -58,6 +58,7 @@ var Runs = (function () {
                        month: that.month,
                        activity_id: activity_id},
                 success: function(data) {
+                    console.log(data);
                     if(data.length) {
                         that.has_data = true;
                     } else {
@@ -178,6 +179,7 @@ var Runs = (function () {
                 dataType: 'json',
                 async: true,
                 success: function(data) {
+                    console.log(data);
                     that.activity_types = data;
                 }
             });
