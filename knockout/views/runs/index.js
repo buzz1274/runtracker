@@ -22,7 +22,7 @@ var Runs = (function () {
                 this.year = date[0] ? date[0] : '';
                 this.month = this.year && date[1] ? date[1] : '';
             }
-            
+
             return $.ajax({url: '//'+window.location.hostname+'/api/',
                 type: 'get',
                 dataType: 'json',

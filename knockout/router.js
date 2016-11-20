@@ -25,8 +25,13 @@ module.exports = (function () {
         });
 
         page('runs/:date?/', function(ctx) {
+            var date = ctx.params.date;
 
-            app.pages['runs'].loadData(ctx.params.date).done(function() {
+            if(!date) {
+                date = 'all';
+            }
+
+            app.pages['runs'].loadData(date).done(function() {
 
                 app.page = 'runs';
 
