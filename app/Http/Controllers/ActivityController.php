@@ -17,9 +17,9 @@ class ActivityController extends Controller {
                                                          $request->query('activities')));
         }
 
-        if($request->query('activity_id') && (int)$request->query('activity_id') > 0) {
+        if($request->query('activity_id')) {
             $activityQuery =
-                "AND a.activity_id = ".$request->query('activity_id')." ";
+                "AND a.activity_id IN (".$request->query('activity_id').") ";
         } else {
             $activityQuery = '';
         }

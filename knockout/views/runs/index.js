@@ -7,48 +7,28 @@ var Runs = (function () {
         this.component = 'runs';
         this.has_data = false;
         this.runs = ko.observableArray();
-        this.selected_activites = ko.observableArray([1, 2, 3, 4, 5, 6]);
+        this.selected_activites = ko.observableArray();
         this.year = '';
         this.month = '';
-        this.activity_id = false;
         this.activity_types = false;
+
+        var that = this;
+
+        this.selected_activites.subscribe(function() {
+            $(".dropdown").removeClass('open');
+            that.loadData();
+        });
+
+        this.runs.subscribe(function() {
+           //re-draw graph
+        });
         
-        this.filterActivities = function(activity_id) {
-            console.log("FILTER Act "+activity_id);
-
-            if(!activity_id) {
-                this.activity_id = false;
-            } else {
-                $('#activity_filter_dropdown').dropdown('toggle');
-
-                this.activity_id = activity_id;
-
-            }
-
-            this.loadData(this.activity_id, false);
-
-            return true;
-
-        }
-
-        this.activityFilterChecked = function(activity_id) {
-            console.log("Activity Filter");
-            console.log(this.activity_id + "   " + activity_id);
-            if(this.activity_id && activity_id == this.activity_id) {
-                console.log("CHECKED");
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        this.loadData = function(activity_id, date) {
+        this.loadData = function(date = false) {
             var that = this;
 
             date = date ? date.split("-") : false;
             this.year = date[0] ? date[0] : '';
             this.month = this.year && date[1] ? date[1] : '';
-            this.activity_id = activity_id;
 
             return $.ajax({url: '//'+window.location.hostname+'/api/',
                 type: 'get',
@@ -56,9 +36,8 @@ var Runs = (function () {
                 async: true,
                 data: {year: that.year,
                        month: that.month,
-                       activity_id: activity_id},
+                       activity_id: that.selected_activites.join()},
                 success: function(data) {
-                    console.log(data);
                     if(data.length) {
                         that.has_data = true;
                     } else {
@@ -77,9 +56,9 @@ var Runs = (function () {
                 } else {
                     return true;
                 }
-            } else if(this.activity_id && activity != 'All') {
+            } else if(this.selected_activites.length == 1 && activity != 'All') {
                 return true;
-            } else if(activity == 'All' && !this.activity_id) {
+            } else if(activity == 'All' && this.selected_activites.length != 1) {
                 return true;
             } else {
                 return false;
@@ -179,7 +158,6 @@ var Runs = (function () {
                 dataType: 'json',
                 async: true,
                 success: function(data) {
-                    console.log(data);
                     that.activity_types = data;
                 }
             });
