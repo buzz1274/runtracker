@@ -69,7 +69,8 @@
                                 style="cursor:pointer">
                                 <!-- ko foreach: $component.activity_types -->
                                 <li>
-                                    <a role="menuitem">
+                                    <a role="menuitem"
+                                       data-bind="click: function(data, event) { $component.filterActivities(id);}">
                                         <input type="checkbox"
                                                data-bind="attr: {id: 'activity_filter_checkbox_' + id},
                                                           value: id,
@@ -82,7 +83,7 @@
                                 <li>
                                     <a role="menuitem" style="padding-left:35px;"
                                        data-bind="click: function(data, event) { $component.selected_activites.removeAll();}">
-                                        <strong>Clear all filters</strong>
+                                        <strong>Clear activity filters</strong>
                                     </a>
                                 </li>
                                 <!-- /ko -->

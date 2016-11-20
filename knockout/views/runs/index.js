@@ -42,6 +42,14 @@ var Runs = (function () {
             });
         }
 
+        this.filterActivities = function(id) {
+            if(this.selected_activites.indexOf(id) == -1) {
+                this.selected_activites.push(id);
+            } else {
+                this.selected_activites.remove(id);
+            }
+        }
+
         this.flattenedActivityDisplay = function(activity) {
             if(this.year && this.month) {
                 if (activity == 'All') {
