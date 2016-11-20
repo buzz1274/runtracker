@@ -71,17 +71,15 @@
                                 <li>
                                     <a role="menuitem"
                                        data-bind="click: function(data, event) { $component.filterActivities(id);}">
-                                        <input type="checkbox"
-                                               data-bind="attr: {id: 'activity_filter_checkbox_' + id},
-                                                          value: id,
-                                                          checked: $component.selected_activites" />
-                                        <span data-bind="text: activity_type"></span>
+                                        <span class="glyphicon glyphicon-ok"
+                                              data-bind="style: {visibility: $component.selected_activites.indexOf(id) == -1 ? 'hidden' : 'visible' }"></span>&nbsp;
+                                        <span role="menuitem" data-bind="text: activity_type"></span>
                                     </a>
                                 </li>
                                 <!-- /ko -->
                                 <!-- ko if: $component.selected_activites.length > 0 -->
                                 <li>
-                                    <a role="menuitem" style="padding-left:35px;"
+                                    <a role="menuitem" style="padding-left:40px;"
                                        data-bind="click: function(data, event) { $component.selected_activites.removeAll();}">
                                         <strong>Clear activity filters</strong>
                                     </a>

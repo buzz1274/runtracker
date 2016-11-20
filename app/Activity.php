@@ -57,7 +57,7 @@ class activity extends Model {
                            self::convertSecondsToDisplayTime($activity->seconds)]]];
         }
 
-        return $activities;
+        return isset($activities) ? $activities : [];
 
     }
 

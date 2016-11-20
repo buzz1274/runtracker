@@ -53,6 +53,7 @@ var Runs = (function () {
             } else {
                 this.selected_activites.remove(id);
             }
+            return true;
         }
 
         this.flattenedActivityDisplay = function(activity) {
