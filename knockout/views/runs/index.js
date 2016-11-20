@@ -18,9 +18,14 @@ var Runs = (function () {
             var that = this;
 
             if(date) {
-                date = date ? date.split("-") : false;
-                this.year = date[0] ? date[0] : '';
-                this.month = this.year && date[1] ? date[1] : '';
+                if(date == 'all') {
+                    this.year = '';
+                    this.month = '';
+                } else {
+                    date = date ? date.split("-") : false;
+                    this.year = date[0] ? date[0] : '';
+                    this.month = this.year && date[1] ? date[1] : '';
+                }
             }
 
             return $.ajax({url: '//'+window.location.hostname+'/api/',
