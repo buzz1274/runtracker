@@ -14,22 +14,15 @@ var Runs = (function () {
 
         var that = this;
 
-        this.selected_activites.subscribe(function() {
-            $(".dropdown").removeClass('open');
-            that.loadData();
-        });
-
-        this.runs.subscribe(function() {
-           //re-draw graph
-        });
-        
         this.loadData = function(date = false) {
             var that = this;
 
-            date = date ? date.split("-") : false;
-            this.year = date[0] ? date[0] : '';
-            this.month = this.year && date[1] ? date[1] : '';
-
+            if(date) {
+                date = date ? date.split("-") : false;
+                this.year = date[0] ? date[0] : '';
+                this.month = this.year && date[1] ? date[1] : '';
+            }
+            
             return $.ajax({url: '//'+window.location.hostname+'/api/',
                 type: 'get',
                 dataType: 'json',
@@ -166,6 +159,15 @@ var Runs = (function () {
         }
 
         this.loadActivityTypes();
+
+        this.selected_activites.subscribe(function() {
+            $(".dropdown").removeClass('open');
+            that.loadData();
+        });
+
+        this.runs.subscribe(function() {
+            //re-draw graph
+        });
 
         ko.track(this);
 

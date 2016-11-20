@@ -26,8 +26,7 @@ module.exports = (function () {
 
         page('runs/:date?/', function(ctx) {
 
-            app.pages['runs'].loadData(ctx.params.activity_id,
-                                       ctx.params.date).done(function() {
+            app.pages['runs'].loadData(ctx.params.date).done(function() {
 
                 app.page = 'runs';
 

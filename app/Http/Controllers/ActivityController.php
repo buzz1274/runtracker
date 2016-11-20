@@ -14,7 +14,7 @@ class ActivityController extends Controller {
         if($request->query('year') && $request->query('month')) {
             return response()->json(activity::activities(USER_ID, $request->query('year'),
                                                          $request->query('month'),
-                                                         $request->query('activities')));
+                                                         $request->query('activity_id')));
         }
 
         if($request->query('activity_id')) {

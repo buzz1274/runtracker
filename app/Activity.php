@@ -15,7 +15,7 @@ class activity extends Model {
         $query = self::where('user_id', $userID);
 
         if($activityID) {
-            $query = $query->where('activity_id', $activityID);
+            $query = $query->whereIn('activity_id', explode(',', $activityID));
         }
 
         if($year) {
