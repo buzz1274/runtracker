@@ -11,7 +11,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.html$/,
-                loader: 'html'
+                loader: 'html?-minimize'
             },
             {
                 test: /\.js$/,
