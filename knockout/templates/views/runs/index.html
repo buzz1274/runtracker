@@ -52,7 +52,8 @@
                     <!-- ko if: $component.flattenedActivityDisplay('All') && $component.has_data -->
                         <i data-bind="click: $component.toggleActivityData.bind(false, 'all'),
                                       attr: {id: 'toggle_date_all'}"
-                           class="glyphicon glyphicon-menu-down pull-right"></i>
+                           class="glyphicon glyphicon-menu-down pull-right"
+                           title="Expand all dates"></i>
                     <!-- /ko -->
                 </th>
                 <th style="width:20%">
@@ -61,7 +62,8 @@
                         <div class="dropdown pull-right">
                             <span class="dropdown-toggle"
                                   id="activity_filter_dropdown" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-filter pull-right"></span>
+                                <span class="glyphicon glyphicon-filter pull-right"
+                                      title="Filter by activity"></span>
                             </span>
                             <ul class="dropdown-menu" aria-labelledby="filter_dropdown">
                                 <!-- ko foreach: $component.activity_types -->
