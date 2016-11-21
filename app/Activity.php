@@ -61,6 +61,10 @@ class activity extends Model {
 
     }
 
+    public static function calculateSummary($activities) {
+
+    }
+
     public static function convertSecondsToDisplayTime($seconds) {
         $seconds = (int)$seconds;
 

@@ -107,63 +107,101 @@
                 </tr>
             </tbody>
         <!-- /ko -->
-        <tbody data-bind="foreach: runs">
-            <!-- ko foreach: activities -->
-                <tr>
-                    <!-- ko if: $index() === 0 -->
-                        <td data-bind="attr: {rowspan: function(){return $parent.activities.length;}()}">
-                            <!-- ko if: !$component.month -->
-                                <a data-bind="text: $component.formatDate($parent.date),
-                                              attr: {href: 'runs/'+$parent.date+'/'}"></a>
-                            <!-- /ko -->
-                            <!-- ko if: $component.month -->
-                                <span data-bind="text: $component.formatDate($parent.date)"></span>
-                            <!-- /ko -->
-                            <!-- ko if: $component.flattenedActivityDisplay('All') -->
-                                <i data-bind="click: $component.toggleActivityData.bind($data, $parent.date),
-                                              attr: {id: 'toggle_date_'+$parent.date}"
-                                   class="glyphicon glyphicon-menu-down pull-right"></i>
-                            <!-- /ko -->
+        <tbody>
+            <!-- ko foreach: runs -->
+                <!-- ko foreach: activities -->
+                    <tr>
+                        <!-- ko if: $index() === 0 -->
+                            <td data-bind="attr: {rowspan: function(){return $parent.activities.length;}()}">
+                                <!-- ko if: !$component.month -->
+                                    <a data-bind="text: $component.formatDate($parent.date),
+                                                  attr: {href: 'runs/'+$parent.date+'/'}"></a>
+                                <!-- /ko -->
+                                <!-- ko if: $component.month -->
+                                    <span data-bind="text: $component.formatDate($parent.date)"></span>
+                                <!-- /ko -->
+                                <!-- ko if: $component.flattenedActivityDisplay('All') -->
+                                    <i data-bind="click: $component.toggleActivityData.bind($data, $parent.date),
+                                                  attr: {id: 'toggle_date_'+$parent.date}"
+                                       class="glyphicon glyphicon-menu-down pull-right"></i>
+                                <!-- /ko -->
+                            </td>
+                        <!-- /ko -->
+                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                       attr: {'class': 'date_'+$parent.date,
+                                              'data-activity': activity}">
+                            <span data-bind="text: activity"></span>
                         </td>
-                    <!-- /ko -->
-                    <td data-bind="visible: $component.flattenedActivityDisplay(activity),
-                                   attr: {'class': 'date_'+$parent.date,
-                                          'data-activity': activity}">
-                        <span data-bind="text: activity"></span>
-                    </td>
-                    <!-- ko if: !$component.month -->
+                        <!-- ko if: !$component.month -->
+                            <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                           attr: {'class': 'date_'+$parent.date,
+                                                  'data-activity': activity}">
+                                <div class="text-right"
+                                     data-bind="text: activity_count"></div>
+                            </td>
+                        <!-- /ko -->
                         <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                        attr: {'class': 'date_'+$parent.date,
                                               'data-activity': activity}">
                             <div class="text-right"
-                                 data-bind="text: activity_count"></div>
+                                 data-bind="text: display_seconds"></div>
                         </td>
-                    <!-- /ko -->
-                    <td data-bind="visible: $component.flattenedActivityDisplay(activity),
-                                   attr: {'class': 'date_'+$parent.date,
-                                          'data-activity': activity}">
-                        <div class="text-right"
-                             data-bind="text: display_seconds"></div>
-                    </td>
-                    <td data-bind="visible: $component.flattenedActivityDisplay(activity),
-                                   attr: {'class': 'date_'+$parent.date,
-                                          'data-activity': activity}">
-                        <div class="text-right" data-bind="text: km"></div>
-                    </td>
-                    <td data-bind="visible: $component.flattenedActivityDisplay(activity),
-                                   attr: {'class': 'date_'+$parent.date,
-                                          'data-activity': activity}">
-                        <div class="text-right"
-                             data-bind="text: display_average_pace_time"></div>
-                    </td>
-                    <td data-bind="visible: $component.flattenedActivityDisplay(activity),
-                                   attr: {'class': 'date_'+$parent.date,
-                                          'data-activity': activity}">
-                        <div class="text-right"
-                             data-bind="text: display_average_pace_distance"></div>
-                    </td>
-                </tr>
+                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                       attr: {'class': 'date_'+$parent.date,
+                                              'data-activity': activity}">
+                            <div class="text-right" data-bind="text: km"></div>
+                        </td>
+                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                       attr: {'class': 'date_'+$parent.date,
+                                              'data-activity': activity}">
+                            <div class="text-right"
+                                 data-bind="text: display_average_pace_time"></div>
+                        </td>
+                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                       attr: {'class': 'date_'+$parent.date,
+                                              'data-activity': activity}">
+                            <div class="text-right"
+                                 data-bind="text: display_average_pace_distance"></div>
+                        </td>
+                    </tr>
+                <!-- /ko -->
             <!-- /ko -->
+            <tr>
+                <td class="text-center">-</td>
+                <td class="text-center">-</td>
+                <!-- ko if: !$component.month -->
+                    <td>
+                        <div class="text-right" data-bind="">1</div>
+                    </td>
+                <!-- /ko -->
+                <td>
+                    <div class="text-right" data-bind="">2</div>
+                </td>
+                <td>
+                    <div class="text-right" data-bind="">3</div>
+                </td>
+                <td>
+                    <div class="text-right" data-bind="">4</div>
+                </td>
+                <td>
+                    <div class="text-right" data-bind="">5</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">-</td>
+                <td class="text-center">-</td>
+                <!-- ko if: !$component.month -->
+                    <td class="text-center">-</td>
+                <!-- /ko -->
+                <td>
+                    <div class="text-right" data-bind="">0.11</div>
+                </td>
+                <td>
+                    <div class="text-right" data-bind="">0.22</div>
+                </td>
+                <td class="text-center">-</td>
+                <td class="text-center">-</td>
+            </tr>
         </tbody>
     </table>
 </div>

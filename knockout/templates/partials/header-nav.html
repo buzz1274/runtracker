@@ -5,6 +5,24 @@
         |&nbsp;
         <a>Logout</a>
         <a data-bind="attr.href:href" href="login">Login</a>
+        <br />
+        <div id="header_menu" class="dropdown pull-right">
+            <a class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                Menu&nbsp;<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a role="menuitem" href="/stats/">
+                        Activity types
+                    </a>
+                </li>
+                <li>
+                    <a role="menuitem" href="/models/add">
+                        Split calculator
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
     <div id="header_content">
         <h1><a data-bind="attr.href:href" href="">RunTracker</a></h1>
