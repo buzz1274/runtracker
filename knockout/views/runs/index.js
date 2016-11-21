@@ -8,6 +8,7 @@ var Runs = (function () {
         this.has_data = false;
         this.runs = ko.observableArray();
         this.selected_activites = ko.observableArray();
+        this.summary = false;
         this.year = '';
         this.month = '';
         this.activity_types = false;
@@ -36,13 +37,20 @@ var Runs = (function () {
                        month: that.month,
                        activity_id: that.selected_activites.join()},
                 success: function(data) {
-                    if(data.length) {
+                    if(data['activities'].length) {
                         that.has_data = true;
                     } else {
                         that.has_data = false;
                     }
 
-                    that.runs = data;
+                    console.log(data);
+
+                    that.runs = data['activities'];
+                    that.summary = data['summary'];
+
+                },
+                failure: function() {
+                    console.log("FAILURE");
                 }
             });
         }

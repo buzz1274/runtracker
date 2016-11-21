@@ -25,21 +25,10 @@ class ActivityController extends Controller {
         }
 
         if($request->query('year') && (int)$request->query('year') > 2000) {
-            if($request->query('month') && (int)$request->query('month') >= 1 &&
-               (int)$request->query('month') <= 12) {
-
-                $dateType = 'month';
-                $extractQuery = "a.activity_date AS dt ";
-                $startDate = date('Y-m-d', strtotime($request->query('year').'-'.
-                                                     $request->query('month').'-01'));
-                $endDate = date('Y-m-t', strtotime($startDate));
-
-            } else {
-                $dateType = 'year';
-                $extractQuery = "EXTRACT(MONTH FROM a.activity_date) AS dt ";
-                $startDate = date('Y-m-d', strtotime($request->query('year').'-01-01'));
-                $endDate = date('Y-m-d', strtotime($request->query('year').'-12-31'));
-            }
+            $dateType = 'year';
+            $extractQuery = "EXTRACT(MONTH FROM a.activity_date) AS dt ";
+            $startDate = date('Y-m-d', strtotime($request->query('year').'-01-01'));
+            $endDate = date('Y-m-d', strtotime($request->query('year').'-12-31'));
 
             $dateQuery = "AND a.activity_date BETWEEN '".$startDate."' ".
                          "                        AND '".$endDate."' ";
@@ -67,6 +56,9 @@ class ActivityController extends Controller {
 
         $as = \DB::select($sql);
         $activities = [];
+        $summary = ['total_activity_count' => 0,
+                    'total_seconds' => 0,
+                    'total_km' => 0];
         $lookup = [];
 
         if($as) {
@@ -101,36 +93,38 @@ class ActivityController extends Controller {
                              activity::convertSecondsToDisplayTime($a->duration),
                          'seconds' => $a->duration];
 
-                if($dateType != 'month') {
-                    $totals[$a->dt]['seconds'] += $a->duration;
-                    $totals[$a->dt]['activity_count'] += $a->activity_count;
-                    $totals[$a->dt]['km'] += $a->km;
-                }
+                $totals[$a->dt]['seconds'] += $a->duration;
+                $totals[$a->dt]['activity_count'] += $a->activity_count;
+                $totals[$a->dt]['km'] += $a->km;
 
             }
 
-            if($dateType != 'month') {
-                foreach($totals as $key => $total) {
-                    $activities[$lookup[$key]]['activities'][] =
-                        ['activity' => 'All',
-                         'activity_id' => '',
-                         'activity_count' => $total['activity_count'],
-                         'km' => number_format($total['km'], 3),
-                         'display_average_pace_time' =>
-                             activity::averagePaceTime($total['seconds'], $total['km']),
-                         'display_average_pace_distance' =>
-                             activity::averagePaceDistance($total['seconds'], $total['km']),
-                         'display_seconds' =>
-                             activity::convertSecondsToDisplayTime($total['seconds']),
-                         'seconds' => $total['seconds']];
-                }
+            foreach($totals as $key => $total) {
+                $activities[$lookup[$key]]['activities'][] =
+                    ['activity' => 'All',
+                     'activity_id' => '',
+                     'activity_count' => $total['activity_count'],
+                     'km' => number_format($total['km'], 3),
+                     'display_average_pace_time' =>
+                         activity::averagePaceTime($total['seconds'], $total['km']),
+                     'display_average_pace_distance' =>
+                         activity::averagePaceDistance($total['seconds'], $total['km']),
+                     'display_seconds' =>
+                         activity::convertSecondsToDisplayTime($total['seconds']),
+                     'seconds' => $total['seconds']];
+
+                $summary['total_activity_count'] += $total['activity_count'];
+                $summary['total_seconds'] += $total['seconds'];
+                $summary['total_km'] += number_format($total['km'], 3);
+
             }
 
-
+            $summary =  activity::calculateSummary($summary);
 
         }
 
-        return response()->json($activities);
+        return response()->json(['activities' => $activities,
+                                 'summary' => $summary]);
 
     }
 

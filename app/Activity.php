@@ -13,6 +13,8 @@ class activity extends Model {
 
     public static function activities($userID, $year, $month, $activityID) {
         $query = self::where('user_id', $userID);
+        $activities = [];
+        $summary = [];
 
         if($activityID) {
             $query = $query->whereIn('activity_id', explode(',', $activityID));
@@ -34,34 +36,64 @@ class activity extends Model {
 
         $query = $query->get();
 
-        if(!$query) {
-            return false;
+        if($query) {
+            $summary = ['total_activity_count' => 0,
+                        'total_seconds' => 0,
+                        'total_km' => 0];
+
+            foreach ($query as $activity) {
+                $km = number_format($activity->metres / 1000, 3);
+
+                $activities[] =
+                    ['date' => $activity->activity_date,
+                     'activities' =>
+                         [['activity_id' => $activity->id,
+                           'activity_count' => 1,
+                           'activity' => $activity->activity->activity_type,
+                           'seconds' => $activity->seconds,
+                           'km' => $km,
+                           'display_average_pace_time' =>
+                                self::averagePaceTime($activity->seconds,
+                                                      $km),
+                           'display_average_pace_distance' =>
+                                self::averagePaceDistance($activity->seconds,
+                                                          $km),
+                           'display_seconds' =>
+                                self::convertSecondsToDisplayTime($activity->seconds)]]];
+
+                $summary['total_activity_count'] += 1;
+                $summary['total_seconds'] += $activity->seconds;
+                $summary['total_km'] += $km;
+
+            }
         }
 
-        foreach($query as $activity) {
-            $km = number_format($activity->metres / 1000, 3);
-
-            $activities[] =
-                ['date' => $activity->activity_date,
-                 'activities' =>
-                     [['activity_id' => $activity->id,
-                       'activity_count' => 1,
-                       'activity' => $activity->activity->activity_type,
-                       'seconds' => $activity->seconds,
-                       'km' => $km,
-                       'display_average_pace_time' =>
-                           self::averagePaceTime($activity->seconds, $km),
-                       'display_average_pace_distance' =>
-                           self::averagePaceDistance($activity->seconds, $km),
-                       'display_seconds' =>
-                           self::convertSecondsToDisplayTime($activity->seconds)]]];
-        }
-
-        return isset($activities) ? $activities : [];
+        return ['activities' => $activities,
+                'summary' => self::calculateSummary($summary)];
 
     }
 
-    public static function calculateSummary($activities) {
+    public static function calculateSummary($summary) {
+        $summary['total_display_seconds'] =
+            self::convertSecondsToDisplayTime($summary['total_seconds']);
+
+        $summary['total_display_average_pace_time'] =
+            self::averagePaceTime($summary['total_seconds'],
+                                  $summary['total_km']);
+
+        $summary['total_display_average_pace_distance'] =
+            self::averagePaceDistance($summary['total_seconds'],
+                                      $summary['total_km']);
+
+        $summary['total_display_average_time_per_activity'] =
+            self::convertSecondsToDisplayTime((int)($summary['total_seconds'] /
+                                                    $summary['total_activity_count']));
+
+        $summary['total_display_average_distance_per_activity'] =
+            number_format(($summary['total_km'] /
+                           $summary['total_activity_count']), 3);
+
+        return $summary;
 
     }
 
