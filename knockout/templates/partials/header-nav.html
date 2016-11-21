@@ -1,16 +1,16 @@
 <div id="header">
     <div id="welcome">
-        Welcome back,&nbsp;
-        <i id="edit_user" class="glyphicon glyphicon-edit"></i>
-        |&nbsp;
-        <a>Logout</a>
-        <a data-bind="attr.href:href" href="login">Login</a>
-        <br />
+        Welcome back,&nbsp;|&nbsp;
         <div id="header_menu" class="dropdown pull-right">
             <a class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" href="#">
                 Menu&nbsp;<span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a role="menuitem" href="/stats/">
+                        Edit user
+                    </a>
+                </li>
                 <li>
                     <a role="menuitem" href="/stats/">
                         Activity types
@@ -19,6 +19,11 @@
                 <li>
                     <a role="menuitem" href="/models/add">
                         Split calculator
+                    </a>
+                </li>
+                <li>
+                    <a role="menuitem" href="/models/add">
+                        Logout
                     </a>
                 </li>
             </ul>
