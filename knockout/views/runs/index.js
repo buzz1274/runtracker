@@ -29,6 +29,8 @@ var Runs = (function () {
                 }
             }
 
+            $('#ajax_loader').show();
+
             return $.ajax({url: '//'+window.location.hostname+'/api/',
                 type: 'get',
                 dataType: 'json',
@@ -43,10 +45,10 @@ var Runs = (function () {
                         that.has_data = false;
                     }
 
-                    console.log(data);
-
                     that.runs = data['activities'];
                     that.summary = data['summary'];
+
+                    $('#ajax_loader').hide();
 
                 },
                 failure: function() {

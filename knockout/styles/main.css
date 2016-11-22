@@ -3,6 +3,31 @@ body {
     font-family: "Trebuchet MS";
     font-size:13px;
 }
+#opaque {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width:100%;
+    z-index: 200;
+    background-color: black;
+    filter: alpha(opacity=20);
+    opacity: 0.2;
+}
+* html #opaque {
+    position: absolute;
+}
+#ajax_loader {
+    display: none;
+}
+.centred {
+    position: fixed;
+    z-index: 300;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
 .container-fluid {
     border:1px solid #000;
     width:1100px;
