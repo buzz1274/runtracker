@@ -1,4 +1,5 @@
-var Moment = require('moment');
+var Moment = require('moment'),
+    page = require('page');
 
 var Runs = (function () {
     'use strict';
@@ -31,10 +32,9 @@ var Runs = (function () {
 
             $('#ajax_loader').show();
 
-            return $.ajax({url: '//'+window.location.hostname+'/api/',
+            $.ajax({url: '//'+window.location.hostname+'/api/',
                 type: 'get',
                 dataType: 'json',
-                async: true,
                 data: {year: that.year,
                        month: that.month,
                        activity_id: that.selected_activites.join()},
@@ -51,8 +51,9 @@ var Runs = (function () {
                     $('#ajax_loader').hide();
 
                 },
-                failure: function() {
-                    console.log("FAILURE");
+                error: function(response) {
+                    $('#ajax_loader').hide();
+                    page('/error/500');
                 }
             });
         }
@@ -176,6 +177,9 @@ var Runs = (function () {
                 async: true,
                 success: function(data) {
                     that.activity_types = data;
+                },
+                error: function() {
+                    page('error/500');
                 }
             });
 

@@ -38,36 +38,34 @@
                 </th>
                 <th style="width:20%">
                     Activity
-                    <!-- ko if: $component.has_data -->
-                        <div class="dropdown pull-right">
-                            <span class="dropdown-toggle"
-                                  id="activity_filter_dropdown" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-filter pull-right"
-                                      title="Filter by activity"></span>
-                            </span>
-                            <ul class="dropdown-menu" aria-labelledby="filter_dropdown"
-                                style="cursor:pointer">
-                                <!-- ko foreach: $component.activity_types -->
-                                <li>
-                                    <a role="menuitem"
-                                       data-bind="click: function(data, event) { $component.filterActivities(id);}">
-                                        <span class="glyphicon glyphicon-ok"
-                                              data-bind="style: {visibility: $component.selected_activites.indexOf(id) == -1 ? 'hidden' : 'visible' }"></span>&nbsp;
-                                        <span role="menuitem" data-bind="text: activity_type"></span>
-                                    </a>
-                                </li>
-                                <!-- /ko -->
-                                <!-- ko if: $component.selected_activites.length > 0 -->
-                                <li>
-                                    <a role="menuitem" style="padding-left:40px;"
-                                       data-bind="click: function(data, event) { $component.selected_activites.removeAll();}">
-                                        <strong>Clear activity filters</strong>
-                                    </a>
-                                </li>
-                                <!-- /ko -->
-                            </ul>
-                        </div>
-                    <!-- /ko -->
+                    <div class="dropdown pull-right">
+                        <span class="dropdown-toggle"
+                              id="activity_filter_dropdown" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-filter pull-right"
+                                  title="Filter by activity"></span>
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="filter_dropdown"
+                            style="cursor:pointer">
+                            <!-- ko foreach: $component.activity_types -->
+                            <li>
+                                <a role="menuitem"
+                                   data-bind="click: function(data, event) { $component.filterActivities(id);}">
+                                    <span class="glyphicon glyphicon-ok"
+                                          data-bind="style: {visibility: $component.selected_activites.indexOf(id) == -1 ? 'hidden' : 'visible' }"></span>&nbsp;
+                                    <span role="menuitem" data-bind="text: activity_type"></span>
+                                </a>
+                            </li>
+                            <!-- /ko -->
+                            <!-- ko if: $component.selected_activites.length > 0 -->
+                            <li>
+                                <a role="menuitem" style="padding-left:40px;"
+                                   data-bind="click: function(data, event) { $component.selected_activites.removeAll();}">
+                                    <strong>Clear activity filters</strong>
+                                </a>
+                            </li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
                 </th>
                 <!-- ko if: !$component.month -->
                     <th style="width:10%">Count</th>
@@ -146,56 +144,58 @@
                     </tr>
                 <!-- /ko -->
             <!-- /ko -->
-            <tr>
-                <td class="text-left"><strong>Total</strong></td>
-                <td class="text-center">-</td>
-                <!-- ko if: !$component.month -->
+            <!-- ko if: $component.has_data -->
+                <tr>
+                    <td class="text-left"><strong>Total</strong></td>
+                    <td class="text-center">-</td>
+                    <!-- ko if: !$component.month -->
+                        <td>
+                            <div class="text-right"
+                                 data-bind="text: summary.total_activity_count">
+                            </div>
+                        </td>
+                    <!-- /ko -->
                     <td>
                         <div class="text-right"
-                             data-bind="text: summary.total_activity_count">
+                             data-bind="text: summary.total_display_seconds">
                         </div>
                     </td>
-                <!-- /ko -->
-                <td>
-                    <div class="text-right"
-                         data-bind="text: summary.total_display_seconds">
-                    </div>
-                </td>
-                <td>
-                    <div class="text-right"
-                         data-bind="text: summary.total_km">
-                    </div>
-                </td>
-                <td>
-                    <div class="text-right"
-                         data-bind="text: summary.total_display_average_pace_time">
-                    </div>
-                </td>
-                <td>
-                    <div class="text-right"
-                         data-bind="text: summary.total_display_average_pace_distance">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-left"><strong>Average per activity</strong></td>
-                <td class="text-center">-</td>
-                <!-- ko if: !$component.month -->
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_km">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_display_average_pace_time">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_display_average_pace_distance">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left"><strong>Average per activity</strong></td>
                     <td class="text-center">-</td>
-                <!-- /ko -->
-                <td>
-                    <div class="text-right"
-                         data-bind="text: summary.total_display_average_time_per_activity">
-                    </div>
-                </td>
-                <td>
-                    <div class="text-right"
-                         data-bind="text: summary.total_display_average_distance_per_activity">
-                    </div>
-                </td>
-                <td class="text-center">-</td>
-                <td class="text-center">-</td>
-            </tr>
+                    <!-- ko if: !$component.month -->
+                        <td class="text-center">-</td>
+                    <!-- /ko -->
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_display_average_time_per_activity">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_display_average_distance_per_activity">
+                        </div>
+                    </td>
+                    <td class="text-center">-</td>
+                    <td class="text-center">-</td>
+                </tr>
+            <!-- /ko -->
         </tbody>
     </table>
 </div>

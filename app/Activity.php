@@ -36,7 +36,7 @@ class activity extends Model {
 
         $query = $query->get();
 
-        if($query) {
+        if($query->count()) {
             $summary = ['total_activity_count' => 0,
                         'total_seconds' => 0,
                         'total_km' => 0];
@@ -66,10 +66,13 @@ class activity extends Model {
                 $summary['total_km'] += $km;
 
             }
+
+            $summary = self::calculateSummary($summary);
+
         }
 
         return ['activities' => $activities,
-                'summary' => self::calculateSummary($summary)];
+                'summary' => $summary];
 
     }
 

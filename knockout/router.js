@@ -31,28 +31,27 @@ module.exports = (function () {
                 date = 'all';
             }
 
-            app.pages['runs'].loadData(date).done(function() {
+            app.pages['runs'].loadData(date);
+            app.page = 'runs';
 
-                app.page = 'runs';
+        });
 
-            }).fail(function() {
-                var error = app.pages.error;
+        page('error/:code', function(ctx) {
+            var error = app.pages.error;
 
-                error.code = 500;
+            error.code = ctx.params.code;
+            app.page = 'error';
+
+            if(ctx.params.code == 500) {
                 error.message = 'An error occurred';
-                app.page = 'error';
-
-            });
+            } else if(ctx.params.code == 404) {
+                error.message = 'Page not found';
+            }
 
         });
 
         page('*', function() {
-            var error = app.pages.error;
-
-            error.code = 404;
-            error.message = 'Page not found';
-            app.page = 'error';
-
+            page('/error/404');
         });
 
         page();
