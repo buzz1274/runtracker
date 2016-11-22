@@ -22,6 +22,10 @@ body {
     font-weight:bold;
     font-size:0.9em;
 }
+#welcome h4 {
+    margin:0;
+    padding:0;
+}
 #welcome a {
     color:#000;
     text-decoration:underline;
@@ -45,6 +49,10 @@ body {
 }
 #header_menu a {
     color:#000;
+}
+#header_menu > span {
+    font-size: 2em;
+    margin-left:20px;
 }
 div#home_text {
     width:80%;
@@ -83,6 +91,11 @@ div.table_title {
     margin:auto;
     text-align:center;
     font-weight:bold;
+}
+div.table_title a {
+    color:#FFF;
+    text-decoration:none;
+    margin-left:5px;
 }
 table.runs td.blanked {
     background-color:#000;

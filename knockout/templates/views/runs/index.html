@@ -6,31 +6,6 @@
         <thead>
             <tr class="table_nav">
                 <th class="title" colspan="7">
-                    <!-- ko if: $component.year || $component.month -->
-                        <div class="dropdown pull-right">
-                            <button class="btn btn-xs btn-default dropdown-toggle"
-                                    type="button" id="action_dropdown" data-toggle="dropdown">
-                                Actions&nbsp;<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="action_dropdown">
-                                <!-- ko if: $component.month -->
-                                    <li>
-                                        <a role="menuitem"
-                                           data-bind="attr: {href: 'runs/'+$component.year+'/'}">
-                                            Monthly summary
-                                        </a>
-                                    </li>
-                                <!-- /ko -->
-                                <!-- ko if: $component.year && !$component.month -->
-                                    <li>
-                                        <a role="menuitem" href="runs/">
-                                            Annual summary
-                                        </a>
-                                    </li>
-                                <!-- /ko -->
-                            </ul>
-                        </div>
-                    <!-- /ko -->
                     <div class="table_title">
                         <!-- ko if: !$component.year -->
                             Annual Activity Summary
@@ -38,10 +13,15 @@
                         <!-- ko if: $component.year && !$component.month -->
                             Monthly Activity Summary
                             (<span data-bind="text: $component.formatDate($component.year)"></span>)
+                            <a class="glyphicon glyphicon-triangle-top" href="runs/"
+                               title="Return to annual activity summary"></a>
                         <!-- /ko -->
                         <!-- ko if: $component.year && $component.month -->
                             Monthly Activities
                             (<span data-bind="text: $component.formatDate($component.year+'-'+$component.month)"></span>)
+                            <a class="glyphicon glyphicon-triangle-top"
+                               data-bind="attr: {href: 'runs/'+$component.year+'/'}"
+                               title="Return to monthly activity summary"></a>
                         <!-- /ko -->
                     </div>
                 </th>
