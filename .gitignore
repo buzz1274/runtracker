@@ -10,6 +10,8 @@ Homestead.json
 bundle.js
 public/main.css
 public/main.js
+*.sql
+*.tar.gz
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
