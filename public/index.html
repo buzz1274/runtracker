@@ -14,8 +14,13 @@
             <img width="35" class="centred" src="/spinner.svg" />
         </div>
         <header-nav params="option:header"></header-nav>
-        <div id="main"
-             data-bind="component:{name:pages[page].component,params:pages[page]}">
+        <div id="main">
+            <div data-bind="component:{name:pages[page].component,params:pages[page]}">
+            </div>
+            <div id="left_container">
+                <personal-bests-nav params="option:personal_bests"></personal-bests-nav>
+                <activities-nav params="option:activities"></activities-nav>
+            </div>
         </div>
         <div id="footer">Runtracker v0.1</div>
     </div>

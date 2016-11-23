@@ -1,4 +1,6 @@
 var Header = require('./partials/header.js'),
+    Activities = require('./partials/activities.js'),
+    PersonalBests = require('./partials/personal_bests.js'),
     Index = require('./views/index.js'),
     Register = require('./views/register.js'),
     Login = require('./views/login.js'),
@@ -23,6 +25,8 @@ module.exports = (function() {
         };
 
         this.header = new Header();
+        this.personal_bests = new PersonalBests();
+        this.activities = new Activities();
 
         ko.track(this);
 
