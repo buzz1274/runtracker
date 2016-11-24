@@ -224,6 +224,9 @@ div.form legend {
 div.form div.buttons {
     float:right;
 }
+div.form div.buttons a {
+    text-decoration:none;
+}
 div.form form {
     padding:0px 50px 35px 50px;
 }

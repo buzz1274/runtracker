@@ -1,5 +1,6 @@
 <div id="header">
     <div id="welcome">
+        <!-- ko if: user -->
         <div id="header_menu" class="dropdown pull-right">
             <span class="dropdown-toggle glyphicon glyphicon-menu-hamburger"
                   data-toggle="dropdown" title="Menu"></span>
@@ -26,6 +27,7 @@
                 </li>
             </ul>
         </div>
+        <!-- /ko -->
     </div>
     <div id="header_content">
         <h1><a data-bind="attr.href:href" href="">RunTracker</a></h1>

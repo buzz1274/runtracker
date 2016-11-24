@@ -8,6 +8,7 @@ $(function() {
     'use strict';
 
     var app = new Application();
+
     new Router(app);
 
     ko.applyBindings(app, $('html')[0]);

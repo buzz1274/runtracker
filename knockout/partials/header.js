@@ -1,7 +1,9 @@
 var Header = (function () {
     'use strict';
 
-    function Header() {
+    function Header(user) {
+        this.user = user;
+
         ko.track(this);
     }
 

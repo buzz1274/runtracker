@@ -14,6 +14,8 @@ module.exports = (function() {
     function Application() {
         this.page = 'register';
         this.href = '';
+        this.display_left_nav = true;
+        this.user = false;
 
         this.pages = {
             'home': new Index(),
@@ -24,7 +26,7 @@ module.exports = (function() {
             'error': new ErrorPage()
         };
 
-        this.header = new Header();
+        this.header = new Header(this.user);
         this.personal_bests = new PersonalBests();
         this.activities = new Activities();
 
