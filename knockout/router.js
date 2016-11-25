@@ -34,6 +34,8 @@ module.exports = (function () {
             }
 
             app.pages['runs'].loadData(date);
+            app.pages['runs'].loadActivityTypes();
+
             app.page = 'runs';
             app.display_left_nav = true;
 

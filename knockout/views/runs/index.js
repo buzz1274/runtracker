@@ -19,8 +19,6 @@ var Runs = (function () {
         this.loadData = function(date = false) {
             var that = this;
 
-            this.loadActivityTypes();
-
             if(date) {
                 if(date == 'all') {
                     this.year = '';
@@ -104,6 +102,8 @@ var Runs = (function () {
                     that.selected_activites.push(parent_id);
                 }
             }
+
+            this.loadData();
 
             return true;
         }
@@ -234,8 +234,6 @@ var Runs = (function () {
             } else {
                 $('#activity_filter_icon').removeClass('red');
             }
-
-            that.loadData();
         });
 
         this.runs.subscribe(function() {
