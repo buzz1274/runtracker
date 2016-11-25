@@ -26,10 +26,12 @@ class ActivityController extends Controller {
     }
 
     public function personalBests() {
+        /*
         $personalBests = array(array('title' => 'Longest Run',
-                                     'value' => activity::longestRun(USER_ID, true)));
+                                     'value' => activity::longestActivity(USER_ID, true)));
+        */
 
-        return response()->json($personalBests);
+        return response()->json([]);
 
     }
 

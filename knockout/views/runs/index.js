@@ -89,15 +89,21 @@ var Runs = (function () {
             }
 
             if(parent_id) {
+                var all_children_checked = true;
+
                 $.each(this.activity_types, function (key, activity_type) {
-                    if(activity_type.parent_id == parent_id &&
-                       that.selected_activites.indexOf(activity_type.id) != -1) {
-                        that.selected_activites.remove(activity_type.id);
+                    if(activity_type.parent_id == parent_id) {
+                        if(that.selected_activites.indexOf(activity_type.id) == -1) {
+                            that.selected_activites.remove(parent_id);
+                            all_children_checked = false;
+                        }
                     }
                 });
-            }
 
-            //loop through and check if all children are in array if so add parent
+                if(all_children_checked) {
+                    that.selected_activites.push(parent_id);
+                }
+            }
 
             return true;
         }
