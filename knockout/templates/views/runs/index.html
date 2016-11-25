@@ -64,7 +64,7 @@
                             <!-- ko if: $component.selected_activites.length > 0 -->
                             <li>
                                 <a role="menuitem" style="padding-left:40px;"
-                                   data-bind="click: function(data, event) { $component.selected_activites.removeAll();}">
+                                   data-bind="click: function(data, event) { $component.filterActivities(false, false);}">
                                     <strong>Clear activity filters</strong>
                                 </a>
                             </li>

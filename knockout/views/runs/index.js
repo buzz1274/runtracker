@@ -61,6 +61,14 @@ var Runs = (function () {
         this.filterActivities = function(id, parent_id) {
             var that = this;
 
+            if(!id && !parent_id) {
+                this.selected_activites.removeAll();
+                this.loadData();
+
+                return true;
+
+            }
+
             if(this.selected_activites.indexOf(id) == -1) {
                 this.selected_activites.push(id);
 
