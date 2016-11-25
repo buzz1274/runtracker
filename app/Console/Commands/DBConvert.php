@@ -115,6 +115,7 @@ class DBConvert extends Command {
 
             $at->activity_type = $activityType;
             $at->parent_id = $parentID;
+
             $at->save();
 
         }

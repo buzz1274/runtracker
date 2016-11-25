@@ -17,7 +17,7 @@ class CreateActivityTable extends Migration
             $table->unsignedSmallInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedSmallInteger('activity_id');
-            $table->foreign('activity_id')->references('id')->on('activity');
+            $table->foreign('activity_id')->references('id')->on('activity_type');
             $table->unsignedSmallInteger('route_id');
             $table->foreign('route_id')->references('id')->on('route');
             $table->date('activity_date');

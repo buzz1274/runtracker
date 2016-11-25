@@ -12,14 +12,12 @@ class activity extends Model {
     }
 
     public static function activities($userID, $year, $month, $activityID) {
-        $query = self::where('user_id', $userID);
         $activities = [];
         $summary = [];
 
-        if($activityID) {
-            $query->whereIn('activity_id', explode(',', $activityID))->
-                    orWhereIn('parent_id', explode(',', $activityID));
-        }
+        $query = self::where('user_id', $userID)->
+                        join('activity_type',
+                             'activity.activity_id', '=', 'activity_type.id');
 
         if($year) {
             if($month) {
@@ -33,6 +31,13 @@ class activity extends Model {
             $query = $query->whereBetween('activity_date',
                                           [$startDate, $endDate]);
 
+        }
+
+        if($activityID) {
+            $query->where(function($query) use ($activityID) {
+                return $query->whereIn('activity_id', explode(',', $activityID))->
+                               orWhereIn('parent_id', explode(',', $activityID));
+            });
         }
 
         $query = $query->get();
