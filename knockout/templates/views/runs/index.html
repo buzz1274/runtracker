@@ -41,7 +41,8 @@
                     <div class="dropdown pull-right">
                         <span class="dropdown-toggle"
                               id="activity_filter_dropdown" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-filter pull-right"
+                            <span id="activity_filter_icon"
+                                  class="glyphicon glyphicon-filter pull-right"
                                   title="Filter by activity"></span>
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="filter_dropdown"
@@ -49,10 +50,14 @@
                             <!-- ko foreach: $component.activity_types -->
                             <li>
                                 <a role="menuitem"
-                                   data-bind="click: function(data, event) { $component.filterActivities(id);}">
+                                   data-bind="click: function(data, event) { $component.filterActivities(id, parent_id);}">
                                     <span class="glyphicon glyphicon-ok"
                                           data-bind="style: {visibility: $component.selected_activites.indexOf(id) == -1 ? 'hidden' : 'visible' }"></span>&nbsp;
-                                    <span role="menuitem" data-bind="text: activity_type"></span>
+                                    <span role="menuitem"
+                                          data-bind="text: activity_type,
+                                                     style: {padding: parent_id ? '0 0 0 10px' : '' }">
+
+                                    </span>
                                 </a>
                             </li>
                             <!-- /ko -->

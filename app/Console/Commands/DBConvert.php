@@ -78,25 +78,43 @@ class DBConvert extends Command {
     private function getActivityTypeID($type, $treadmill, $run) {
         if($type == 'couch25k' && !$treadmill) {
             $activityType = 'Street running';
+            $parentActivityType = 'Running';
         } elseif($type == 'hike') {
             $activityType = 'Hiking';
+            $parentActivityType = 'Walking';
         } elseif($type == 'walk') {
-            $activityType = 'Walking';
+            $activityType = 'Casual walking';
+            $parentActivityType = 'Walking';
         } elseif($type == 'trail') {
             $activityType = 'Trail running';
+            $parentActivityType = 'Running';
         } elseif($type == 'couch25k' && $treadmill && $run) {
             $activityType = 'Treadmill running';
+            $parentActivityType = 'Running';
         } else {
             $activityType = 'Treadmill walking';
+            $parentActivityType = 'Walking';
         }
 
+        return $this->activityID($activityType, $parentActivityType);
+
+    }
+
+    private function activityID($activityType, $parentActivityType) {
         $at = ActivityType::where('activity_type',
                                   $activityType)->first();
 
         if(!$at || !$at->count()) {
+            if($parentActivityType) {
+                $parentID = $this->activityID($parentActivityType, false);
+            } else {
+                $parentID = null;
+            }
+
             $at = new activityType;
 
             $at->activity_type = $activityType;
+            $at->parent_id = $parentID;
             $at->save();
 
         }

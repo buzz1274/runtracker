@@ -19,6 +19,8 @@ var Runs = (function () {
         this.loadData = function(date = false) {
             var that = this;
 
+            this.loadActivityTypes();
+
             if(date) {
                 if(date == 'all') {
                     this.year = '';
@@ -58,12 +60,45 @@ var Runs = (function () {
             });
         }
 
-        this.filterActivities = function(id) {
+        this.filterActivities = function(id, parent_id) {
+            var that = this;
+
             if(this.selected_activites.indexOf(id) == -1) {
                 this.selected_activites.push(id);
+
+                if(!parent_id) {
+                    $.each(this.activity_types, function (key, activity_type) {
+                        if(activity_type.parent_id == id &&
+                           that.selected_activites.indexOf(activity_type.id) == -1) {
+                            that.selected_activites.push(activity_type.id);
+                        }
+                    });
+                }
+
             } else {
                 this.selected_activites.remove(id);
+
+                if(!parent_id) {
+                    $.each(this.activity_types, function (key, activity_type) {
+                        if(activity_type.parent_id == id &&
+                           that.selected_activites.indexOf(activity_type.id) != -1) {
+                            that.selected_activites.remove(activity_type.id);
+                        }
+                    });
+                }
             }
+
+            if(parent_id) {
+                $.each(this.activity_types, function (key, activity_type) {
+                    if(activity_type.parent_id == parent_id &&
+                       that.selected_activites.indexOf(activity_type.id) != -1) {
+                        that.selected_activites.remove(activity_type.id);
+                    }
+                });
+            }
+
+            //loop through and check if all children are in array if so add parent
+
             return true;
         }
 
@@ -179,17 +214,21 @@ var Runs = (function () {
                     that.activity_types = data;
                 },
                 error: function() {
-                    page('error/500');
+                    page('/error/500');
                 }
             });
 
-
         }
-
-        this.loadActivityTypes();
 
         this.selected_activites.subscribe(function() {
             $(".dropdown").removeClass('open');
+
+            if(that.selected_activites.length >= 1) {
+                $('#activity_filter_icon').addClass('red');
+            } else {
+                $('#activity_filter_icon').removeClass('red');
+            }
+
             that.loadData();
         });
 

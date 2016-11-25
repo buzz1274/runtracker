@@ -12,4 +12,5 @@
 */
 
 Route::get('/', 'ActivityController@index');
+Route::get('/activities/personal_bests', 'ActivityController@personalBests');
 Route::get('/activities/type', 'ActivityTypeController@type');

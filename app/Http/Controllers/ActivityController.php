@@ -10,7 +10,6 @@ use App\Activity;
 class ActivityController extends Controller {
 
     public function index(Request $request) {
-
         if($request->query('year') && $request->query('month')) {
             $activities = activity::activities(USER_ID,
                                                $request->query('year'),
@@ -24,7 +23,13 @@ class ActivityController extends Controller {
 
         return response()->json($activities);
 
+    }
 
+    public function personalBests() {
+        $personalBests = array(array('title' => 'Longest Run',
+                                     'value' => activity::longestRun(USER_ID, true)));
+
+        return response()->json($personalBests);
 
     }
 

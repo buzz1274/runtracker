@@ -17,7 +17,8 @@ class activity extends Model {
         $summary = [];
 
         if($activityID) {
-            $query = $query->whereIn('activity_id', explode(',', $activityID));
+            $query->whereIn('activity_id', explode(',', $activityID))->
+                    orWhereIn('parent_id', explode(',', $activityID));
         }
 
         if($year) {
@@ -95,7 +96,8 @@ class activity extends Model {
                     where('activity.user_id', $userID);
 
         if($activityID) {
-            $query->whereIn('activity.activity_id', explode(',', $activityID));
+            $query->whereIn('activity_id', explode(',', $activityID))->
+                    orWhereIn('parent_id', explode(',', $activityID));
         }
 
         if($year && (int)$year > 2000) {
@@ -171,9 +173,11 @@ class activity extends Model {
 
                 $summary['total_activity_count'] += $total['activity_count'];
                 $summary['total_seconds'] += $total['seconds'];
-                $summary['total_km'] += number_format($total['km'], 3);
+                $summary['total_km'] += $total['km'];
 
             }
+
+            $summary['total_km'] = number_format($summary['total_km'], 3);
 
             $summary =  activity::calculateSummary($summary);
 
@@ -182,6 +186,22 @@ class activity extends Model {
         return ['activities' => $activities,
                 'summary' => $summary];
 
+    }
+
+    public static function longestRun($userID, $personalBest) {
+        $query = self::where('user_id', $userID)->
+                       //where('activity_type', 'Running')->
+                       orderBy('metres', 'desc');
+
+        if($personalBest) {
+            $query->limit(1);
+        } else {
+            $query->limit(20);
+        }
+
+        var_dump($query->get());
+
+        return '6k on 23rd September at 00:05:00 per km';
     }
 
     private static function calculateSummary($summary) {

@@ -27,8 +27,8 @@ module.exports = (function() {
         };
 
         this.header = new Header(this.user);
-        this.personal_bests = new PersonalBests();
-        this.activities = new Activities();
+        this.personal_bests = new PersonalBests(this.user);
+        this.activities = new Activities(this.user);
 
         ko.track(this);
 
