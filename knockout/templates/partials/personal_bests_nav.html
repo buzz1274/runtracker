@@ -3,15 +3,22 @@
         <thead>
         <tr class="table_nav">
             <td colspan="2">
+                <i id="configure_personal_bests" title="Configure personal bests"
+                   class="glyphicon glyphicon-wrench pull-right"></i>
                 <div class="table_title">Personal Bests</div>
             </td>
         </tr>
         </thead>
         <tbody>
             <!-- ko foreach: personal_bests -->
-                <tr>
+                <tr title="View more">
                     <td class="stats_title" data-bind="text: title"></td>
-                    <td data-bind="text: value"></td>
+                    <td>
+                        <a style="text-decoration:none;"
+                           data-bind="text: value,
+                                      attr: {href: '/activities/personal_best/' + id}">
+                        </a>
+                    </td>
                 </tr>
             <!-- /ko -->
         </tbody>

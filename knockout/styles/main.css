@@ -197,7 +197,7 @@ tr.table_nav {
     background-color:#000;
     color:#FFF;
 }
-div#graph {
+div#sub_main {
     float:right;
     width:680px;
     min-height:500px;
@@ -250,4 +250,7 @@ p.form-warning {
     background-color:#000;
     color:#FFF;
     font-weight:bold;
+}
+a.personal_best_link {
+    text-decoration:none;
 }

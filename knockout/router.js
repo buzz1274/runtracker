@@ -26,6 +26,14 @@ module.exports = (function () {
             app.display_left_nav = false;
         });
 
+        page('activities/personal_best/:personal_best_id/', function(ctx) {
+            app.pages['personal_bests'].loadData(ctx.params.personal_best_id);
+
+            app.page = 'personal_bests';
+            app.display_left_nav = true;
+
+        });
+
         page('runs/:date?/', function(ctx) {
             var date = ctx.params.date;
 

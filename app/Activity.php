@@ -193,20 +193,49 @@ class activity extends Model {
 
     }
 
-    public static function longestRun($userID, $personalBest) {
-        $query = self::where('user_id', $userID)->
-                       //where('activity_type', 'Running')->
-                       orderBy('metres', 'desc');
+    public static function personalBests($userID, $type, $activityID, $limit,
+                                         $minDistance, $maxDistance) {
 
-        if($personalBest) {
-            $query->limit(1);
-        } else {
-            $query->limit(20);
+        if(!is_array($activityID)) {
+            $activityID = explode(',', $activityID);
         }
 
-        var_dump($query->get());
+        $pb = self::where('user_id', $userID)->
+                    join('activity_type',
+                         'activity.activity_id', '=', 'activity_type.id')->
+                    where(function($query) use ($activityID) {
+                        return $query->whereIn('activity_id', $activityID)->
+                                       orWhereIn('parent_id', $activityID);
+                    })->
+                    when($minDistance, function($query) use($minDistance) {
+                        return $query->where('metres', '>=', $minDistance);
+                    })->
+                    when($maxDistance, function($query) use($maxDistance) {
+                        return $query->where('metres', '<=', $maxDistance);
+                    })->
+                    when($type == 'longest', function($query) {
+                        return $query->orderBy('metres', 'desc');
+                    })->
+                    when($type == 'fastest', function($query) {
+                        return $query->orderBy(\DB::raw('(1.0 * metres) / seconds'), 'desc');
+                    })->
+                    limit($limit)->get();
 
-        return '6k on 23rd September at 00:05:00 per km';
+        if($pb && $limit == 1) {
+            return $pb->pop();
+        } else {
+            return $pb;
+        }
+
+    }
+
+    public static function convertSecondsToDisplayTime($seconds) {
+        $seconds = (int)$seconds;
+
+        return str_pad(intdiv($seconds, 3600), 2, 0, STR_PAD_LEFT).':'.
+               str_pad(intdiv(($seconds % 3600), 60), 2, 0, STR_PAD_LEFT).':'.
+               str_pad((($seconds % 3600) % 60), 2, 0, STR_PAD_LEFT);
+
     }
 
     private static function calculateSummary($summary) {
@@ -233,20 +262,11 @@ class activity extends Model {
 
     }
 
-    private static function convertSecondsToDisplayTime($seconds) {
-        $seconds = (int)$seconds;
-
-        return str_pad(intdiv($seconds, 3600), 2, 0, STR_PAD_LEFT).':'.
-               str_pad(intdiv(($seconds % 3600), 60), 2, 0, STR_PAD_LEFT).':'.
-               str_pad((($seconds % 3600) % 60), 2, 0, STR_PAD_LEFT);
-
-    }
-
-    private static function averagePaceTime($seconds, $distance) {
+    public static function averagePaceTime($seconds, $distance) {
         return self::convertSecondsToDisplayTime($seconds / $distance);
     }
 
-    private static function averagePaceDistance($seconds, $distance) {
+    public static function averagePaceDistance($seconds, $distance) {
         return number_format(60 / (($seconds / $distance) / 60), 3);
     }
 

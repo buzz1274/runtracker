@@ -1,9 +1,9 @@
 var page = require('page');
 
-var PersonalBests = (function () {
+var PersonalBestsNav = (function () {
     'use strict';
 
-    function PersonalBests() {
+    function PersonalBestsNav() {
         this.personal_bests = ko.observableArray();
 
         this.loadPersonalBests = function() {
@@ -27,18 +27,18 @@ var PersonalBests = (function () {
         ko.track(this);
     }
 
-    return PersonalBests;
+    return PersonalBestsNav;
 
 })();
 
 ko.components.register('personal-bests-nav', {
-    template: require('../templates/partials/personal_bests.html'),
+    template: require('../templates/partials/personal_bests_nav.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';
-            return params instanceof PersonalBests ? params : ko.unwrap(params.option);
+            return params instanceof PersonalBestsNav ? params : ko.unwrap(params.option);
         }
     }
 });
 
-module.exports = PersonalBests;
+module.exports = PersonalBestsNav;

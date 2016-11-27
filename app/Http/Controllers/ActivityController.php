@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Activity;
+use App\PersonalBests;
 
 class ActivityController extends Controller {
 
@@ -25,13 +26,73 @@ class ActivityController extends Controller {
 
     }
 
-    public function personalBests() {
-        /*
-        $personalBests = array(array('title' => 'Longest Run',
-                                     'value' => activity::longestActivity(USER_ID, true)));
-        */
+    public function personalBest(Request $request) {
+        $response = array();
+        $personalBest = PersonalBests::where('user_id', USER_ID)->
+                                       where('id', $request->query('personal_best_id'))->
+                                       orderBy('display_order')->get();
 
-        return response()->json([]);
+        if(!$personalBest) {
+            return response()->json($response);
+        }
+
+        $personalBest = $personalBest->pop();
+        $activities = activity::personalBests(USER_ID, $personalBest->type,
+                                              $personalBest->activity_ids, 20,
+                                              $personalBest->min_distance,
+                                              $personalBest->max_distance);
+
+        if(!is_object($activities)) {
+            return response()->json($response);
+        }
+
+        $response['title'] = $personalBest->title;
+
+        foreach($activities as $activity) {
+            $km = $activity->metres / 1000;
+
+            $response['activities'][] = array(
+                'date' => date('jS M, Y', strtotime($activity->activity_date)),
+                'activity_type' => $activity->activity_type,
+                'km' => number_format($km, 3),
+                'display_seconds' =>
+                    activity::convertSecondsToDisplayTime($activity->seconds),
+                'display_average_pace_time' =>
+                    activity::averagePaceTime($activity->seconds, $km),
+                'display_average_pace_distance' =>
+                    activity::averagePaceDistance($activity->seconds, $km),
+            );
+        }
+
+        return response()->json($response);
+
+    }
+
+    public function personalBests() {
+        $response = array();
+        $personalBests = PersonalBests::where('user_id', USER_ID)->
+                                        orderBy('display_order')->get();
+
+        foreach($personalBests as $personalBest) {
+            $value = '-';
+            $pb = activity::personalBests(USER_ID, $personalBest->type,
+                                          $personalBest->activity_ids, 1,
+                                          $personalBest->min_distance,
+                                          $personalBest->max_distance);
+
+            if($pb) {
+                $value = number_format(($pb->metres  / 1000), 3).'Km '.
+                    'in '.activity::convertSecondsToDisplayTime($pb->seconds).' '.
+                    'on '.date('jS M, Y', strtotime($pb->activity_date));
+            }
+
+            $response[] = array('id' => $personalBest->id,
+                                'title' => $personalBest->title,
+                                'value' => $value);
+
+        }
+
+        return response()->json($response);
 
     }
 

@@ -51,7 +51,7 @@ var Runs = (function () {
                     $('#ajax_loader').hide();
 
                 },
-                error: function(response) {
+                error: function() {
                     $('#ajax_loader').hide();
                     page('/error/500');
                 }
