@@ -11,14 +11,10 @@
         </thead>
         <tbody>
             <!-- ko foreach: personal_bests -->
-                <tr title="View more">
+                <tr title="View more"
+                    data-bind="click: function(data, event) { $parent.redirectToPersonalBest(id); }">
                     <td class="stats_title" data-bind="text: title"></td>
-                    <td>
-                        <a style="text-decoration:none;"
-                           data-bind="text: value,
-                                      attr: {href: '/activities/personal_best/' + id}">
-                        </a>
-                    </td>
+                    <td data-bind="text: value"></td>
                 </tr>
             <!-- /ko -->
         </tbody>

@@ -22,6 +22,10 @@ var PersonalBestsNav = (function () {
             });
         }
 
+        this.redirectToPersonalBest = function(id) {
+            page('/activities/personal_best/' + id);
+        }
+
         this.loadPersonalBests();
 
         ko.track(this);
