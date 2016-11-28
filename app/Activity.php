@@ -182,10 +182,9 @@ class activity extends Model {
 
             }
 
-            $summary['total_km'] = number_format($summary['total_km'], 3);
-
             $summary =  activity::calculateSummary($summary);
-
+            $summary['total_km'] = number_format($summary['total_km'], 3);
+            
         }
 
         return ['activities' => $activities,
