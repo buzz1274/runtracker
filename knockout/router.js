@@ -28,6 +28,7 @@ module.exports = (function () {
 
         page('activities/personal_best/:personal_best_id/', function(ctx) {
             app.pages['personal_bests'].loadData(ctx.params.personal_best_id);
+            app.personal_bests.loadPersonalBests();
 
             app.page = 'personal_bests';
             app.display_left_nav = true;
@@ -43,6 +44,7 @@ module.exports = (function () {
 
             app.pages['runs'].loadData(date);
             app.pages['runs'].loadActivityTypes();
+            app.personal_bests.loadPersonalBests();
 
             app.page = 'runs';
             app.display_left_nav = true;

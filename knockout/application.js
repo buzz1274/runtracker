@@ -16,7 +16,7 @@ module.exports = (function() {
         this.page = 'register';
         this.href = '';
         this.display_left_nav = true;
-        this.user = false;
+        this.user = true;
 
         this.pages = {
             'home': new Index(),
