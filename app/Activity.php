@@ -17,7 +17,13 @@ class activity extends Model {
 
         $query = self::where('user_id', $userID)->
                         join('activity_type',
-                             'activity.activity_id', '=', 'activity_type.id');
+                             'activity.activity_id', '=', 'activity_type.id')->
+                        where(function($query) use ($activityID) {
+                            if($activityID) {
+                                $query->whereIn('activity_id', explode(',', $activityID))->
+                                        orWhereIn('parent_id', explode(',', $activityID));
+                            }
+                        });
 
         if($year) {
             if($month) {
@@ -32,14 +38,7 @@ class activity extends Model {
                                           [$startDate, $endDate]);
 
         }
-
-        if($activityID) {
-            $query->where(function($query) use ($activityID) {
-                return $query->whereIn('activity_id', explode(',', $activityID))->
-                               orWhereIn('parent_id', explode(',', $activityID));
-            });
-        }
-
+        
         $query->orderBy('activity_date', 'asc');
 
         $query = $query->get();
@@ -95,17 +94,18 @@ class activity extends Model {
                            'activity_type.id',
                            \DB::raw('COUNT(activity.id) AS activity_count'),
                            \DB::raw("TO_CHAR(CAST(SUM(activity.metres) AS FLOAT) / 1000, ".
-                                   "'FM999999999.000') AS km"),
+                                    "'FM999999999.000') AS km"),
                            \DB::raw('SUM(activity.seconds) AS duration'),
-                           'activity_type.activity_type'))->
+                                    'activity_type.activity_type'))->
                     leftjoin('activity',
                              'activity.activity_id', '=', 'activity_type.id')->
-                    where('activity.user_id', $userID);
-
-        if($activityID) {
-            $query->whereIn('activity_id', explode(',', $activityID))->
-                    orWhereIn('parent_id', explode(',', $activityID));
-        }
+                    where('activity.user_id', $userID)->
+                    where(function($query) use ($activityID) {
+                        if($activityID) {
+                            $query->whereIn('activity_id', explode(',', $activityID))->
+                                    orWhereIn('parent_id', explode(',', $activityID));
+                        }
+                    });
 
         if($year && (int)$year > 2000) {
             $dateType = 'year';
@@ -205,8 +205,10 @@ class activity extends Model {
                     join('activity_type',
                          'activity.activity_id', '=', 'activity_type.id')->
                     where(function($query) use ($activityID) {
-                        return $query->whereIn('activity_id', $activityID)->
-                                       orWhereIn('parent_id', $activityID);
+                        if($activityID) {
+                            $query->whereIn('activity_id', $activityID)->
+                                    orWhereIn('parent_id', $activityID);
+                        }
                     })->
                     when($minDistance, function($query) use($minDistance) {
                         return $query->where('metres', '>=', $minDistance);
