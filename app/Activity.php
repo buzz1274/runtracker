@@ -50,7 +50,7 @@ class activity extends Model {
                         'total_km' => 0];
 
             foreach ($query as $activity) {
-                $km = number_format($activity->metres, 3);
+                $km = number_format($activity->metres / 1000, 3);
 
                 $activities[] =
                     ['date' => $activity->activity_date,
