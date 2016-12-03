@@ -22,6 +22,14 @@ var PersonalBestsNav = (function () {
             });
         }
 
+        this.managePersonalBests = function() {
+            $('#ajax_loader').show();
+            $('#personal_bests_management_modal').modal('show');
+            $('#personal_bests_management_modal').on('hidden.bs.modal', function() {
+                $('#ajax_loader').hide();
+            });
+        }
+
         this.redirectToPersonalBest = function(id) {
             page('/activities/personal_best/' + id);
         }

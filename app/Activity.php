@@ -40,6 +40,8 @@ class activity extends Model {
             });
         }
 
+        $query->orderBy('activity_date', 'asc');
+
         $query = $query->get();
 
         if($query->count()) {

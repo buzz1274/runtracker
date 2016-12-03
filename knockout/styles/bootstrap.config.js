@@ -5,6 +5,7 @@ module.exports = {
         'transition': true,
         'dropdown': true,
         'button': true,
+        'modal': true,
     },
     styles: {
         'normalize': true,
@@ -14,6 +15,7 @@ module.exports = {
         'navs': true,
         'scaffolding': true,
         'grid': true,
+        'modals': true,
         'buttons': true,
         'typography': true,
         'forms': true,
