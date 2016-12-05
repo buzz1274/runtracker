@@ -38,7 +38,7 @@ class activity extends Model {
                                           [$startDate, $endDate]);
 
         }
-        
+
         $query->orderBy('activity_date', 'asc');
 
         $query = $query->get();
@@ -75,6 +75,7 @@ class activity extends Model {
             }
 
             $summary = self::calculateSummary($summary);
+            $summary['total_km'] = number_format($summary['total_km'], 3);
 
         }
 
