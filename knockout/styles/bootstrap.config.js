@@ -21,7 +21,7 @@ module.exports = {
         'forms': true,
         'utilities': true,
         'glyphicons': true,
-        "type": true
-
+        "type": true,
+        "close": true,
     }
 };
