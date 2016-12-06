@@ -1,4 +1,6 @@
-var page = require('page');
+var page = require('page'),
+    helper = require('../helper/helper.js'),
+    helper = new helper();
 
 var PersonalBestsNav = (function () {
     'use strict';
@@ -22,11 +24,16 @@ var PersonalBestsNav = (function () {
             });
         }
 
+        this.savePersonalBests = function() {
+
+        }
+
         this.managePersonalBests = function() {
-            $('#ajax_loader').show();
+            helper.overlay(true);
+
             $('#personal_bests_management_modal').modal('show');
             $('#personal_bests_management_modal').on('hidden.bs.modal', function() {
-                $('#ajax_loader').hide();
+                helper.overlay(false);
             });
         }
 

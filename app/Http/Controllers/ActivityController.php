@@ -88,6 +88,10 @@ class ActivityController extends Controller {
 
             $response[] = array('id' => $personalBest->id,
                                 'title' => $personalBest->title,
+                                'type' => $personalBest->type,
+                                'activity_ids' => $personalBest->activity_ids,
+                                'min_distance' => $personalBest->min_distance,
+                                'max_distance' => $personalBest->max_distance,
                                 'value' => $value);
 
         }

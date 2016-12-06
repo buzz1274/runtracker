@@ -1,13 +1,38 @@
 <div id="personal_bests_management_modal"
      class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width:800px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modal title</h4>
+                <h4 class="modal-title">Configure personal bests</h4>
             </div>
             <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                <table class="runs table table-condensed table-hover">
+                    <thead>
+                        <tr class="table_nav">
+                            <td>Title</td>
+                            <td>Type</td>
+                            <td>Activity</td>
+                            <td>Min distance</td>
+                            <td>Max distance</td>
+                            <td class="text-center">-</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach: personal_bests -->
+                            <tr>
+                                <td class="stats_title" data-bind="text: title"></td>
+                                <td data-bind="text: type"></td>
+                                <td data-bind="text: activity_ids"></td>
+                                <td data-bind="text: min_distance"></td>
+                                <td data-bind="text: max_distance"></td>
+                                <td style="width:1%">
+                                    <i class="glyphicon glyphicon-trash" title="Delete run"></i>
+                                </td>
+                            </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -20,14 +45,14 @@
 <div id="control_panel">
     <table class="runs table table-condensed table-hover">
         <thead>
-        <tr class="table_nav">
-            <td colspan="2">
-                <i id="configure_personal_bests" title="Configure personal bests"
-                   data-bind="click: function(data, event) { managePersonalBests(); }"
-                   class="glyphicon glyphicon-wrench pull-right"></i>
-                <div class="table_title">Personal Bests</div>
-            </td>
-        </tr>
+            <tr class="table_nav">
+                <td colspan="2">
+                    <i id="configure_personal_bests" title="Configure personal bests"
+                       data-bind="click: function(data, event) { managePersonalBests(); }"
+                       class="glyphicon glyphicon-wrench pull-right"></i>
+                    <div class="table_title">Personal Bests</div>
+                </td>
+            </tr>
         </thead>
         <tbody>
             <!-- ko foreach: personal_bests -->
