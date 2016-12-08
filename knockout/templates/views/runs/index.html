@@ -80,7 +80,7 @@
                 <!-- ko if: !$component.month -->
                     <th class="text-center">Avg Km</th>
                 <!-- /ko -->
-                <th class="text-center">Avg Pace<br />(hh:mm:ss/km)<br />(km/hr)</th>
+                <th class="text-center">Avg Pace<br />(km/hr)<br />(hh:mm:ss/km)</th>
             </tr>
         </thead>
         <!-- ko if: !$component.has_data -->
@@ -148,8 +148,8 @@
                                        attr: {'class': 'date_'+$parent.date,
                                               'data-activity': activity}">
                             <div class="text-right">
-                                <span data-bind="text: display_average_pace_time"></span>
-                                (<span data-bind="text: display_average_pace_distance"></span>)
+                                <span data-bind="text: display_average_pace_distance"></span>
+                                (<span data-bind="text: display_average_pace_time"></span>)
                             </div>
                         </td>
                     </tr>
@@ -185,8 +185,8 @@
                     <!-- /ko -->
                     <td>
                         <div class="text-right">
-                            <span data-bind="text: summary.total_display_average_pace_time"></span>
-                            (<span data-bind="text: summary.total_display_average_pace_distance"></span>)
+                            <span data-bind="text: summary.total_display_average_pace_distance"></span>
+                            (<span data-bind="text: summary.total_display_average_pace_time"></span>)
                         </div>
                     </td>
                 </tr>
