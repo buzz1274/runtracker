@@ -212,7 +212,7 @@ var Runs = (function () {
             } else if(d.length == 2) {
                 return Moment(date).format('MMMM YYYY');
             } else {
-                return Moment(date).format('MMMM D, YYYY');
+                return Moment(date).format('Do MMM, YYYY');
             }
 
         }

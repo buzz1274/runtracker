@@ -73,12 +73,14 @@
                     </div>
                 </th>
                 <!-- ko if: !$component.month -->
-                    <th style="width:10%">Count</th>
+                    <th style="width:8%">Count</th>
                 <!-- /ko -->
                 <th class="text-center">Time<br />(hh:mm:ss)</th>
-                <th class="text-center">Distance<br />(km)</th>
-                <th class="text-center">Avg Pace<br />(hh:mm:ss/km)</th>
-                <th class="text-center">Avg Speed<br />(km/hr)</th>
+                <th class="text-center">Km</th>
+                <!-- ko if: !$component.month -->
+                    <th class="text-center">Avg Km</th>
+                <!-- /ko -->
+                <th class="text-center">Avg Pace<br />(hh:mm:ss/km)<br />(km/hr)</th>
             </tr>
         </thead>
         <!-- ko if: !$component.has_data -->
@@ -134,17 +136,21 @@
                                               'data-activity': activity}">
                             <div class="text-right" data-bind="text: km"></div>
                         </td>
+                        <!-- ko if: !$component.month  -->
+                            <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                               attr: {'class': 'date_'+$parent.date,
+                                                      'data-activity': activity}">
+                                <div class="text-right"
+                                     data-bind="text: display_average_km"></div>
+                            </td>
+                        <!-- /ko -->
                         <td data-bind="visible: $component.flattenedActivityDisplay(activity),
                                        attr: {'class': 'date_'+$parent.date,
                                               'data-activity': activity}">
-                            <div class="text-right"
-                                 data-bind="text: display_average_pace_time"></div>
-                        </td>
-                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
-                                       attr: {'class': 'date_'+$parent.date,
-                                              'data-activity': activity}">
-                            <div class="text-right"
-                                 data-bind="text: display_average_pace_distance"></div>
+                            <div class="text-right">
+                                <span data-bind="text: display_average_pace_time"></span>
+                                (<span data-bind="text: display_average_pace_distance"></span>)
+                            </div>
                         </td>
                     </tr>
                 <!-- /ko -->
@@ -170,14 +176,17 @@
                              data-bind="text: summary.total_km">
                         </div>
                     </td>
+                    <!-- ko if: !$component.month -->
+                        <td>
+                            <div class="text-right"
+                                 data-bind="text: summary.total_display_average_distance_per_activity">
+                            </div>
+                        </td>
+                    <!-- /ko -->
                     <td>
-                        <div class="text-right"
-                             data-bind="text: summary.total_display_average_pace_time">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="text-right"
-                             data-bind="text: summary.total_display_average_pace_distance">
+                        <div class="text-right">
+                            <span data-bind="text: summary.total_display_average_pace_time"></span>
+                            (<span data-bind="text: summary.total_display_average_pace_distance"></span>)
                         </div>
                     </td>
                 </tr>
@@ -197,7 +206,9 @@
                              data-bind="text: summary.total_display_average_distance_per_activity">
                         </div>
                     </td>
-                    <td class="text-center">-</td>
+                    <!-- ko if: !$component.month -->
+                        <td class="text-center">-</td>
+                    <!-- /ko -->
                     <td class="text-center">-</td>
                 </tr>
             <!-- /ko -->

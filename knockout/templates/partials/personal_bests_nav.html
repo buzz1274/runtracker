@@ -13,19 +13,31 @@
                             <td>Title</td>
                             <td>Type</td>
                             <td>Activity</td>
-                            <td>Min distance</td>
-                            <td>Max distance</td>
+                            <td>Min distance(km)</td>
+                            <td>Max distance(km)</td>
                             <td class="text-center">-</td>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- ko foreach: personal_bests -->
                             <tr>
-                                <td class="stats_title" data-bind="text: title"></td>
-                                <td data-bind="text: type"></td>
-                                <td data-bind="text: activity_ids"></td>
-                                <td data-bind="text: min_distance"></td>
-                                <td data-bind="text: max_distance"></td>
+                                <td>
+                                    <input name="" type="text" value="" data-bind="value: title" />
+                                </td>
+                                <td>
+                                    <input name="" type="text" value="" data-bind="value: type" />
+                                </td>
+                                <td>
+                                    <input name="" type="text" value="" data-bind="value: activity_ids" />
+                                </td>
+                                <td>
+                                    <input name="" type="text" value="" size="4"
+                                           data-bind="value: min_distance" />
+                                </td>
+                                <td>
+                                    <input name="" type="text" value="" size="4"
+                                           data-bind="value: max_distance" />
+                                </td>
                                 <td style="width:1%">
                                     <i class="glyphicon glyphicon-trash" title="Delete run"></i>
                                 </td>

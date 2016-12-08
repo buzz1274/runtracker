@@ -59,6 +59,7 @@ class activity extends Model {
                            'activity' => $activity->activity->activity_type,
                            'seconds' => $activity->seconds,
                            'km' => $km,
+                           'display_average_km' => $km,
                            'display_average_pace_time' =>
                                 self::averagePaceTime($activity->seconds,
                                                       $km),
@@ -151,6 +152,8 @@ class activity extends Model {
                      'activity_id' => $a->id,
                      'activity_count' => $a->activity_count,
                      'km' => $a->km,
+                     'display_average_km' =>
+                        number_format(($a->km / $a->activity_count), 3),
                      'display_average_pace_time' =>
                         self::averagePaceTime($a->duration, $a->km),
                      'display_average_pace_distance' =>
@@ -171,6 +174,8 @@ class activity extends Model {
                      'activity_id' => '',
                      'activity_count' => $total['activity_count'],
                      'km' => number_format($total['km'], 3),
+                     'display_average_km' =>
+                        number_format(($total['km'] / $total['activity_count']), 3),
                      'display_average_pace_time' =>
                         self::averagePaceTime($total['seconds'], $total['km']),
                      'display_average_pace_distance' =>

@@ -12,7 +12,7 @@ return [
      |
      */
     'supportsCredentials' => false,
-    'allowedOrigins' => [env('APP_URL').':8080', env('APP_URL')],
+    'allowedOrigins' => [env('APP_URL').':*', env('APP_URL')],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     'exposedHeaders' => [],
