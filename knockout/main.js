@@ -1,8 +1,6 @@
 require( 'bootstrap-webpack!./styles/bootstrap.config.js');
 require('./styles/main.css');
 
-//test heroku
-
 var Application = require('./application.js'),
     Router = require('./router.js');
 
