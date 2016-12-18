@@ -25,7 +25,7 @@ var PersonalBestsNav = (function () {
         }
 
         this.savePersonalBests = function() {
-
+            console.log('SAVE PERSONAL BESTS');
         }
 
         this.managePersonalBests = function() {

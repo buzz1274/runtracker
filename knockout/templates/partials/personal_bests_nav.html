@@ -18,7 +18,7 @@
                             <td class="text-center">-</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="personal_bests_edit">
                         <!-- ko foreach: personal_bests -->
                             <tr>
                                 <td>
@@ -48,7 +48,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary"
+                        data-bind="click: function(data, event) { savePersonalBests(); }">
+                    Save changes
+                </button>
             </div>
         </div>
     </div>

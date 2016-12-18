@@ -1,3 +1,5 @@
+var page = require('page');
+
 var PersonalBests = (function () {
     'use strict';
 
