@@ -1,50 +1,70 @@
 var page = require('page'),
     helper = require('../helper/helper.js'),
-    helper = new helper();
+    ActivityTypes = require('../models/activity_types.js'),
+    PersonalBestsNav = (function () {
+      'use strict';
 
-var PersonalBestsNav = (function () {
-    'use strict';
+      function PersonalBestsNav() {
+          this.activity_types = ActivityTypes.activity_types;
+          this.personal_bests = ko.observableArray();
 
-    function PersonalBestsNav() {
-        this.personal_bests = ko.observableArray();
+          this.loadPersonalBests = function() {
+              var that = this;
 
-        this.loadPersonalBests = function() {
-            var that = this;
+              $.ajax({url: '//'+window.location.hostname+'/api/activities/personal_bests',
+                  type: 'get',
+                  dataType: 'json',
+                  async: true,
+                  success: function(data) {
+                      that.personal_bests = data;
+                  },
+                  error: function() {
+                      page('/error/500');
+                  }
+              });
+          }
 
-            $.ajax({url: '//'+window.location.hostname+'/api/activities/personal_bests',
-                type: 'get',
-                dataType: 'json',
-                async: true,
-                success: function(data) {
-                    that.personal_bests = data;
-                },
-                error: function() {
-                    page('/error/500');
-                }
-            });
-        }
+          this.filterActivities = function(id, parent_id, pb) {
 
-        this.savePersonalBests = function() {
-            console.log('SAVE PERSONAL BESTS');
-        }
+            //ActivityTypes
+            //console.log(id);
+            console.log(parent_id);
+            console.log(pb);
 
-        this.managePersonalBests = function() {
-            helper.overlay(true);
+            //pb.activity_ids = id;
+            //console.log(this.personal_bests[pb.id]);
+            //console.log(this.personal_bests);
 
-            $('#personal_bests_management_modal').modal('show');
-            $('#personal_bests_management_modal').on('hidden.bs.modal', function() {
-                helper.overlay(false);
-            });
-        }
+            console.log(this.personal_bests[pb]);
 
-        this.redirectToPersonalBest = function(id) {
-            page('/activities/personal_best/' + id);
-        }
+            this.personal_bests[pb].activity_ids = id;
 
-        ko.track(this);
-    }
+            return true;
 
-    return PersonalBestsNav;
+          }
+
+          this.savePersonalBests = function() {
+              console.log('SAVE PERSONAL BESTS');
+          }
+
+          this.managePersonalBests = function() {
+              helper.overlay(true);
+
+              $('#personal_bests_management_modal').modal('show');
+              $('#personal_bests_management_modal').on('hidden.bs.modal', function() {
+                  helper.overlay(false);
+              });
+          }
+
+          this.redirectToPersonalBest = function(id) {
+              page('/activities/personal_best/' + id);
+          }
+
+          ko.track(this);
+
+      }
+
+      return PersonalBestsNav;
 
 })();
 

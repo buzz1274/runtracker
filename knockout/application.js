@@ -7,6 +7,7 @@ var Header = require('./partials/header.js'),
     ErrorPage = require('./views/error_page.js'),
     ResetPassword = require('./views/reset_password.js'),
     Runs = require('./views/runs/index.js'),
+    SplitCalculator = require('./views/runs/split_calculator.js'),
     PersonalBests = require('./views/runs/personal_bests.js');
 
 module.exports = (function() {
@@ -25,6 +26,7 @@ module.exports = (function() {
             'reset_password': new ResetPassword(),
             'runs': new Runs(),
             'personal_bests': new PersonalBests(),
+            'split_calculator': new SplitCalculator(),
             'error': new ErrorPage()
         };
 

@@ -26,8 +26,13 @@ module.exports = (function () {
             app.display_left_nav = false;
         });
 
+        page('split_calculator', function() {
+          app.page = 'split_calculator';
+          app.display_left_nav = false;
+        });
+
         page('activities/personal_best/:personal_best_id/', function(ctx) {
-            app.pages['personal_bests'].loadData(ctx.params.personal_best_id);
+            app.pages.personal_bests.loadData(ctx.params.personal_best_id);
             app.personal_bests.loadPersonalBests();
 
             app.page = 'personal_bests';
@@ -42,8 +47,7 @@ module.exports = (function () {
                 date = 'all';
             }
 
-            app.pages['runs'].loadData(date);
-            app.pages['runs'].loadActivityTypes();
+            app.pages.runs.loadData(date);
             app.personal_bests.loadPersonalBests();
 
             app.page = 'runs';
@@ -58,9 +62,9 @@ module.exports = (function () {
             app.page = 'error';
             app.display_left_nav = false;
 
-            if(ctx.params.code == 500) {
+            if(ctx.params.code === 500) {
                 error.message = 'An error occurred';
-            } else if(ctx.params.code == 404) {
+            } else if(ctx.params.code === 404) {
                 error.message = 'Page not found';
             }
 

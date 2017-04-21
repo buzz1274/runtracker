@@ -1,7 +1,7 @@
 var Moment = require('moment'),
-    page = require('page');
-
-var Runs = (function () {
+    ActivityTypes = require('../../models/activity_types'),
+    page = require('page'),
+    Runs = (function () {
     'use strict';
 
     function Runs() {
@@ -12,7 +12,7 @@ var Runs = (function () {
         this.summary = false;
         this.year = '';
         this.month = '';
-        this.activity_types = false;
+        this.activity_types = ActivityTypes.activity_types;
 
         var that = this;
 
@@ -214,23 +214,6 @@ var Runs = (function () {
             } else {
                 return Moment(date).format('Do MMM, YYYY');
             }
-
-        }
-
-        this.loadActivityTypes = function() {
-            var that = this;
-
-            $.ajax({url: '//'+window.location.hostname+'/api/activities/type',
-                type: 'get',
-                dataType: 'json',
-                async: true,
-                success: function(data) {
-                    that.activity_types = data;
-                },
-                error: function() {
-                    page('/error/500');
-                }
-            });
 
         }
 

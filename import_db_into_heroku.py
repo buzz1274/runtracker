@@ -26,9 +26,9 @@ with open('runtracker_setup.sql', 'w') as setup_file:
 
 with settings(warn_only=True, host_string='icarus.zz50.co.uk', user='dave'):
     run('sudo /var/docker/docker/containers/runtracker.zz50.co.uk/backup.sh')
-    filename = 'runtracker.zz50.co.uk_%d-%d-%d.tar.gz' % (datetime.datetime.now().year,
-                                                          datetime.datetime.now().month,
-                                                          datetime.datetime.now().day,)
+    filename = 'runtracker.zz50.co.uk_%d-%02d-%02d.tar.gz' % (datetime.datetime.now().year,
+                                                              datetime.datetime.now().month,
+                                                              datetime.datetime.now().day,)
 
     status = get('~/docker_backups/runtracker.zz50.co.uk/%s' % (filename,),
                  './runtracker.tar.gz')

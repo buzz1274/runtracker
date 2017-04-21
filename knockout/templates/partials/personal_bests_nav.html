@@ -3,7 +3,9 @@
     <div class="modal-dialog" role="document" style="width:800px;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">Configure personal bests</h4>
             </div>
             <div class="modal-body">
@@ -11,10 +13,10 @@
                     <thead>
                         <tr class="table_nav">
                             <td>Title</td>
-                            <td>Type</td>
-                            <td>Activity</td>
-                            <td>Min distance(km)</td>
-                            <td>Max distance(km)</td>
+                            <td style="width:15%">Type</td>
+                            <td style="width:15%">Activity</td>
+                            <td>Min distance(m)</td>
+                            <td>Max distance(m)</td>
                             <td class="text-center">-</td>
                         </tr>
                     </thead>
@@ -22,23 +24,71 @@
                         <!-- ko foreach: personal_bests -->
                             <tr>
                                 <td>
-                                    <input name="" type="text" value=""
+                                    <input name="" type="text" value="" size="30"
                                            data-bind="value: title" />
                                 </td>
                                 <td>
-                                    <input name="" type="text" value=""
-                                           data-bind="value: type" />
+                                  <div class="dropdown">
+                                    <div class="pull-left" title="longest, fastest, longest">
+                                      longest...
+                                    </div>
+                                    <span class="dropdown-toggle"
+                                          id="activity_type_filter_dropdown" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"
+                                          title="Activity Types"></span>
+                                    </span>
+                                    <ul class="dropdown-menu" aria-labelledby="filter_dropdown"
+                                        style="cursor:pointer">
+                                      <li>
+                                        <a role="menuitem" data-bind="">
+                                          <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                                          <span role="menuitem">Fastest</span>
+                                        </a>
+                                      </li>
+                                      <li>
+                                        <a role="menuitem" data-bind="">
+                                          <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                                          <span role="menuitem">Longest</span>
+                                        </a>
+                                      </li>
+                                    </ul>
+                                  </div>
                                 </td>
                                 <td>
-                                    <input name="" type="text" value=""
-                                           data-bind="value: activity_ids" />
+                                  <div class="dropdown">
+                                    <span class="dropdown-toggle"
+                                          id="activity_filter_dropdown" data-toggle="dropdown">
+                                    <span id="activity_filter_icon"
+                                          class="glyphicon glyphicon-chevron-down"
+                                          title="Activities"></span>
+                                    </span>
+                                    <ul class="dropdown-menu" aria-labelledby="filter_dropdown"
+                                        style="cursor:pointer">
+                                      <!-- ko foreach: $parent.activity_types -->
+                                        <li>
+                                          <a role="menuitem"
+                                             data-bind="click: function(data, event) { $component.filterActivities(id, parent_id,
+                                                                                                                   $parentContext.$index());}">
+                                          <span class="glyphicon glyphicon-ok"
+                                                data-bind="style: {visibility: $parent.activity_ids.indexOf(id) == -1 ? 'hidden' : 'visible' }" ></span>
+                                            &nbsp;
+                                            <span role="menuitem"
+                                                  data-bind="text: activity_type,
+                                                           style: {padding: parent_id ? '0 0 0 10px' : '' }">
+
+                                          </span>
+                                          </a>
+                                        </li>
+                                      <!-- /ko -->
+                                    </ul>
+                                  </div>
                                 </td>
                                 <td>
-                                    <input name="" type="text" value="" size="4"
+                                    <input name="" type="text" value="" size="8"
                                            data-bind="value: min_distance" />
                                 </td>
                                 <td>
-                                    <input name="" type="text" value="" size="4"
+                                    <input name="" type="text" value="" size="8"
                                            data-bind="value: max_distance" />
                                 </td>
                                 <td style="width:1%">

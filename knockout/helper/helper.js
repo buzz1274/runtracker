@@ -1,4 +1,4 @@
-var Helper = (function () {
+let Helper = (function () {
     'use strict';
 
     this.overlay = function (show, show_spinner) {
@@ -12,8 +12,8 @@ var Helper = (function () {
                 $('#loader_spinner').hide();
             }
         }
-    }
+    };
 
 });
 
-module.exports = Helper;
+module.exports = new Helper();
