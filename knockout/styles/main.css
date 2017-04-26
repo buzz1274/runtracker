@@ -3,6 +3,10 @@ body {
     font-family: "Trebuchet MS";
     font-size:13px;
 }
+h3 {
+    padding:0;
+    margin:0;
+}
 #opaque {
     position: fixed;
     top: 0px;
