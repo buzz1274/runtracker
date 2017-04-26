@@ -6,6 +6,7 @@ module.exports = {
     entry: './knockout/main.js',
     output: {
         path: './public/',
+        publicPath: '/',
         filename: 'main-[hash:6].js'
     },
     module: {
@@ -43,7 +44,7 @@ module.exports = {
         new HtmlWebpackPlugin({
           filename: 'index.html',
           inject: true,
-          template: './knockout/templates/index.html'
+          template: './knockout/templates/index.ejs'
       })
     ]
 };
