@@ -47,19 +47,26 @@
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="filter_dropdown"
                             style="cursor:pointer">
-                            <!-- ko foreach: $component.activity_types -->
-                            <li>
-                                <a role="menuitem"
-                                   data-bind="click: function(data, event) { $component.filterActivities(id, parent_id);}">
-                                    <span class="glyphicon glyphicon-ok"
-                                          data-bind="style: {visibility: $component.selected_activites.indexOf(id) == -1 ? 'hidden' : 'visible' }"></span>&nbsp;
-                                    <span role="menuitem"
-                                          data-bind="text: activity_type,
-                                                     style: {padding: parent_id ? '0 0 0 10px' : '' }">
+                            <!-- ko if: $component.activity_types.length == 0 -->
+                              <li>
+                                <a role="menuitem">Loading......</a>
+                              </li>
+                            <!-- /ko -->
+                            <!-- ko if: $component.activity_types.length > 0 -->
+                              <!-- ko foreach: $component.activity_types -->
+                              <li>
+                                  <a role="menuitem"
+                                     data-bind="click: function(data, event) { $component.filterActivities(id, parent_id);}">
+                                      <span class="glyphicon glyphicon-ok"
+                                            data-bind="style: {visibility: $component.selected_activites.indexOf(id) == -1 ? 'hidden' : 'visible' }"></span>&nbsp;
+                                      <span role="menuitem"
+                                            data-bind="text: activity_type,
+                                                       style: {padding: parent_id ? '0 0 0 10px' : '' }">
 
-                                    </span>
-                                </a>
-                            </li>
+                                      </span>
+                                  </a>
+                              </li>
+                              <!-- /ko -->
                             <!-- /ko -->
                             <!-- ko if: $component.selected_activites.length > 0 -->
                             <li>

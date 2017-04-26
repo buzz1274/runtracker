@@ -14,7 +14,10 @@ var page = require('page'),
               dataType: 'json',
               async: true,
         success: function(data) {
-          that.activity_types = data;
+          for(var i = 0; i < data.length; i++) {
+            that.activity_types.push(data[i]);
+          }
+
         },
         error: function() {
           page('/error/500');
@@ -24,6 +27,7 @@ var page = require('page'),
     };
 
     this.load();
+
   }
 
   return ActivityTypes;
