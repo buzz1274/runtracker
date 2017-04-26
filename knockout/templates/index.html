@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <base href="/" />
+  <title>runtracker.zz50.co.uk</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<body>
+<div class="container-fluid">
+  <div id="ajax_loader">
+    <div id="opaque"></div>
+    <img id="loader_spinner" width="35" class="centred" src="/spinner.svg" />
+  </div>
+  <header-nav params="option:header"></header-nav>
+  <div id="main">
+    <div data-bind="component:{name:pages[page].component,params:pages[page]}">
+    </div>
+    <!-- ko if: display_left_nav -->
+    <div id="left_container">
+      <personal-bests-nav params="option:personal_bests"></personal-bests-nav>
+      <activities-nav params="option:activities"></activities-nav>
+    </div>
+    <!-- /ko -->
+  </div>
+  <div id="footer">Runtracker v0.1</div>
+</div>
+</body>
+</html>

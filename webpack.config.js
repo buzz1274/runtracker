@@ -1,11 +1,12 @@
 var webpack = require('webpack'),
-    ExtractTextPlugin = require("extract-text-webpack-plugin");
+    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './knockout/main.js',
     output: {
         path: './public/',
-        filename: 'main.js'
+        filename: 'main-[hash:6].js'
     },
     module: {
         loaders: [
@@ -38,6 +39,11 @@ module.exports = {
             $: 'jquery',
             ko: 'knockout-es5',
         }),
-        new ExtractTextPlugin('main.css', {allChunks: true})
+        new ExtractTextPlugin('main-[hash:6].css', {allChunks: true}),
+        new HtmlWebpackPlugin({
+          filename: 'index.html',
+          inject: true,
+          template: './knockout/templates/index.html'
+      })
     ]
 };

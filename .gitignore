@@ -8,8 +8,8 @@ Homestead.yaml
 Homestead.json
 .env
 bundle.js
-public/main.css
-public/main.js
+public/index.html
+public/main-*
 *.sql
 *.tar.gz
 
