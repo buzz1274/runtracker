@@ -14,6 +14,7 @@ var page = require('page'),
               dataType: 'json',
               async: true,
         success: function(data) {
+          //
           that.activity_types = data;
         },
         error: function() {
