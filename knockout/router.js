@@ -28,12 +28,11 @@ module.exports = (function () {
 
         page('split_calculator', function() {
           app.page = 'split_calculator';
-          app.display_left_nav = false;
+          app.display_left_nav = true;
         });
 
         page('activities/personal_best/:personal_best_id/', function(ctx) {
             app.pages.personal_bests.loadData(ctx.params.personal_best_id);
-            app.personal_bests.loadPersonalBests();
 
             app.page = 'personal_bests';
             app.display_left_nav = true;
@@ -48,7 +47,6 @@ module.exports = (function () {
             }
 
             app.pages.runs.loadData(date);
-            app.personal_bests.loadPersonalBests();
 
             app.page = 'runs';
             app.display_left_nav = true;
@@ -74,6 +72,10 @@ module.exports = (function () {
             page('/error/404');
             app.display_left_nav = false;
         });
+
+        if(app.display_left_nav) {
+          app.personal_bests.loadPersonalBests();
+        }
 
         page();
 

@@ -1,12 +1,14 @@
-<div>
-  <div>
-    <i class="glyphicon glyphicon-refresh pull-right"
-       style="padding-right:8px;"
-       data-bind="click:reset_splits" title="Reset splits"></i>
-    <h4>Split Calculator</h4>
-  </div>
+<div id="sub_main">
   <table class="runs table table-condensed table-hover">
     <thead>
+      <tr class="table_nav">
+        <th class="title" colspan="4">
+          <i class="glyphicon glyphicon-refresh pull-right"
+             style="padding-right:8px;"
+             data-bind="click:reset_splits" title="Reset splits"></i>
+          <div class="table_title">Split calculator</div>
+        </th>
+      </tr>
       <tr class="table_nav">
         <th>Minutes</th>
         <th>Seconds</th>
@@ -17,13 +19,13 @@
     <tbody data-bind="click:add_split, event:{change:update_splits}">
       <tr class="segment">
         <td>
-          <input class="input minutes" type="text" size="40">
+          <input class="input minutes" type="text">
         </td>
         <td>
-          <input class="input seconds" type="text" size="40">
+          <input class="input seconds" type="text">
         </td>
         <td>
-          <input class="input speed" type="text" size="40">
+          <input class="input speed" type="text">
         </td>
         <td class="text-center">
           <p>
