@@ -11,6 +11,19 @@ class activity extends Model {
         return $this->hasOne('App\ActivityType', 'id', 'activity_id');
     }
 
+    public static function activityLog($userID) {
+        $query = self::where('user_id', $userID)->
+                        join('activity_type',
+                             'activity.activity_id', '=', 'activity_type.id')->
+                        join('activity_type as parent_activity_type',
+                             'activity_type.parent_id', '=', 'parent_activity_type.id')->
+                        orderBy('activity_date', 'desc')->
+                        limit(15);
+
+        return $query->get();
+
+    }
+
     public static function activities($userID, $year, $month, $activityID) {
         $activities = [];
         $summary = [];

@@ -56,15 +56,9 @@ module.exports = (function () {
         page('error/:code', function(ctx) {
             var error = app.pages.error;
 
-            error.code = ctx.params.code;
+            error.SetError(ctx.params.code);
             app.page = 'error';
             app.display_left_nav = false;
-
-            if(ctx.params.code === 500) {
-                error.message = 'An error occurred';
-            } else if(ctx.params.code === 404) {
-                error.message = 'Page not found';
-            }
 
         });
 
@@ -74,7 +68,8 @@ module.exports = (function () {
         });
 
         if(app.display_left_nav) {
-          app.personal_bests.loadPersonalBests();
+          app.personal_bests_nav.loadPersonalBests();
+          app.activities_nav.load();
         }
 
         page();

@@ -26,6 +26,10 @@ class ActivityController extends Controller {
 
     }
 
+    public function activities(Request $request) {
+        return response()->json(activity::activityLog(USER_ID));
+    }
+
     public function personalBest(Request $request) {
         $response = array();
         $personalBest = PersonalBests::where('user_id', USER_ID)->

@@ -16,10 +16,10 @@
     <div data-bind="component:{name:pages[page].component,params:pages[page]}">
     </div>
     <!-- ko if: display_left_nav -->
-    <div id="left_container">
-      <personal-bests-nav params="option:personal_bests"></personal-bests-nav>
-      <activities-nav params="option:activities"></activities-nav>
-    </div>
+      <div id="left_container">
+        <personal-bests-nav params="option:personal_bests_nav"></personal-bests-nav>
+        <activities-nav params="option:activities_nav"></activities-nav>
+      </div>
     <!-- /ko -->
   </div>
   <div id="footer">Runtracker v0.1</div>

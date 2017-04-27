@@ -21,15 +21,23 @@
         <td class="width_12">-</td>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+  <tbody>
+    <!-- ko foreach: activities -->
+      <tr>
         <td>
-            <i class="glyphicon glyphicon-edit" title="Add run"></i>
-            <i class="glyphicon glyphicon-trash" title="Delete run"></i>
+          <div data-bind="text: activity_date"></div>
         </td>
-    </tr>
-    </tbody>
+        <td>
+          <div data-bind="text: activity_type"></div>
+        </td>
+        <td>
+          <div class="text-right" data-bind="text: metres"></div>
+        </td>
+        <td>
+            <i class="glyphicon glyphicon-edit" title="Add activity"></i>
+            <i class="glyphicon glyphicon-trash" title="Delete activity"></i>
+        </td>
+      </tr>
+    <!-- /ko -->
+  </tbody>
 </table>

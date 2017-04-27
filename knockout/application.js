@@ -1,5 +1,5 @@
 var Header = require('./partials/header.js'),
-    Activities = require('./partials/activities.js'),
+    ActivitiesNav = require('./partials/activities-nav.js'),
     PersonalBestsNav = require('./partials/personal_bests_nav.js'),
     Index = require('./views/index.js'),
     Register = require('./views/register.js'),
@@ -31,8 +31,8 @@ module.exports = (function() {
         };
 
         this.header = new Header(this.user);
-        this.personal_bests = new PersonalBestsNav(this.user);
-        this.activities = new Activities(this.user);
+        this.personal_bests_nav = new PersonalBestsNav(this.user);
+        this.activities_nav = new ActivitiesNav(this.user);
 
         ko.track(this);
 

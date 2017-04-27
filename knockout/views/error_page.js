@@ -8,6 +8,17 @@ var ErrorPage = (function () {
         this.code = 500;
         this.message = '';
 
+        this.SetError = function(errorCode) {
+          this.code = errorCode;
+
+          if(this.code == '500') {
+            this.message = 'An error occurred';
+          } else if(this.code == '404') {
+            this.message = 'Page not found';
+          }
+
+        }
+
         ko.track(this);
     }
 
