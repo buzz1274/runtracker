@@ -25,6 +25,7 @@ var SplitCalculator = (function () {
           $('.glyphicon-plus').each(function() {
             $(this).removeClass('glyphicon-plus');
             $(this).addClass('glyphicon-minus');
+            $(this).prop('title', 'Remove split');
           });
 
           row.after(clone.find('input:text').val('').end());
