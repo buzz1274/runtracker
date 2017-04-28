@@ -19,7 +19,7 @@ class activity extends Model {
                             'activity_type.parent_id', '=', 'parent_activity_type.id')->
                        orderBy('activity_date', 'desc')->
                        orderBy('activity.id', 'desc')->
-                       limit(15);
+                       limit(20);
 
         return $query->get();
 
@@ -54,7 +54,7 @@ class activity extends Model {
         }
 
         $query->orderBy('activity_date', 'asc')->
-                orderBy('activity.id', 'asc');
+                orderBy('activity.id', 'desc');
 
         $query = $query->get();
 
