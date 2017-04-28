@@ -13,12 +13,13 @@ class activity extends Model {
 
     public static function activityLog($userID) {
         $query = self::where('user_id', $userID)->
-                        join('activity_type',
-                             'activity.activity_id', '=', 'activity_type.id')->
-                        join('activity_type as parent_activity_type',
-                             'activity_type.parent_id', '=', 'parent_activity_type.id')->
-                        orderBy('activity_date', 'desc')->
-                        limit(15);
+                       join('activity_type',
+                            'activity.activity_id', '=', 'activity_type.id')->
+                       join('activity_type as parent_activity_type',
+                            'activity_type.parent_id', '=', 'parent_activity_type.id')->
+                       orderBy('activity_date', 'desc')->
+                       orderBy('activity.id', 'desc')->
+                       limit(15);
 
         return $query->get();
 
@@ -52,7 +53,8 @@ class activity extends Model {
 
         }
 
-        $query->orderBy('activity_date', 'asc');
+        $query->orderBy('activity_date', 'asc')->
+                orderBy('activity.id', 'asc');
 
         $query = $query->get();
 
