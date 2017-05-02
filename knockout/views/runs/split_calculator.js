@@ -24,6 +24,8 @@ var SplitCalculator = (function () {
 
           $('.glyphicon-plus').each(function() {
             $(this).removeClass('glyphicon-plus');
+            $(this).removeAttr('id');
+            $(this).removeAttr('tabindex');
             $(this).addClass('glyphicon-minus');
             $(this).prop('title', 'Remove split');
           });
@@ -37,19 +39,20 @@ var SplitCalculator = (function () {
 
     this.update_splits = function() {
       var total_distance = 0,
-          total_time = 0;
+          total_time = 0,
+          total_time_display;
 
       $('.segment').each(function () {
-        var time = parseInt($(this).find('.minutes').val()),
-            seconds = $(this).find('.seconds').val(),
+        var time = parseInt($(this).find('.minutes').val()) * 60,
+            seconds = parseInt($(this).find('.seconds').val()),
             speed = parseFloat($(this).find('.speed').val());
 
         if(time && speed) {
           if (seconds) {
-            time += parseFloat((seconds / 60).toFixed(2));
+            time += seconds;
           }
 
-          var distance = (speed / 60) * time;
+          var distance = ((speed / 60) / 60) * time;
 
           total_distance += distance;
           total_time += time;
@@ -57,16 +60,22 @@ var SplitCalculator = (function () {
 
       });
 
+      total_time_display = parseInt(total_time / 60) + ' minutes';
+
+      if(total_time % 60) {
+        total_time_display += ' ' + (total_time % 60) + ' seconds';
+      }
+      
       if(total_distance && total_time) {
-        $('#total_distance').val(total_distance.toFixed(2));
-        $('#average_pace_km_hr').val(((60 / total_time) * total_distance).toFixed(2));
-        $('#average_pace_min_km').val((total_time / total_distance).toFixed(2));
-        $('#total_time').val(total_time.toFixed(2));
+        $('#total_distance').html(total_distance.toFixed(2) + ' Km');
+        $('#average_pace_km_hr').html(((3600 / total_time) * total_distance).toFixed(2) + ' Km/hr');
+        $('#average_pace_min_km').html(((total_time / 60) / total_distance).toFixed(2) + ' min/Km');
+        $('#total_time').html(total_time_display);
       } else {
-        $('#total_distance').val('');
-        $('#average_pace_km_hr').val('');
-        $('#average_pace_min_km').val('');
-        $('#total_time').val('');
+        $('#total_distance').html('-');
+        $('#average_pace_km_hr').html('-');
+        $('#average_pace_min_km').html('-');
+        $('#total_time').html('-');
       }
 
     }

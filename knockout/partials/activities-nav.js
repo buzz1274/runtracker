@@ -10,6 +10,8 @@ var ActivitiesNav = (function () {
       this.load = function() {
         var that = this;
 
+        console.log("LOAD ACTIVITES NAV");
+
         $.ajax({url: '//'+window.location.hostname+'/api/activities',
                 type: 'get',
                 dataType: 'json',
@@ -25,6 +27,7 @@ var ActivitiesNav = (function () {
         });
       };
 
+      this.load();
       ko.track(this);
 
     }

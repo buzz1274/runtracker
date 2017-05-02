@@ -60,6 +60,8 @@ var page = require('page'),
               page('/activities/personal_best/' + id);
           }
 
+          this.loadPersonalBests();
+
           ko.track(this);
 
       }

@@ -67,11 +67,6 @@ module.exports = (function () {
             app.display_left_nav = false;
         });
 
-        if(app.display_left_nav) {
-          app.personal_bests_nav.loadPersonalBests();
-          app.activities_nav.load();
-        }
-
         page();
 
     }
