@@ -42,19 +42,16 @@ var SplitCalculator = (function () {
     this.update_splits = function() {
       var total_distance = 0,
           total_time = 0,
+          distance = 0,
           total_time_display;
 
       $('.segment').each(function () {
-        var time = parseInt($(this).find('.minutes').val()) * 60,
-            seconds = parseInt($(this).find('.seconds').val()),
+        var time = (parseInt($(this).find('.minutes').val()) || 0) * 60 +
+                   (parseInt($(this).find('.seconds').val()) || 0),
             speed = parseFloat($(this).find('.speed').val());
 
         if(time && speed) {
-          if (seconds) {
-            time += seconds;
-          }
-
-          var distance = ((speed / 60) / 60) * time;
+          distance = ((speed / 60) / 60) * time;
 
           total_distance += distance;
           total_time += time;
