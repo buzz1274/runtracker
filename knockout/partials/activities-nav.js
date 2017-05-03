@@ -1,23 +1,42 @@
-var page = require('page'),
-    helper = require('../helper/helper.js');
+var page = require('page');
 
 var ActivitiesNav = (function () {
     'use strict';
 
     function ActivitiesNav() {
-      this.activities = ko.observableArray();
+      this.activities = false;
+      this.current_page = 1;
+      this.has_more_pages = false;
 
-      this.load = function() {
-      var that = this;
+      this.load = function(action) {
+        var that = this;
+
+        if(action === 'prev' && this.current_page > 1) {
+          this.current_page--;
+        }else if(action === 'next' && this.has_more_pages) {
+          this.current_page++;
+        }
+
+        this.activities = false;
 
         $.ajax({url: '//'+window.location.hostname+'/api/activities',
+                data: {page: this.current_page},
                 type: 'get',
                 dataType: 'json',
                 async: true,
                 success: function(data) {
-                  for(var i = 0; i < data.length; i++) {
-                    that.activities.push(data[i]);
+                  if(data.hasOwnProperty('has_more_pages') &&
+                     data.hasOwnProperty('activities')) {
+
+                    that.activities = ko.observableArray();
+                    that.has_more_pages = data.has_more_pages;
+
+                    for(var i = 0; i < data.activities.length; i++) {
+                      that.activities.push(data.activities[i]);
+                    }
+
                   }
+
                 },
                 error: function() {
                   page('/error/500');

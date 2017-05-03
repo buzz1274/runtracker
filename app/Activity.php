@@ -11,7 +11,7 @@ class activity extends Model {
         return $this->hasOne('App\ActivityType', 'id', 'activity_id');
     }
 
-    public static function activityLog($userID) {
+    public static function activityLog($userID, $page) {
         $query = self::select(array('activity.id', 'activity_date', 'metres',
                                     'seconds', 'parent_activity_type.activity_type'))->
                        where('user_id', $userID)->
@@ -20,10 +20,9 @@ class activity extends Model {
                        join('activity_type as parent_activity_type',
                             'activity_type.parent_id', '=', 'parent_activity_type.id')->
                        orderBy('activity_date', 'desc')->
-                       orderBy('activity.id', 'desc')->
-                       limit(15);
+                       orderBy('activity.id', 'desc');
 
-        return $query->get();
+        return $query->paginate(15);
 
     }
 

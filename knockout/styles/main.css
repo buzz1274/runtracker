@@ -257,3 +257,6 @@ p.form-warning {
 a.personal_best_link {
     text-decoration:none;
 }
+.pointer:hover {
+    cursor:pointer;
+}

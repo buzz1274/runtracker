@@ -1,18 +1,24 @@
 <table class="runs table table-condensed table-hover">
   <thead>
     <tr class="table_nav">
-        <td colspan="5">
-            <i id="add_run" class="glyphicon glyphicon-plus pull-right"></i>
-            <div class="table_title">
-                            <span title="Previous Page" class="pull-left">
-                                &laquo;&laquo;
-                            </span>
-                Activities
-                            <span title="Next Page" class="pull-right">
-                                &raquo;&raquo;
-                            </span>
-            </div>
-        </td>
+      <td colspan="5">
+        <i id="add_run" class="glyphicon glyphicon-plus pull-right"></i>
+        <div class="table_title">
+          <!-- ko if: current_page > 1 -->
+            <span title="Previous Page" class="pointer pull-left"
+                  data-bind="click: function(data, event) { load('prev'); }">
+              &laquo;&laquo;
+            </span>
+          <!-- /ko -->
+          Activities
+          <!-- ko if: has_more_pages -->
+            <span title="Next Page" class="pointer pull-right"
+                  data-bind="click: function(data, event) { load('next'); }">
+              &raquo;&raquo;
+            </span>
+          <!-- /ko -->
+        </div>
+      </td>
     </tr>
     <tr>
       <td style="width:35%"><strong>Date</strong></td>
@@ -23,25 +29,32 @@
     </tr>
   </thead>
   <tbody>
-    <!-- ko foreach: activities -->
+    <!-- ko if: !activities -->
       <tr>
-        <td>
-          <div data-bind="text: activity_date"></div>
-        </td>
-        <td>
-          <div data-bind="text: activity_type"></div>
-        </td>
-        <td>
-          <div class="text-right" data-bind="text: time"></div>
-        </td>
-        <td>
-          <div class="text-right" data-bind="text: distance"></div>
-        </td>
-        <td class="text-center">
+        <td colspan="5"><strong>Loading...</strong></td>
+      </tr>
+    <!-- /ko -->
+    <!-- ko if: activities -->
+      <!-- ko foreach: activities -->
+        <tr>
+          <td>
+            <div data-bind="text: activity_date"></div>
+          </td>
+          <td>
+            <div data-bind="text: activity_type"></div>
+          </td>
+          <td>
+            <div class="text-right" data-bind="text: time"></div>
+          </td>
+          <td>
+            <div class="text-right" data-bind="text: distance"></div>
+          </td>
+          <td class="text-center">
             <i class="glyphicon glyphicon-edit" title="Add activity"></i>
             <i class="glyphicon glyphicon-trash" title="Delete activity"></i>
-        </td>
-      </tr>
+          </td>
+        </tr>
+      <!-- /ko -->
     <!-- /ko -->
   </tbody>
 </table>
