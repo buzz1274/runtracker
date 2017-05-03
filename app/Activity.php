@@ -12,7 +12,9 @@ class activity extends Model {
     }
 
     public static function activityLog($userID) {
-        $query = self::where('user_id', $userID)->
+        $query = self::select(array('activity.id', 'activity_date', 'metres',
+                                    'seconds', 'parent_activity_type.activity_type'))->
+                       where('user_id', $userID)->
                        join('activity_type',
                             'activity.activity_id', '=', 'activity_type.id')->
                        join('activity_type as parent_activity_type',
