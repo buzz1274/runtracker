@@ -27,7 +27,23 @@ class ActivityController extends Controller {
     }
 
     public function activities(Request $request) {
-        return response()->json(activity::activityLog(USER_ID));
+        $response = [];
+        $activities = activity::activityLog(USER_ID);
+
+        if($activities->count()) {
+            foreach($activities as $activity) {
+                $response[] =
+                    ['id' => $activity->id,
+                     'activity_date' => date('jS M, Y', strtotime($activity->activity_date)),
+                     'activity_type' => $activity->activity_type,
+                     'time' => activity::convertSecondsToDisplayTime($activity->seconds),
+                     'distance' => number_format(($activity->metres / 1000), 3)];
+
+            }
+        }
+
+        return response()->json($response);
+
     }
 
     public function personalBest(Request $request) {

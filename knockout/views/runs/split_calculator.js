@@ -65,7 +65,7 @@ var SplitCalculator = (function () {
       if(total_time % 60) {
         total_time_display += ' ' + (total_time % 60) + ' seconds';
       }
-      
+
       if(total_distance && total_time) {
         $('#total_distance').html(total_distance.toFixed(2) + ' Km');
         $('#average_pace_km_hr').html(((3600 / total_time) * total_distance).toFixed(2) + ' Km/hr');

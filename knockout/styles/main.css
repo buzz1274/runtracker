@@ -172,7 +172,7 @@ tbody tr:hover td[rowspan] {
     background-color: #FFFFFF;
 }
 table.runs td.date_width {
-    width:40%;
+    width:30%;
 }
 table.runs td.width_20 {
     width:20%;

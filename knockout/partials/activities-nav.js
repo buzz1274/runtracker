@@ -8,7 +8,7 @@ var ActivitiesNav = (function () {
       this.activities = ko.observableArray();
 
       this.load = function() {
-        var that = this;
+      var that = this;
 
         console.log("LOAD ACTIVITES NAV");
 
