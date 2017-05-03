@@ -37,7 +37,7 @@ class DBConvert extends Command {
      * @return mixed
      */
     public function handle() {
-        $runs = \DB::select('SELECT * FROM run ORDER BY date ASC');
+        $runs = \DB::select('SELECT * FROM run ORDER BY date ASC, run_id ASC');
 
         foreach($runs as $run) {
             $activity = new Activity;
