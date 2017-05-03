@@ -23,11 +23,13 @@ var SplitCalculator = (function () {
           var clone = row.clone();
 
           $('.glyphicon-plus').each(function() {
-            $(this).removeClass('glyphicon-plus');
-            $(this).removeAttr('id');
-            $(this).removeAttr('tabindex');
-            $(this).addClass('glyphicon-minus');
-            $(this).prop('title', 'Remove split');
+            if($(this).attr('id') === 'add_split') {
+              $(this).removeClass('glyphicon-plus');
+              $(this).removeAttr('id');
+              $(this).removeAttr('tabindex');
+              $(this).addClass('glyphicon-minus');
+              $(this).prop('title', 'Remove split');
+            }
           });
 
           row.after(clone.find('input:text').val('').end());
