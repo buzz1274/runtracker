@@ -28,8 +28,8 @@ var page = require('page'),
 
             //ActivityTypes
             //console.log(id);
-            console.log(parent_id);
-            console.log(pb);
+            //console.log(parent_id);
+            //console.log(pb);
 
             //pb.activity_ids = id;
             //console.log(this.personal_bests[pb.id]);
