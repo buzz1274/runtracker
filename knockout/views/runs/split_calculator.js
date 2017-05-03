@@ -43,7 +43,7 @@ var SplitCalculator = (function () {
       var total_distance = 0,
           total_time = 0,
           distance = 0,
-          total_time_display;
+          total_time_display, average_pace_min_km_display;
 
       $('.segment').each(function () {
         var time = (parseInt($(this).find('.minutes').val()) || 0) * 60 +
@@ -60,15 +60,23 @@ var SplitCalculator = (function () {
       });
 
       total_time_display = parseInt(total_time / 60) + ' minutes';
+      average_pace_min_km_display = parseInt((total_time / total_distance) / 60) + ' minutes';
 
       if(total_time % 60) {
         total_time_display += ' ' + (total_time % 60) + ' seconds';
       }
 
+      if((total_time / total_distance) % 60) {
+        average_pace_min_km_display += ' ' +
+          parseInt((total_time / total_distance) % 60) + ' seconds';
+      }
+
+      average_pace_min_km_display += ' per Km';
+
       if(total_distance && total_time) {
         $('#total_distance').html(total_distance.toFixed(2) + ' Km');
         $('#average_pace_km_hr').html(((3600 / total_time) * total_distance).toFixed(2) + ' Km/hr');
-        $('#average_pace_min_km').html(((total_time / 60) / total_distance).toFixed(2) + ' min/Km');
+        $('#average_pace_min_km').html(average_pace_min_km_display);
         $('#total_time').html(total_time_display);
       } else {
         $('#total_distance').html('-');
