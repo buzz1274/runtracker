@@ -7,16 +7,16 @@
       <td colspan="5">
         <i id="add_run" class="glyphicon glyphicon-plus pull-right"></i>
         <div class="table_title">
-          <!-- ko if: current_page > 1 -->
+          <!-- ko if: activities.current_page() > 1 -->
             <span title="Previous Page" class="pointer pull-left"
-                  data-bind="click: function(data, event) { load('prev'); }">
+                  data-bind="click: function(data, event) { activities.load('prev'); }">
               &laquo;&laquo;
             </span>
           <!-- /ko -->
           Activities
-          <!-- ko if: activities.has_more_activities -->
+          <!-- ko if: activities.has_more_activities() -->
             <span title="Next Page" class="pointer pull-right"
-                  data-bind="click: function(data, event) { load('next'); }">
+                  data-bind="click: function(data, event) { activities.load('next'); }">
               &raquo;&raquo;
             </span>
           <!-- /ko -->
@@ -32,13 +32,13 @@
     </tr>
   </thead>
   <tbody>
-    <!-- ko if: !$component.activities.has_activities -->
+    <!-- ko if: !activities.has_activities() -->
       <tr>
         <td colspan="5"><strong>Loading...</strong></td>
       </tr>
     <!-- /ko -->
-    <!-- ko if: $component.activities.has_activities  -->
-      <!-- ko foreach: activities.activities -->
+    <!-- ko if: activities.has_activities()  -->
+      <!-- ko foreach: activities.activities() -->
         <tr data-bind="click: function(data, event) { $parent.viewActivity(id); }">
           <td>
             <div data-bind="text: activity_date"></div>

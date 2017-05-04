@@ -5,7 +5,11 @@ var ActivityModel = (function () {
     if(typeof activity === 'object') {
       for(var property in activity) {
         if(activity.hasOwnProperty(property)) {
-          this[property] = ko.observable(activity[property]);
+          if(property === 'id') {
+            this[property] =activity[property];
+          } else {
+            this[property] = ko.observable(activity[property]);
+          }
         }
       }
     }

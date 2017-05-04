@@ -1,19 +1,24 @@
 var helper = require('../helper/helper.js'),
-    activitiesModel = require('../models/activities-model.js'),
-    activityModel = require('../models/activity.js'),
-    ajax = require('../helper/ajax.js');
+    activityCollection = require('../collections/activity-collection.js');
 
 var ActivitiesNav = (function () {
     'use strict';
 
     function ActivitiesNav() {
-      this.activities = new activitiesModel();
-      this.current_page = 1;
+      this.activities = new activityCollection();
+      this.activity = ko.observableArray();
 
       this.viewActivity = function(id) {
         helper.overlay(true);
 
-        //this.load(id);
+        this.activity.push(this.activities.find(id));
+
+        /*
+        console.log("VIEW ACTIVITY");
+        console.log(id);
+
+        console.log(this.activity);
+        */////
 
         $('#view_activity_modal').modal('show');
         $('#view_activity_modal').on('hidden.bs.modal', function() {
@@ -21,9 +26,6 @@ var ActivitiesNav = (function () {
         });
 
       }
-
-      console.log('DERP');
-      console.log(this.activities);
 
       ko.track(this);
 
@@ -35,6 +37,7 @@ var ActivitiesNav = (function () {
 
 ko.components.register('activities-view', {
   template: require('../templates/partials/activities-view.html'),
+  viewModel: ActivitiesNav
 });
 
 ko.components.register('activities-nav', {
