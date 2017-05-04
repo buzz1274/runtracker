@@ -15,8 +15,18 @@ var ActivityManage = (function () {
         helper.overlay(false);
       });
 
-      ////
+    }
 
+    this.edit = function() {
+
+    }
+
+    this.delete = function() {
+
+    }
+
+    this.add = function() {
+      
     }
 
     ko.track(this);
