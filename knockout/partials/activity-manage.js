@@ -5,23 +5,17 @@ var ActivityManage = (function () {
   'use strict';
 
   function ActivityManage() {
-    this.activity = ko.observableArray();
+    this.activity = ko.observable(new activityModel());
 
     this.view = function(activity_id) {
-      this.activity_model = new activityModel();
-      this.activity_model.load(activity_id);
-
-      this.activity = this.activity_model.activity;
-
-      console.log("AM");
-      console.log(this.activity().activity_date);
-
+      this.activity.load(activity_id);
 
       $('#view_activity_modal').modal('show');
       $('#view_activity_modal').on('hidden.bs.modal', function() {
         helper.overlay(false);
       });
 
+      ////
 
     }
 

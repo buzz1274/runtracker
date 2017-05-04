@@ -4,8 +4,10 @@ var ActivityModel = (function () {
   'use strict';
 
   function ActivityModel(activity = false) {
-    this.id = 1;
-    this.activity = ko.observableArray();
+    this.id = ko.observable();
+    this.activity_date = ko.observable();
+    this.metres = ko.observable();
+    this.seconds = ko.observable();
 
     this.save = function() {
       console.log('SAVE ACTIVITY MODEL');
@@ -16,7 +18,7 @@ var ActivityModel = (function () {
 
       ajax.request('api/activity/' + activity_id).then((response) => {
         if(response.hasOwnProperty('activity')) {
-          that.activity.push(response.activity[0]);
+          that.set(response.activity[0]);
         }
       });
 
@@ -26,8 +28,8 @@ var ActivityModel = (function () {
       if(typeof activity === 'object') {
         for(var property in activity) {
           if(activity.hasOwnProperty(property)) {
-            if(property === 'id') {
-              this[property] = activity[property];
+            if(property === 'activity_date' || property === 'id') {
+              this[property](activity[property]);
             } else {
               this[property] = ko.observable(activity[property]);
             }

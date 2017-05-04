@@ -8,10 +8,9 @@
         <h4 class="modal-title">View activity</h4>
       </div>
       <div class="modal-body">
-        Hello World
         <!-- ko if: activity.id  -->
-          <h1>WE HAVE DATA</h1>
-          <h1 data-bind="text: $activity.id"></h1>
+          <h1>WE HAVE DATA</h1>////
+          <h1 data-bind="text: activity.activity_date"></h1>
         <!-- /ko -->
       </div>
       <div class="modal-footer">
