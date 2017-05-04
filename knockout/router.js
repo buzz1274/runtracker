@@ -67,10 +67,7 @@ module.exports = (function () {
 
         });
 
-        page('*', function(ctx) {
-
-          console.log(ctx);
-
+        page('*', function() {
           page('/error/404');
           app.display_left_nav = false;
         });

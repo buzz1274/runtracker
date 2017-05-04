@@ -1,13 +1,21 @@
 var helper = require('../helper/helper.js'),
     activityModel = require('../models/activity.js');
 
-var ActivitiesManage = (function () {
+var ActivityManage = (function () {
   'use strict';
 
-  function ActivitiesManage() {
+  function ActivityManage() {
+    this.activity = ko.observableArray();
 
     this.view = function(activity_id) {
-      console.log("VIEW ACTIVITY  ActivitiesManage  " + activity_id);
+      this.activity_model = new activityModel();
+      this.activity_model.load(activity_id);
+
+      this.activity = this.activity_model.activity;
+
+      console.log("AM");
+      console.log(this.activity().activity_date);
+
 
       $('#view_activity_modal').modal('show');
       $('#view_activity_modal').on('hidden.bs.modal', function() {
@@ -21,18 +29,18 @@ var ActivitiesManage = (function () {
 
   }
 
-  return ActivitiesManage;
+  return ActivityManage;
 
 })();
 
-ko.components.register('activities-manage', {
-  template: require('../templates/partials/activities-manage.html'),
+ko.components.register('activity-manage', {
+  template: require('../templates/partials/activity-manage.html'),
   viewModel: {
     createViewModel: function (params) {
       'use strict';
-      return params instanceof ActivitiesManage ? params : ko.unwrap(params.option);
+      return params instanceof ActivityManage ? params : ko.unwrap(params.option);
     }
   }
 });
 
-module.exports = ActivitiesManage;
+module.exports = ActivityManage;

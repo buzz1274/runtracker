@@ -27,7 +27,16 @@ class ActivityController extends Controller {
     }
 
     public function activity(Request $request, $id) {
-        echo($id);
+        $query = activity::select(array('activity.id', 'activity_date', 'metres',
+                                        'seconds', 'parent_activity_type.activity_type'))->
+                            where('user_id', USER_ID)->
+                            where('activity.id', $id)->
+                             join('activity_type',
+                                  'activity.activity_id', '=', 'activity_type.id')->
+                             join('activity_type as parent_activity_type',
+                                  'activity_type.parent_id', '=', 'parent_activity_type.id');
+
+        return response()->json(['activity' => $query->get()]);
     }
 
     public function activities(Request $request) {
