@@ -1,3 +1,6 @@
+<div id="view_activity"
+     data-bind="component: { name: 'activities-view'}">
+</div>
 <table class="runs table table-condensed table-hover">
   <thead>
     <tr class="table_nav">
@@ -11,7 +14,7 @@
             </span>
           <!-- /ko -->
           Activities
-          <!-- ko if: has_more_pages -->
+          <!-- ko if: activities.has_more_activities -->
             <span title="Next Page" class="pointer pull-right"
                   data-bind="click: function(data, event) { load('next'); }">
               &raquo;&raquo;
@@ -29,14 +32,14 @@
     </tr>
   </thead>
   <tbody>
-    <!-- ko if: !activities -->
+    <!-- ko if: !$component.activities.has_activities -->
       <tr>
         <td colspan="5"><strong>Loading...</strong></td>
       </tr>
     <!-- /ko -->
-    <!-- ko if: activities -->
-      <!-- ko foreach: activities -->
-        <tr>
+    <!-- ko if: $component.activities.has_activities  -->
+      <!-- ko foreach: activities.activities -->
+        <tr data-bind="click: function(data, event) { $parent.viewActivity(id); }">
           <td>
             <div data-bind="text: activity_date"></div>
           </td>

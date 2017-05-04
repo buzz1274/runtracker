@@ -1,50 +1,30 @@
-var page = require('page');
+var helper = require('../helper/helper.js'),
+    activitiesModel = require('../models/activities-model.js'),
+    activityModel = require('../models/activity.js'),
+    ajax = require('../helper/ajax.js');
 
 var ActivitiesNav = (function () {
     'use strict';
 
     function ActivitiesNav() {
-      this.activities = false;
+      this.activities = new activitiesModel();
       this.current_page = 1;
-      this.has_more_pages = false;
 
-      this.load = function(action) {
-        var that = this;
+      this.viewActivity = function(id) {
+        helper.overlay(true);
 
-        if(action === 'prev' && this.current_page > 1) {
-          this.current_page--;
-        }else if(action === 'next' && this.has_more_pages) {
-          this.current_page++;
-        }
+        //this.load(id);
 
-        this.activities = false;
-
-        $.ajax({url: '//'+window.location.hostname+'/api/activities',
-                data: {page: this.current_page},
-                type: 'get',
-                dataType: 'json',
-                async: true,
-                success: function(data) {
-                  if(data.hasOwnProperty('has_more_pages') &&
-                     data.hasOwnProperty('activities')) {
-
-                    that.activities = ko.observableArray();
-                    that.has_more_pages = data.has_more_pages;
-
-                    for(var i = 0; i < data.activities.length; i++) {
-                      that.activities.push(data.activities[i]);
-                    }
-
-                  }
-
-                },
-                error: function() {
-                  page('/error/500');
-                }
+        $('#view_activity_modal').modal('show');
+        $('#view_activity_modal').on('hidden.bs.modal', function() {
+          helper.overlay(false);
         });
-      };
 
-      this.load();
+      }
+
+      console.log('DERP');
+      console.log(this.activities);
+
       ko.track(this);
 
     }
@@ -53,8 +33,13 @@ var ActivitiesNav = (function () {
 
   })();
 
+ko.components.register('activities-view', {
+  template: require('../templates/partials/activities-view.html'),
+});
+
 ko.components.register('activities-nav', {
   template: require('../templates/partials/activities-nav.html'),
+  template_activities_view: require('../templates/partials/activities-view.html'),
   viewModel: {
     createViewModel: function (params) {
       'use strict';

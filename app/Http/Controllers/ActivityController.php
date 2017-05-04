@@ -26,6 +26,10 @@ class ActivityController extends Controller {
 
     }
 
+    public function activity(Request $request, $id) {
+        echo($id);
+    }
+
     public function activities(Request $request) {
         $response = [];
         $activities = activity::activityLog(USER_ID,
@@ -41,7 +45,7 @@ class ActivityController extends Controller {
                      'distance' => number_format(($activity->metres / 1000), 3)];
 
             }
-            $response['has_more_pages'] = $activities->hasMorePages();
+            $response['has_more_activities'] = $activities->hasMorePages();
         }
 
         return response()->json($response);
