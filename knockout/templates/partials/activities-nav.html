@@ -1,6 +1,3 @@
-<div id="view_activity"
-     data-bind="component: { name: 'activities-view'}">
-</div>
 <table class="runs table table-condensed table-hover">
   <thead>
     <tr class="table_nav">
@@ -39,7 +36,7 @@
     <!-- /ko -->
     <!-- ko if: activities.has_activities()  -->
       <!-- ko foreach: activities.activities() -->
-        <tr data-bind="click: function(data, event) { $parent.viewActivity(id); }">
+        <tr data-bind="click: function(data, event) { $parent.page('/activity/'+id); }">
           <td>
             <div data-bind="text: activity_date"></div>
           </td>

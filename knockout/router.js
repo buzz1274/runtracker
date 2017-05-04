@@ -31,6 +31,11 @@ module.exports = (function () {
           app.display_left_nav = true;
         });
 
+        page('activity/:activity_id', function(ctx) {
+          app.activity_manage.view(ctx.params.activity_id);
+          page.redirect('runs');
+        });
+
         page('activities/personal_best/:personal_best_id/', function(ctx) {
             app.pages.personal_bests.loadData(ctx.params.personal_best_id);
 
@@ -62,9 +67,12 @@ module.exports = (function () {
 
         });
 
-        page('*', function() {
-            page('/error/404');
-            app.display_left_nav = false;
+        page('*', function(ctx) {
+
+          console.log(ctx);
+
+          page('/error/404');
+          app.display_left_nav = false;
         });
 
         page();

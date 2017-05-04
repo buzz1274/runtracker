@@ -23,7 +23,7 @@ var ActivitiesCollection = (function () {
                    {page: this.current_page}).then((response) => {
 
         if(response.hasOwnProperty('has_more_activities') &&
-          response.hasOwnProperty('activities')) {
+           response.hasOwnProperty('activities')) {
 
           that.activities.removeAll();
           that.has_more_activities(response.has_more_activities);
