@@ -32,11 +32,12 @@ module.exports = (function () {
         });
 
         page('activity/:activity_id', function(ctx) {
+          console.log("ACTIVITy");
           if(app.page !== 'runs' && app.page !== 'split_calculator' &&
              app.page !== 'personal_bests') {
             page('/runs');
           }
-          console.log("ROUTER");
+          console.log("ROUTER   " + ctx.params.activity_id);
           app.activity_manage.view(ctx.params.activity_id);
         });
 
