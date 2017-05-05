@@ -26,7 +26,7 @@ var ActivityManage = (function () {
     }
 
     this.add = function() {
-      
+
     }
 
     ko.track(this);

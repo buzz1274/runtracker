@@ -32,8 +32,12 @@ module.exports = (function () {
         });
 
         page('activity/:activity_id', function(ctx) {
+          if(app.page !== 'runs' && app.page !== 'split_calculator' &&
+             app.page !== 'personal_bests') {
+            page('/runs');
+          }
+          console.log("ROUTER");
           app.activity_manage.view(ctx.params.activity_id);
-          page.redirect('runs');
         });
 
         page('activities/personal_best/:personal_best_id/', function(ctx) {
