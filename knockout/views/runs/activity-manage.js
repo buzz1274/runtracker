@@ -1,20 +1,14 @@
-var helper = require('../helper/helper.js'),
-    activityModel = require('../models/activity.js');
+var activityModel = require('../../models/activity.js');
 
 var ActivityManage = (function () {
   'use strict';
 
   function ActivityManage() {
+    this.component = 'activity-manage';
     this.activity = ko.observable(new activityModel());
 
-    this.view = function(activity_id) {
+    this.load = function(activity_id) {
       this.activity.load(activity_id);
-
-      $('#view_activity_modal').modal('show');
-      $('#view_activity_modal').on('hidden.bs.modal', function() {
-        helper.overlay(false);
-      });
-
     }
 
     this.edit = function() {
@@ -38,7 +32,7 @@ var ActivityManage = (function () {
 })();
 
 ko.components.register('activity-manage', {
-  template: require('../templates/partials/activity-manage.html'),
+  template: require('../../templates/views/runs/activity-manage.html'),
   viewModel: {
     createViewModel: function (params) {
       'use strict';

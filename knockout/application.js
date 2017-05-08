@@ -1,6 +1,6 @@
 var Header = require('./partials/header.js'),
     ActivitiesNav = require('./partials/activities-nav.js'),
-    ActivityManage = require('./partials/activity-manage.js'),
+    ActivityManage = require('./views/runs/activity-manage.js'),
     PersonalBestsNav = require('./partials/personal_bests_nav.js'),
     Index = require('./views/index.js'),
     Register = require('./views/register.js'),
@@ -19,13 +19,13 @@ module.exports = (function() {
         this.href = '';
         this.display_left_nav = true;
         this.user = true;
-        this.activity_manage = new ActivityManage();
 
         this.pages = {
             'home': new Index(),
             'register': new Register(),
             'login': new Login(),
             'reset_password': new ResetPassword(),
+            'activity-manage': new ActivityManage(),
             'runs': new Runs(),
             'personal_bests': new PersonalBests(),
             'split_calculator': new SplitCalculator(),
