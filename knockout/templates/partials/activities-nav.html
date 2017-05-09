@@ -21,11 +21,11 @@
       </td>
     </tr>
     <tr>
-      <td style="width:35%"><strong>Date</strong></td>
+      <td style="width:38%"><strong>Date</strong></td>
       <td style="width:17%"><strong>Type</strong></td>
       <td style="width:15%"><strong>Time(h:m:s)</strong></td>
-      <td style="width:20%"><strong>Distance(Km)</strong></td>
-      <td style="width:15%" class="text-center">-</td>
+      <td style="width:12%"><strong>Km</strong></td>
+      <td style="width:18%" class="text-center">-</td>
     </tr>
   </thead>
   <tbody>
@@ -36,7 +36,7 @@
     <!-- /ko -->
     <!-- ko if: activities.has_activities()  -->
       <!-- ko foreach: activities.activities() -->
-        <tr data-bind="click: function(data, event) { $parent.page('/activity/'+id()); }">
+        <tr>
           <td>
             <div data-bind="text: activity_date"></div>
           </td>
@@ -50,6 +50,9 @@
             <div class="text-right" data-bind="text: distance"></div>
           </td>
           <td class="text-center">
+            <i class="glyphicon glyphicon-zoom-in" title="View activity"
+               data-bind="click: function(data, event) { $parent.page('/activity/'+id()); }">
+            </i>
             <i class="glyphicon glyphicon-edit" title="Add activity"></i>
             <i class="glyphicon glyphicon-trash" title="Delete activity"></i>
           </td>
