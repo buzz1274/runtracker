@@ -1,6 +1,6 @@
 var ajax = require('../helper/ajax.js');
 
-var ActivityModel = (function () {
+module.exports = (function () {
   'use strict';
 
   function ActivityModel(activity = false) {
@@ -8,6 +8,9 @@ var ActivityModel = (function () {
     this.activity_date = ko.observable();
     this.metres = ko.observable();
     this.seconds = ko.observable();
+    this.parent_activity_type = ko.observable();
+    this.activity_type = ko.observable();
+    this.route = ko.observable();//////
 
     this.save = function() {
       console.log('SAVE ACTIVITY MODEL');
@@ -24,15 +27,26 @@ var ActivityModel = (function () {
 
     };
 
+    this.display_time = function() {
+      var hours = parseInt(this.seconds() / 3600),
+          minutes = parseInt((this.seconds() % 3600) / 60),
+          seconds = parseInt((this.seconds() % 3600) % 60);
+
+      return (hours < 9 ? '0' + hours : hours) + ':' +
+             (minutes < 9 ? '0' + minutes : minutes) + ':' +
+             (seconds < 9 ? '0' + seconds : seconds);
+    }
+
+    this.display_distance = function() {
+      return (this.metres() / 1000).toFixed(3);
+    }
+
     this.set = function(activity) {
       if(typeof activity === 'object') {
         for(var property in activity) {
-          if(activity.hasOwnProperty(property)) {
-            if(property === 'activity_date' || property === 'id') {
-              this[property](activity[property]);
-            } else {
-              this[property] = ko.observable(activity[property]);
-            }
+          if(activity.hasOwnProperty(property) &&
+             this.hasOwnProperty(property)) {
+            this[property](activity[property]);
           }
         }
       }
@@ -45,5 +59,3 @@ var ActivityModel = (function () {
   return ActivityModel;
 
 })();
-
-module.exports = ActivityModel;

@@ -15,7 +15,7 @@ module.exports = (function() {
     'use strict';
 
     function Application() {
-        this.page = 'register';
+        this.page = 'home';
         this.href = '';
         this.display_left_nav = true;
         this.user = true;

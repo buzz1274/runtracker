@@ -28,9 +28,13 @@ class ActivityController extends Controller {
 
     public function activity(Request $request, $id) {
         $query = activity::select(array('activity.id', 'activity_date', 'metres',
-                                        'seconds', 'parent_activity_type.activity_type'))->
+                                        'seconds', 'route.route',
+                                        'parent_activity_type.activity_type AS parent_activity_type',
+                                        'activity_type.activity_type'))->
                             where('user_id', USER_ID)->
                             where('activity.id', $id)->
+                             join('route',
+                                  'route.id', '=', 'activity.route_id')->
                              join('activity_type',
                                   'activity.activity_id', '=', 'activity_type.id')->
                              join('activity_type as parent_activity_type',
@@ -50,6 +54,8 @@ class ActivityController extends Controller {
                     ['id' => $activity->id,
                      'activity_date' => date('jS M, Y', strtotime($activity->activity_date)),
                      'activity_type' => $activity->activity_type,
+                     'metres' => $activity->metres,
+                     'seconds' => $activity->seconds,
                      'time' => activity::convertSecondsToDisplayTime($activity->seconds),
                      'distance' => number_format(($activity->metres / 1000), 3)];
 

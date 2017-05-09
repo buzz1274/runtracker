@@ -38,18 +38,6 @@ var ActivitiesCollection = (function () {
       });
 
     };
-    //
-
-    this.find = function(id) {
-      console.log(id);
-
-      return this.activities.pop();
-
-    }
-
-    this.test = function() {
-      return true;
-    }
 
     if(!this.activities.length) {
       this.load();
