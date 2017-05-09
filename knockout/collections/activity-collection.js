@@ -1,7 +1,7 @@
 var activityModel = require('../models/activity.js'),
     ajax = require('../helper/ajax.js');
 
-var ActivitiesCollection = (function () {
+module.exports = (function () {
   'use strict';
 
   function ActivitiesCollection() {
@@ -48,5 +48,3 @@ var ActivitiesCollection = (function () {
   return ActivitiesCollection;
 
 })();
-
-module.exports = ActivitiesCollection;

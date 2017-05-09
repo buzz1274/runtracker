@@ -1,6 +1,44 @@
 <div id="sub_main">
-  <h1 data-bind="text: activity.id"></h1>
-
-  <h1 data-bind="text: activity.display_time()">..</h1>
+  <div class="text-center header">
+    <strong>View Activity</strong>
+  </div>
+  <div style="margin:20px;width:60%">
+    <table class="runs table table-condensed">
+      <tr>
+        <td style="width:20%"><strong>ID</strong></td>
+        <td data-bind="text: activity.id"></td>
+      </tr>
+      <tr>
+        <td><strong>Date</strong></td>
+        <td data-bind="text: activity.display_date()"></td>
+      </tr>
+      <tr>
+        <td><strong>Activity</strong></td>
+        <td data-bind="text: activity.display_activity()"></td>
+      </tr>
+      <tr>
+        <td><strong>Route</strong></td>
+        <td data-bind="text: activity.route"></td>
+      </tr>
+      <tr>
+        <td><strong>Time(h:m:s)</strong></td>
+        <td data-bind="text: activity.display_time()"></td>
+      </tr>
+      <tr>
+        <td><strong>Distance(Km)</strong></td>
+        <td data-bind="text: activity.display_distance()"></td>
+      </tr>
+    </table>
+    <span>
+      <a data-bind="attr.href:href" href="#">
+        <button type="button" class="btn btn-default">Edit</button>
+      </a>
+    </span>
+    <span>
+      <a data-bind="attr.href:href" href="#">
+        <button type="button" class="btn btn-danger">Delete</button>
+      </a>
+    </span>
+  </div>
 </div>
 

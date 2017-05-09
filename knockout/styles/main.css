@@ -239,6 +239,11 @@ div.form form {
 div.form div.error {
     color:#FF0000;
 }
+div.header {
+  line-height:30px;
+  background-color:#000;
+  color:#FFF;
+}
 p.form-warning {
     margin-top:20px;
     padding:5px;
