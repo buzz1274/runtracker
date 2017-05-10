@@ -55,9 +55,9 @@ module.exports = (function () {
           minutes = parseInt((seconds % 3600) / 60),
           seconds = parseInt((seconds % 3600) % 60);
 
-      return (hours < 9 ? '0' + hours : hours) + ':' +
-             (minutes < 9 ? '0' + minutes : minutes) + ':' +
-             (seconds < 9 ? '0' + seconds : seconds);
+      return (hours <= 9 ? '0' + hours : hours) + ':' +
+             (minutes <= 9 ? '0' + minutes : minutes) + ':' +
+             (seconds <= 9 ? '0' + seconds : seconds);
     };
 
     this.average_pace_time = ko.computed(function() {
