@@ -1,8 +1,8 @@
-var SplitCalculator = (function () {
+module.exports = (function () {
   'use strict';
 
   function SplitCalculator() {
-    this.component = 'split_calculator';
+    this.component = 'split-calculator';
 
     this.reset_splits = function() {
       $(':input').each(function () {
@@ -95,15 +95,3 @@ var SplitCalculator = (function () {
   return SplitCalculator;
 
 })();
-
-ko.components.register('split_calculator', {
-  template: require('../../templates/views/runs/split_calculator.html'),
-  viewModel: {
-    createViewModel: function (params) {
-      'use strict';
-      return params instanceof SplitCalculator ? params : ko.unwrap(params.option);
-    }
-  }
-});
-
-module.exports = SplitCalculator;

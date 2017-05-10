@@ -27,7 +27,7 @@ module.exports = (function () {
         });
 
         page('split_calculator', function() {
-          app.page = 'split_calculator';
+          app.page = 'split-calculator';
           app.display_left_nav = true;
         });
 
