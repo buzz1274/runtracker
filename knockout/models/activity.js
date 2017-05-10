@@ -61,10 +61,19 @@ module.exports = (function () {
     };
 
     this.average_pace_time = ko.computed(function() {
+      if(!this.seconds() || !this.kilometres()) {
+        return 0;
+      }
+
       return this.time(this.seconds() / this.kilometres());
+
     }, this);
 
     this.average_pace_distance = ko.computed(function() {
+      if(!this.seconds() || !this.kilometres()) {
+        return 0;
+      }
+      
       return (60 / ((this.seconds() / this.kilometres()) / 60)).toFixed(3);
     }, this);
 
