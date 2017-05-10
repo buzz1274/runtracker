@@ -44,26 +44,11 @@ class ActivityController extends Controller {
     }
 
     public function activities(Request $request) {
-        $response = [];
         $activities = activity::activityLog(USER_ID,
                                             $request->query('page', 1));
 
-        if($activities->count()) {
-            foreach($activities as $activity) {
-                $response['activities'][] =
-                    ['id' => $activity->id,
-                     'activity_date' => date('jS M, Y', strtotime($activity->activity_date)),
-                     'activity_type' => $activity->activity_type,
-                     'metres' => $activity->metres,
-                     'seconds' => $activity->seconds,
-                     'time' => activity::convertSecondsToDisplayTime($activity->seconds),
-                     'distance' => number_format(($activity->metres / 1000), 3)];
-
-            }
-            $response['has_more_activities'] = $activities->hasMorePages();
-        }
-
-        return response()->json($response);
+        return response()->json(['activities' => $activities,
+                                 'has_more_activities' => $activities->hasMorePages()]);
 
     }
 

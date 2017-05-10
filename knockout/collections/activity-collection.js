@@ -29,8 +29,8 @@ module.exports = (function () {
           that.has_more_activities(response.has_more_activities);
           that.has_activities(true);
 
-          for (var i = 0; i < response.activities.length; i++) {
-            that.activities.push(new activityModel(response.activities[i]));
+          for (var i = 0; i < response.activities.data.length; i++) {
+            that.activities.push(new activityModel(response.activities.data[i]));
           }
 
         }

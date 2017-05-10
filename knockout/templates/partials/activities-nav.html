@@ -39,16 +39,16 @@
       <!-- ko foreach: activities.activities() -->
         <tr>
           <td>
-            <div data-bind="text: activity_date"></div>
+            <div data-bind="text: date('Do MMM, YYYY')"></div>
           </td>
           <td>
             <div data-bind="text: activity_type"></div>
           </td>
           <td>
-            <div class="text-right" data-bind="text: display_time()"></div>
+            <div class="text-right" data-bind="text: time()"></div>
           </td>
           <td>
-            <div class="text-right" data-bind="text: display_distance()"></div>
+            <div class="text-right" data-bind="text: kilometres()"></div>
           </td>
           <td class="text-center">
             <i class="glyphicon glyphicon-zoom-in" title="View activity"

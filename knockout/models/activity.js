@@ -28,27 +28,41 @@ module.exports = (function () {
 
     };
 
-    this.display_time = function() {
-      var hours = parseInt(this.seconds() / 3600),
-          minutes = parseInt((this.seconds() % 3600) / 60),
-          seconds = parseInt((this.seconds() % 3600) % 60);
+    this.kilometres = function() {
+      if(!this.metres()) {
+        return 0;
+      }
+
+      return (this.metres() / 1000).toFixed(3);
+
+    };
+
+    this.date = function(format = 'Do MMMM, YYYY') {
+      if(!this.activity_date()) {
+        return '-';
+      }
+
+      return Moment(this.activity_date()).format(format);
+
+    };
+
+    this.time = function(seconds = this.seconds()) {
+      if(!seconds) {
+        return 0;
+      }
+
+      var hours = parseInt(seconds / 3600),
+          minutes = parseInt((seconds % 3600) / 60),
+          seconds = parseInt((seconds % 3600) % 60);
 
       return (hours < 9 ? '0' + hours : hours) + ':' +
              (minutes < 9 ? '0' + minutes : minutes) + ':' +
              (seconds < 9 ? '0' + seconds : seconds);
-    }
+    };
 
-    this.display_activity = function() {
-      return this.parent_activity_type() + ' »» ' + this.activity_type();
-    }
-
-    this.display_distance = function() {
-      return (this.metres() / 1000).toFixed(3);
-    }
-
-    this.display_date = function() {
-      return Moment(this.activity_date()).format('Do MMMM, YYYY');
-    }
+    this.average_pace_time = ko.computed(function() {
+      return this.time(this.seconds() / this.kilometres());
+    }, this);
 
     this.set = function(activity) {
       if(typeof activity === 'object') {
@@ -59,7 +73,7 @@ module.exports = (function () {
           }
         }
       }
-    }
+    };
 
     this.set(activity);
 
