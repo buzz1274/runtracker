@@ -64,6 +64,10 @@ module.exports = (function () {
       return this.time(this.seconds() / this.kilometres());
     }, this);
 
+    this.average_pace_distance = ko.computed(function() {
+      return (60 / ((this.seconds() / this.kilometres()) / 60)).toFixed(3);
+    }, this);
+
     this.set = function(activity) {
       if(typeof activity === 'object') {
         for(var property in activity) {
