@@ -11,7 +11,7 @@ module.exports = (function () {
     this.seconds = ko.observable();
     this.parent_activity_type = ko.observable();
     this.activity_type = ko.observable();
-    this.route = ko.observable();//////
+    this.route = ko.observable();
 
     this.save = function() {
       console.log('SAVE ACTIVITY MODEL');
@@ -73,7 +73,7 @@ module.exports = (function () {
       if(!this.seconds() || !this.kilometres()) {
         return 0;
       }
-      
+
       return (60 / ((this.seconds() / this.kilometres()) / 60)).toFixed(3);
     }, this);
 

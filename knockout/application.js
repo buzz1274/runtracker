@@ -1,8 +1,10 @@
-require('./components/split-calculator-component');
+require('./components/split-calculator-component.js');
+require('./components/activity-add-component.js');
+require('./components/activity-view-component.js');
 
 var Header = require('./partials/header.js'),
     ActivitiesNav = require('./partials/activities-nav.js'),
-    ActivityManage = require('./views/runs/activity-manage.js'),
+    Activity = require('./views/activity.js'),
     PersonalBestsNav = require('./partials/personal_bests_nav.js'),
     Index = require('./views/index.js'),
     Register = require('./views/register.js'),
@@ -27,7 +29,8 @@ module.exports = (function() {
             'register': new Register(),
             'login': new Login(),
             'reset_password': new ResetPassword(),
-            'activity-manage': new ActivityManage(),
+            'activity-add': new Activity('activity-add'),
+            'activity-view': new Activity('activity-view'),
             'runs': new Runs(),
             'personal_bests': new PersonalBests(),
             'split-calculator': new SplitCalculator(),

@@ -1,4 +1,4 @@
-var activityModel = require('../models/activity.js'),
+var activityModel = require('../models/activity-model.js'),
     ajax = require('../helper/ajax.js');
 
 module.exports = (function () {

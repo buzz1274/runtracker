@@ -1,42 +1,58 @@
 var page = require('page');
 
 module.exports = (function () {
-    'use strict';
+  'use strict';
 
-    function Router(app) {
-        page.base('/');
+  function Router(app) {
+    page.base('/');
 
-        page('', function() {
-            app.page = 'home';
-            app.display_left_nav = false;
-        });
+    page('', function() {
+      app.page = 'home';
+      app.display_left_nav = false;
+    });
 
-        page('register', function() {
-            app.page = 'register';
-            app.display_left_nav = false;
-        });
+    page('register', function() {
+      app.page = 'register';
+      app.display_left_nav = false;
+    });
 
-        page('login', function() {
-            app.page = 'login';
-            app.display_left_nav = false;
-        });
+    page('login', function() {
+      app.page = 'login';
+      app.display_left_nav = false;
+    });
 
-        page('reset_password', function() {
-            app.page = 'reset_password';
-            app.display_left_nav = false;
-        });
+    page('reset_password', function() {
+      app.page = 'reset_password';
+      app.display_left_nav = false;
+    });
 
-        page('split_calculator', function() {
-          app.page = 'split-calculator';
-          app.display_left_nav = true;
-        });
+    page('split_calculator', function() {
+      app.page = 'split-calculator';
+      app.display_left_nav = true;
+    });
 
-        page('activity/:activity_id', function(ctx) {
-          app.pages['activity-manage'].load(ctx.params.activity_id);
+    /*
+    page('activity/add', function() {
+      console.log("HERE");
+      //app.pages['activity-view'].activity.load(ctx.params.activity_id);
 
-          app.page = 'activity-manage';
-          app.display_left_nav = true;
-        });
+      app.page = 'activity-view';
+      app.display_left_nav = true;
+    });
+    */
+
+    page('activity/:activity_id', function(ctx) {
+      if(ctx.params.activity_id === 'add') {
+        app.page = 'activity-add';
+      } else {
+        app.page = 'activity-view';
+        app.pages['activity-view'].activity.load(ctx.params.activity_id);
+
+      }
+
+      app.display_left_nav = true;
+
+    });
 
         page('activities/personal_best/:personal_best_id/', function(ctx) {
             app.pages.personal_bests.loadData(ctx.params.personal_best_id);
