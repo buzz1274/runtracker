@@ -37,16 +37,18 @@
         <td data-bind="text: activity.average_pace_distance()"></td>
       </tr>
     </table>
-    <span>
-      <a data-bind="attr.href:href" href="#">
-        <button type="button" class="btn btn-default">Edit</button>
-      </a>
-    </span>
-    <span>
-      <a data-bind="attr.href:href" href="#">
-        <button type="button" class="btn btn-danger">Delete</button>
-      </a>
-    </span>
+    <div class="pull-right">
+      <span>
+        <a data-bind="attr.href:href" href="#">
+          <button type="button" class="btn btn-default">Edit</button>
+        </a>
+      </span>
+      <span>
+        <a data-bind="attr.href:href" href="#">
+          <button type="button" class="btn btn-danger">Delete</button>
+        </a>
+      </span>
+    </div>
   </div>
 </div>
 
