@@ -3,10 +3,11 @@ require('./components/activity-add-component.js');
 require('./components/activity-view-component.js');
 require('./components/activity-nav-component.js');
 require('./components/header-nav-component.js');
+require('./components/index-component.js');
 
 var User = require('./models/user-model.js'),
-    headerNav = require('./views/partials/header-nav.js'),
-    activityNav = require('./views/partials/activity-nav.js'),
+    HeaderNav = require('./views/partials/header-nav.js'),
+    ActivityNav = require('./views/partials/activity-nav.js'),
     Activity = require('./views/activity.js'),
     PersonalBestsNav = require('./views/partials/personal-best-nav.js'),
     Index = require('./views/index.js'),
@@ -22,13 +23,13 @@ module.exports = (function() {
     'use strict';
 
     function Application() {
-        this.page = 'home';
+        this.page = 'index';
         this.href = '';
         this.display_left_nav = true;
         this.user = new User();
 
         this.pages = {
-            'home': new Index(),
+            'index': new Index(),
             'register': new Register(),
             'login': new Login(),
             'reset_password': new ResetPassword(),
@@ -40,9 +41,9 @@ module.exports = (function() {
             'error': new ErrorPage()
         };
 
-        this.header = new headerNav(this.user);
+        this.header = new HeaderNav(this.user);
         this.personal_bests_nav = new PersonalBestsNav(this.user);
-        this.activity_nav = new activityNav(this.user);
+        this.activity_nav = new ActivityNav(this.user);
 
         ko.track(this);
 

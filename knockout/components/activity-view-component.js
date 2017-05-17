@@ -1,11 +1,11 @@
-var activity = require('../views/activity.js');
+var Activity = require('../views/activity.js');
 
 ko.components.register('activity-view', {
   template: require('../templates/activity-view.html'),
   viewModel: {
     createViewModel: function (params) {
       'use strict';
-      return params instanceof activity ? params : ko.unwrap(params.option);
+      return params instanceof Activity ? params : ko.unwrap(params.option);
     }
   }
 });

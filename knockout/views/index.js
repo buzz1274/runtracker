@@ -1,4 +1,4 @@
-var Index = (function () {
+module.exports = (function () {
     'use strict';
 
     function Index() {
@@ -10,15 +10,3 @@ var Index = (function () {
     return Index;
 
 })();
-
-ko.components.register('index', {
-    template: require('../templates/index.html'),
-    viewModel: {
-        createViewModel: function (params) {
-            'use strict';
-            return params instanceof Index ? params : ko.unwrap(params.option);
-        }
-    }
-});
-
-module.exports = Index;
