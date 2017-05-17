@@ -12,7 +12,7 @@ var Index = (function () {
 })();
 
 ko.components.register('index', {
-    template: require('../templates/views/index.html'),
+    template: require('../templates/index.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';

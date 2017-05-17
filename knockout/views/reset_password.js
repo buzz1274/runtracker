@@ -12,7 +12,7 @@ var ResetPassword = (function () {
 })();
 
 ko.components.register('reset_password', {
-    template: require('../templates/views/reset_password.html'),
+    template: require('../templates/reset_password.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';

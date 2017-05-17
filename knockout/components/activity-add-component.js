@@ -1,7 +1,7 @@
 var activity = require('../views/activity.js');
 
 ko.components.register('activity-add', {
-  template: require('../templates/views/activity-add.html'),
+  template: require('../templates/activity-add.html'),
   viewModel: {
     createViewModel: function (params) {
       'use strict';

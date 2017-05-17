@@ -1,7 +1,7 @@
 var activity = require('../views/activity.js');
 
 ko.components.register('activity-view', {
-  template: require('../templates/views/activity-view.html'),
+  template: require('../templates/activity-view.html'),
   viewModel: {
     createViewModel: function (params) {
       'use strict';
@@ -9,4 +9,3 @@ ko.components.register('activity-view', {
     }
   }
 });
-

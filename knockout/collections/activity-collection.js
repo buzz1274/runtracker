@@ -4,7 +4,7 @@ var activityModel = require('../models/activity-model.js'),
 module.exports = (function () {
   'use strict';
 
-  function ActivitiesCollection() {
+  function ActivityCollection() {
     this.activities = ko.observableArray();
     this.has_more_activities = ko.observable(false);;
     this.has_activities = ko.observable(false);
@@ -39,12 +39,8 @@ module.exports = (function () {
 
     };
 
-    if(!this.activities.length) {
-      this.load();
-    }
-
   }
 
-  return ActivitiesCollection;
+  return ActivityCollection;
 
 })();

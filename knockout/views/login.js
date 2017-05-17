@@ -12,7 +12,7 @@ var Login = (function () {
 })();
 
 ko.components.register('login', {
-    template: require('../templates/views/login.html'),
+    template: require('../templates/login.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';

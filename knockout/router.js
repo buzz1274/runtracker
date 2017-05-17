@@ -31,16 +31,6 @@ module.exports = (function () {
       app.display_left_nav = true;
     });
 
-    /*
-    page('activity/add', function() {
-      console.log("HERE");
-      //app.pages['activity-view'].activity.load(ctx.params.activity_id);
-
-      app.page = 'activity-view';
-      app.display_left_nav = true;
-    });
-    */
-
     page('activity/:activity_id', function(ctx) {
       if(ctx.params.activity_id === 'add') {
         app.page = 'activity-add';

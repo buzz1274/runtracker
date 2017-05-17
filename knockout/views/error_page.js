@@ -27,7 +27,7 @@ var ErrorPage = (function () {
 })();
 
 ko.components.register('error_page', {
-    template: require('../templates/views/error_page.html'),
+    template: require('../templates/error_page.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';

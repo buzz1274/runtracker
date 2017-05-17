@@ -1,9 +1,12 @@
 require('./components/split-calculator-component.js');
 require('./components/activity-add-component.js');
 require('./components/activity-view-component.js');
+require('./components/activity-nav-component.js');
+require('./components/header-nav-component.js');
 
-var Header = require('./partials/header.js'),
-    ActivitiesNav = require('./partials/activities-nav.js'),
+var User = require('./models/user-model.js'),
+    headerNav = require('./views/partials/header-nav.js'),
+    activityNav = require('./views/partials/activity-nav.js'),
     Activity = require('./views/activity.js'),
     PersonalBestsNav = require('./partials/personal_bests_nav.js'),
     Index = require('./views/index.js'),
@@ -22,7 +25,7 @@ module.exports = (function() {
         this.page = 'home';
         this.href = '';
         this.display_left_nav = true;
-        this.user = true;
+        this.user = new User();
 
         this.pages = {
             'home': new Index(),
@@ -37,9 +40,9 @@ module.exports = (function() {
             'error': new ErrorPage()
         };
 
-        this.header = new Header(this.user);
+        this.header = new headerNav(this.user);
         this.personal_bests_nav = new PersonalBestsNav(this.user);
-        this.activities_nav = new ActivitiesNav(this.user);
+        this.activity_nav = new activityNav(this.user);
 
         ko.track(this);
 
