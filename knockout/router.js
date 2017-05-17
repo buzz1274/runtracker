@@ -21,6 +21,12 @@ module.exports = (function () {
       app.display_left_nav = false;
     });
 
+    page('logout', function() {
+      app.user.logout();
+      app.page = 'home';
+      app.display_left_nav = false;
+    });
+
     page('reset_password', function() {
       app.page = 'reset_password';
       app.display_left_nav = false;

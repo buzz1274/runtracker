@@ -6,8 +6,7 @@ module.exports = (function () {
 
   function ActivityCollection() {
     this.activities = ko.observableArray();
-    this.has_more_activities = ko.observable(false);;
-    this.has_activities = ko.observable(false);
+    this.has_more_activities = ko.observable(false);
     this.current_page = ko.observable(1);
 
     this.load = function(action) {
@@ -27,7 +26,6 @@ module.exports = (function () {
 
           that.activities.removeAll();
           that.has_more_activities(response.has_more_activities);
-          that.has_activities(true);
 
           for (var i = 0; i < response.activities.data.length; i++) {
             that.activities.push(new activityModel(response.activities.data[i]));
@@ -38,6 +36,7 @@ module.exports = (function () {
       });
 
     };
+
 
   }
 

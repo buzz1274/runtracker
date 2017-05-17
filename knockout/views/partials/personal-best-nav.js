@@ -1,6 +1,6 @@
 var page = require('page'),
-    helper = require('../helper/helper.js'),
-    ActivityTypes = require('../models/activity_types.js'),
+    helper = require('../../helper/helper.js'),
+    ActivityTypes = require('../../models/activity_types.js'),
     PersonalBestsNav = (function () {
       'use strict';
 
@@ -71,7 +71,7 @@ var page = require('page'),
 })();
 
 ko.components.register('personal-bests-nav', {
-    template: require('../templates/partials/personal_bests_nav.html'),
+    template: require('../../templates/partials/personal_bests_nav.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';

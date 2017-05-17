@@ -12,7 +12,11 @@ module.exports = (function () {
     var that = this;
 
     this.user.user_id.subscribe(function() {
-      that.activities.load(that.user.user_id());
+      if(that.user.user_id()) {
+        that.activities.load(that.user.user_id());
+      } else if(that.activities.activities().length) {
+        that.activities.activities.removeAll();
+      }
     });
 
     ko.track(this);
