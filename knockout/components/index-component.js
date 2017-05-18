@@ -1,6 +1,5 @@
 var Index = require('../views/index.js');
 
-
 ko.components.register('index', {
   template: require('../templates/index.html'),
   viewModel: {

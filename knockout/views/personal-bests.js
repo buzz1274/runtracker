@@ -1,10 +1,10 @@
 var page = require('page');
 
-var PersonalBests = (function () {
+module.exports = (function () {
     'use strict';
 
     function PersonalBests() {
-        this.component = 'personal_bests';
+        this.component = 'personal-bests';
         this.activities = ko.observableArray();
         this.title = false
 
@@ -38,16 +38,3 @@ var PersonalBests = (function () {
     return PersonalBests;
 
 })();
-
-ko.components.register('personal_bests', {
-    template: require('../../templates/views/runs/personal_bests.html'),
-    viewModel: {
-        createViewModel: function (params) {
-            'use strict';
-
-            return params instanceof PersonalBests ? params : params.option;
-        }
-    }
-});
-
-module.exports = PersonalBests;

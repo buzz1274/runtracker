@@ -57,7 +57,7 @@ var page = require('page'),
           }
 
           this.redirectToPersonalBest = function(id) {
-              page('/activities/personal_best/' + id);
+              page('/personal_best/' + id);
           }
 
           this.loadPersonalBests();

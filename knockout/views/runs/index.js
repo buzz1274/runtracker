@@ -240,7 +240,7 @@ var Moment = require('moment'),
 })();
 
 ko.components.register('runs', {
-    template: require('../../templates/views/runs/index.html'),
+    template: require('../../templates/runs/index.html'),
     viewModel: {
         createViewModel: function (params) {
             'use strict';

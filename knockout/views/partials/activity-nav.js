@@ -13,7 +13,7 @@ module.exports = (function () {
 
     this.user.user_id.subscribe(function() {
       if(that.user.user_id()) {
-        that.activities.load(that.user.user_id());
+        that.activities.load();
       } else if(that.activities.activities().length) {
         that.activities.activities.removeAll();
       }

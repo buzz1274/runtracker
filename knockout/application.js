@@ -4,6 +4,7 @@ require('./components/activity-view-component.js');
 require('./components/activity-nav-component.js');
 require('./components/header-nav-component.js');
 require('./components/index-component.js');
+require('./components/personal-bests-component.js');
 
 var User = require('./models/user-model.js'),
     HeaderNav = require('./views/partials/header-nav.js'),
@@ -17,7 +18,7 @@ var User = require('./models/user-model.js'),
     ResetPassword = require('./views/reset_password.js'),
     Runs = require('./views/runs/index.js'),
     SplitCalculator = require('./views/split-calculator.js'),
-    PersonalBests = require('./views/runs/personal_bests.js');
+    PersonalBests = require('./views/personal-bests.js');
 
 module.exports = (function() {
     'use strict';
@@ -36,7 +37,7 @@ module.exports = (function() {
             'activity-add': new Activity('activity-add'),
             'activity-view': new Activity('activity-view'),
             'runs': new Runs(),
-            'personal_bests': new PersonalBests(),
+            'personal-bests': new PersonalBests(),
             'split-calculator': new SplitCalculator(),
             'error': new ErrorPage()
         };
