@@ -1,37 +1,28 @@
-var page = require('page'),
-    helper = require('../../helper/helper.js'),
-    ActivityTypes = require('../../models/activity_types.js');
+var activityCollection = require('../../collections/activity-collection.js'),
+    page = require('page');
 
 module.exports = (function () {
-      'use strict';
+  'use strict';
 
-      function PersonalBestsNav() {
-          this.page = page;
-          this.activity_types = ActivityTypes.activity_types;
-          this.personal_bests = ko.observableArray();
+  function PersonalBestNav(user) {
+    this.page = page;
+    this.user = user;
+    this.personal_bests = new activityCollection();
 
-          this.loadPersonalBests = function() {
-              var that = this;
+    var that = this;
 
-              $.ajax({url: '//'+window.location.hostname+'/api/activities/personal_bests',
-                  type: 'get',
-                  dataType: 'json',
-                  async: true,
-                  success: function(data) {
-                      that.personal_bests = data;
-                  },
-                  error: function() {
-                      page('/error/500');
-                  }
-              });
-          }
-
-          this.loadPersonalBests();
-
-          ko.track(this);
-
+    this.user.user_id.subscribe(function() {
+      if(that.user.user_id()) {
+        that.personal_bests.load_personal_best();
+      } else if(that.activities.activities().length) {
+        that.activities.activities.removeAll();
       }
+    });
 
-      return PersonalBestsNav;
+    ko.track(this);
+
+  }
+
+  return PersonalBestNav;
 
 })();

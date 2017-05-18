@@ -6,6 +6,7 @@ module.exports = (function () {
 
   function ActivityModel(activity = false) {
     this.id = ko.observable();
+    this.title = ko.observable();
     this.activity_date = ko.observable();
     this.metres = ko.observable();
     this.seconds = ko.observable();

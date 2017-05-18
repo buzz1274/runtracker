@@ -223,13 +223,18 @@ class activity extends Model {
             $activityID = explode(',', $activityID);
         }
 
-        $pb = self::where('user_id', $userID)->
+        $pb = self::select(array('activity.id', 'activity_date', 'metres',
+                                 'seconds',
+                                 'parent_activity_type.activity_type'))->
                     join('activity_type',
                          'activity.activity_id', '=', 'activity_type.id')->
+                    join('activity_type as parent_activity_type',
+                         'activity_type.parent_id', '=', 'parent_activity_type.id')->
+                    where('user_id', $userID)->
                     where(function($query) use ($activityID) {
                         if($activityID) {
-                            $query->whereIn('activity_id', $activityID)->
-                                    orWhereIn('parent_id', $activityID);
+                            $query->whereIn('activity_type.id', $activityID)->
+                                    orWhereIn('parent_activity_type.id', $activityID);
                         }
                     })->
                     when($minDistance, function($query) use($minDistance) {

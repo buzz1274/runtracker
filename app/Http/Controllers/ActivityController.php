@@ -59,6 +59,7 @@ class ActivityController extends Controller {
 
     }
 
+    /*
     public function personalBest(Request $request) {
         $response = array();
         $personalBest = PersonalBests::where('user_id', USER_ID)->
@@ -100,36 +101,27 @@ class ActivityController extends Controller {
         return response()->json($response);
 
     }
+    */
 
-    public function personalBests() {
-        $response = array();
+    public function personalBest() {
+        $pb = false;
+        $i = 0;
         $personalBests = PersonalBests::where('user_id', USER_ID)->
                                         orderBy('display_order')->get();
 
         foreach($personalBests as $personalBest) {
-            $value = '-';
-            $pb = activity::personalBests(USER_ID, $personalBest->type,
-                                          $personalBest->activity_ids, 1,
-                                          $personalBest->min_distance,
-                                          $personalBest->max_distance);
+            $pb[$i] = activity::personalBests(USER_ID, $personalBest->type,
+                                              $personalBest->activity_ids, 1,
+                                              $personalBest->min_distance,
+                                              $personalBest->max_distance);
 
-            if($pb) {
-                $value = number_format(($pb->metres  / 1000), 3).'Km '.
-                    'in '.activity::convertSecondsToDisplayTime($pb->seconds).' '.
-                    'on '.date('jS M, Y', strtotime($pb->activity_date));
-            }
+            $pb[$i]['title'] = $personalBest['title'];
 
-            $response[] = array('id' => $personalBest->id,
-                                'title' => $personalBest->title,
-                                'type' => $personalBest->type,
-                                'activity_ids' => $personalBest->activity_ids,
-                                'min_distance' => $personalBest->min_distance,
-                                'max_distance' => $personalBest->max_distance,
-                                'value' => $value);
+            $i++;
 
         }
 
-        return response()->json($response);
+        return response()->json(['activities' => ['data' => $pb]]);
 
     }
 
