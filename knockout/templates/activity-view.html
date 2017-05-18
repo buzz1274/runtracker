@@ -3,52 +3,59 @@
     <strong>View Activity</strong>
   </div>
   <div style="margin:27px;">
-    <table class="runs table table-condensed">
-      <tr>
-        <td style="width:30%"><strong>ID</strong></td>
-        <td data-bind="text: activity.id"></td>
-      </tr>
-      <tr>
-        <td><strong>Date</strong></td>
-        <td data-bind="text: activity.date()"></td>
-      </tr>
-      <tr>
-        <td><strong>Activity</strong></td>
-        <td data-bind="text: activity.parent_activity_type() + ' »» ' + activity.activity_type(); "></td>
-      </tr>
-      <tr>
-        <td><strong>Route</strong></td>
-        <td data-bind="text: activity.route"></td>
-      </tr>
-      <tr>
-        <td><strong>Time(h:m:s)</strong></td>
-        <td data-bind="text: activity.time()"></td>
-      </tr>
-      <tr>
-        <td><strong>Distance(Km)</strong></td>
-        <td data-bind="text: activity.kilometres()"></td>
-      </tr>
-      <tr>
-        <td><strong>Average Pace(h:m:s/Km)</strong></td>
-        <td data-bind="text: activity.average_pace_time()"></td>
-      </tr>
-      <tr>
-        <td><strong>Average Speed(Km/hr)</strong></td>
-        <td data-bind="text: activity.average_pace_distance()"></td>
-      </tr>
-    </table>
-    <div class="pull-right">
-      <span>
-        <a data-bind="attr.href:href" href="#">
-          <button type="button" class="btn btn-default">Edit</button>
-        </a>
-      </span>
-      <span>
-        <a data-bind="attr.href:href" href="#">
-          <button type="button" class="btn btn-danger">Delete</button>
-        </a>
-      </span>
-    </div>
+    <!-- ko if: !activity.id()  -->
+      <div class="text-center" style="padding-top:150px;">
+        <img id="loader_spinner" width="35" src="/spinner.svg" />
+      </div>
+    <!-- /ko -->
+    <!-- ko if: activity.id()  -->
+      <table class="runs table table-condensed">
+        <tr>
+          <td style="width:30%"><strong>ID</strong></td>
+          <td data-bind="text: activity.id"></td>
+        </tr>
+        <tr>
+          <td><strong>Date</strong></td>
+          <td data-bind="text: activity.date()"></td>
+        </tr>
+        <tr>
+          <td><strong>Activity</strong></td>
+          <td data-bind="text: activity.parent_activity_type() + ' »» ' + activity.activity_type(); "></td>
+        </tr>
+        <tr>
+          <td><strong>Route</strong></td>
+          <td data-bind="text: activity.route"></td>
+        </tr>
+        <tr>
+          <td><strong>Time(h:m:s)</strong></td>
+          <td data-bind="text: activity.time()"></td>
+        </tr>
+        <tr>
+          <td><strong>Distance(Km)</strong></td>
+          <td data-bind="text: activity.kilometres()"></td>
+        </tr>
+        <tr>
+          <td><strong>Average Pace(h:m:s/Km)</strong></td>
+          <td data-bind="text: activity.average_pace_time()"></td>
+        </tr>
+        <tr>
+          <td><strong>Average Speed(Km/hr)</strong></td>
+          <td data-bind="text: activity.average_pace_distance()"></td>
+        </tr>
+      </table>
+      <div class="pull-right">
+        <span>
+          <a data-bind="attr.href:href" href="#">
+            <button type="button" class="btn btn-default">Edit</button>
+          </a>
+        </span>
+        <span>
+          <a data-bind="attr.href:href" href="#">
+            <button type="button" class="btn btn-danger">Delete</button>
+          </a>
+        </span>
+      </div>
+    <!-- /ko -->
   </div>
 </div>
 

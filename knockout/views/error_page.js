@@ -11,10 +11,10 @@ var ErrorPage = (function () {
         this.SetError = function(errorCode) {
           this.code = errorCode;
 
-          if(this.code == '500') {
+          if(this.code === '500') {
             this.message = 'An error occurred';
-          } else if(this.code == '404') {
-            this.message = 'Page not found';
+          } else if(this.code === '404') {
+            this.message = 'Not found';
           }
 
         }

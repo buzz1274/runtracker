@@ -12,6 +12,7 @@ module.exports = (function () {
     this.parent_activity_type = ko.observable();
     this.activity_type = ko.observable();
     this.route = ko.observable();
+    this.invalid_activity = ko.observable();
 
     this.save = function() {
       console.log('SAVE ACTIVITY MODEL');
@@ -19,11 +20,16 @@ module.exports = (function () {
 
     this.load = function(activity_id) {
       var that = this;
+      this.set('unset');
 
       ajax.request('api/activity/' + activity_id).then((response) => {
-        if(response.hasOwnProperty('activity')) {
-          that.set(response.activity[0]);
+        if(response.hasOwnProperty('activity') &&
+           response.activity.hasOwnProperty('id')) {
+          that.set(response.activity);
+        } else {
+          that.invalid_activity(true);
         }
+
       });
 
     };
@@ -78,14 +84,24 @@ module.exports = (function () {
     }, this);
 
     this.set = function(activity) {
+      var property = '';
       if(typeof activity === 'object') {
-        for(var property in activity) {
+        for(property in activity) {
           if(activity.hasOwnProperty(property) &&
              this.hasOwnProperty(property)) {
             this[property](activity[property]);
           }
         }
+      } else {
+        for(property in this) {
+          if(this.hasOwnProperty(property) &&
+             ko.isObservable(this[property]) &&
+             !ko.isComputed(this[property])) {
+            this[property](false);
+          }
+        }
       }
+
     };
 
     this.set(activity);

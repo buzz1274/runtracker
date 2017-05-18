@@ -40,7 +40,14 @@ class ActivityController extends Controller {
                              join('activity_type as parent_activity_type',
                                   'activity_type.parent_id', '=', 'parent_activity_type.id');
 
-        return response()->json(['activity' => $query->get()]);
+        $activity = $query->get();
+
+        if(!$activity->count()) {
+            return response()->json(['message' => 'Activity not found'], 404);
+        } else {
+            return response()->json(['activity' => $activity[0]]);
+        }
+
     }
 
     public function activities(Request $request) {

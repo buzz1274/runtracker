@@ -1,0 +1,31 @@
+<div id="control_panel">
+  <table class="runs table table-condensed table-hover">
+    <thead>
+      <tr class="table_nav">
+        <td colspan="3">
+          <i id="configure_personal_bests" title="Configure personal bests"
+             data-bind="click: function(data, event) { managePersonalBests(); }"
+             class="glyphicon glyphicon-wrench pull-right"></i>
+          <div class="table_title">Personal Bests</div>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- ko foreach: personal_bests -->
+        <tr>
+          <td class="stats_title">
+            <a data-bind="text: title,
+                          attr: {href: '/personal_best/'+id}"
+               title="view more"></a>
+          </td>
+          <td data-bind="text: value"></td>
+          <td>
+            <i class="glyphicon glyphicon-zoom-in" title="View activity"
+               data-bind="click: function(data, event) { $parent.page('/activity/'+id); }">
+            </i>
+          </td>
+        </tr>
+      <!-- /ko -->
+    </tbody>
+  </table>
+</div>

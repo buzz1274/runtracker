@@ -4,13 +4,14 @@ require('./components/activity-view-component.js');
 require('./components/activity-nav-component.js');
 require('./components/header-nav-component.js');
 require('./components/index-component.js');
+require('./components/partials/personal-best-nav-component.js');
 require('./components/personal-bests-component.js');
 
 var User = require('./models/user-model.js'),
     HeaderNav = require('./views/partials/header-nav.js'),
     ActivityNav = require('./views/partials/activity-nav.js'),
     Activity = require('./views/activity.js'),
-    PersonalBestsNav = require('./views/partials/personal-best-nav.js'),
+    PersonalBestNav = require('./views/partials/personal-best-nav.js'),
     Index = require('./views/index.js'),
     Register = require('./views/register.js'),
     Login = require('./views/login.js'),
@@ -43,7 +44,7 @@ module.exports = (function() {
         };
 
         this.header = new HeaderNav(this.user);
-        this.personal_bests_nav = new PersonalBestsNav(this.user);
+        this.personal_best_nav = new PersonalBestNav(this.user);
         this.activity_nav = new ActivityNav(this.user);
 
         ko.track(this);
