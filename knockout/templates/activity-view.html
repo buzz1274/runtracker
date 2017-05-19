@@ -1,6 +1,16 @@
 <div id="sub_main">
   <div class="text-center header">
     <strong>View Activity</strong>
+    <!-- ko if: activity.id()  -->
+      <span class="pull-right" style="padding:2px 5px 0 0;">
+        <i class="glyphicon glyphicon-wrench" title="Edit activity"
+           data-bind="click: function(data, event) { $parent.page('/activity/'+activity.id()); }">
+        </i>
+        <i class="glyphicon glyphicon-trash" title="Delete activity"
+           data-bind="click: function(data, event) { $parent.page('/activity/'+activity.id()); }">
+        </i>
+      </span>
+    <!-- /ko -->
   </div>
   <div style="margin:27px;">
     <!-- ko if: !activity.id()  -->
@@ -43,18 +53,6 @@
           <td data-bind="text: activity.average_pace_distance()"></td>
         </tr>
       </table>
-      <div class="pull-right">
-        <span>
-          <a data-bind="attr.href:href" href="#">
-            <button type="button" class="btn btn-default">Edit</button>
-          </a>
-        </span>
-        <span>
-          <a data-bind="attr.href:href" href="#">
-            <button type="button" class="btn btn-danger">Delete</button>
-          </a>
-        </span>
-      </div>
     <!-- /ko -->
   </div>
 </div>

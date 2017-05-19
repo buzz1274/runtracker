@@ -1,7 +1,7 @@
-var HeaderNav = require('../views/partials/header-nav.js');
+var HeaderNav = require('../../views/partials/header-nav.js');
 
 ko.components.register('header-nav', {
-  template: require('../templates/partials/header-nav.html'),
+  template: require('../../templates/partials/header-nav.html'),
   viewModel: {
     createViewModel: function (params) {
       'use strict';

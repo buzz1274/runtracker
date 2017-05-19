@@ -1,9 +1,9 @@
 require('./components/split-calculator-component.js');
 require('./components/activity-add-component.js');
 require('./components/activity-view-component.js');
-require('./components/activity-nav-component.js');
-require('./components/header-nav-component.js');
 require('./components/index-component.js');
+require('./components/partials/header-nav-component.js');
+require('./components/partials/activity-nav-component.js');
 require('./components/partials/personal-best-nav-component.js');
 require('./components/personal-bests-component.js');
 

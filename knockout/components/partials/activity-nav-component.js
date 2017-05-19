@@ -1,7 +1,7 @@
-var ActivityNav = require('../views/partials/activity-nav.js');
+var ActivityNav = require('../../views/partials/activity-nav.js');
 
 ko.components.register('activity-nav', {
-  template: require('../templates/partials/activity-nav.html'),
+  template: require('../../templates/partials/activity-nav.html'),
   viewModel: {
     createViewModel: function (params) {
       'use strict';
