@@ -225,7 +225,7 @@ class activity extends Model {
 
         $pb = self::select(array('activity.id', 'activity_date', 'metres',
                                  'seconds',
-                                 'parent_activity_type.activity_type'))->
+                                 'activity_type.activity_type'))->
                     join('activity_type',
                          'activity.activity_id', '=', 'activity_type.id')->
                     join('activity_type as parent_activity_type',
