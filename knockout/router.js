@@ -51,7 +51,8 @@ module.exports = (function () {
     });
 
     page('personal_best/:personal_best_id/', function(ctx) {
-      app.pages['personal-bests'].loadData(ctx.params.personal_best_id);
+      app.pages['personal-bests'].activities.load_personal_best(
+        ctx.params.personal_best_id);
 
       app.page = 'personal-bests';
       app.display_left_nav = true;

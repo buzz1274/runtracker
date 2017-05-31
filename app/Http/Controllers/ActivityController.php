@@ -59,67 +59,38 @@ class ActivityController extends Controller {
 
     }
 
-    /*
-    public function personalBest(Request $request) {
-        $response = array();
-        $personalBest = PersonalBests::where('user_id', USER_ID)->
-                                       where('id', $request->query('personal_best_id'))->
-                                       orderBy('display_order')->get();
-
-        if(!$personalBest) {
-            return response()->json($response);
-        }
-
-        $personalBest = $personalBest->pop();
-        $activities = activity::personalBests(USER_ID, $personalBest->type,
-                                              $personalBest->activity_ids, 20,
-                                              $personalBest->min_distance,
-                                              $personalBest->max_distance);
-
-        if(!is_object($activities)) {
-            return response()->json($response);
-        }
-
-        $response['title'] = $personalBest->title;
-
-        foreach($activities as $activity) {
-            $km = $activity->metres / 1000;
-
-            $response['activities'][] = array(
-                'date' => date('jS M, Y', strtotime($activity->activity_date)),
-                'activity_type' => $activity->activity_type,
-                'km' => number_format($km, 3),
-                'display_seconds' =>
-                    activity::convertSecondsToDisplayTime($activity->seconds),
-                'display_average_pace_time' =>
-                    activity::averagePaceTime($activity->seconds, $km),
-                'display_average_pace_distance' =>
-                    activity::averagePaceDistance($activity->seconds, $km),
-            );
-        }
-
-        return response()->json($response);
-
-    }
-    */
-
-    public function personalBest() {
+    public function personalBest($id = false) {
         $pb = false;
         $i = 0;
-        $personalBests = PersonalBests::where('user_id', USER_ID)->
-                                        orderBy('display_order')->get();
+        $limit = $id ? 20 : 1;
+        $personalBests =
+            PersonalBests::where('user_id', USER_ID)->
+                           when($id, function($query) use($id) {
+                                return $query->where('id', '=', $id);
+                           })->
+                           orderBy('display_order')->get();
 
         foreach($personalBests as $personalBest) {
-            $pb[$i] = activity::personalBests(USER_ID, $personalBest->type,
-                                              $personalBest->activity_ids, 1,
-                                              $personalBest->min_distance,
-                                              $personalBest->max_distance);
+            $activity = activity::personalBests(USER_ID, $personalBest->type,
+                                                $personalBest->activity_ids, $limit,
+                                                $personalBest->min_distance,
+                                                $personalBest->max_distance);
+
+            if(!$id) {
+                $pb[$i] = $activity;
+            } else {
+                foreach($activity as $a) {
+                    $pb[$i]['data'] = $activity;
+                }
+            }
 
             $pb[$i]['title'] = $personalBest['title'];
+            $pb[$i]['personal_best_id'] = $personalBest['id'];
 
             $i++;
 
         }
+
 
         return response()->json(['activities' => ['data' => $pb]]);
 

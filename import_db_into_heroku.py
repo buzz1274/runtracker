@@ -13,7 +13,6 @@ personal_bests =\
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Casual walking'), Null, Null, 3, 'Longest walk');",
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 4, 'Fastest Run');",
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, 5100, 5, 'Fastest 5K');",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, Null, 6, 'Fastest >5K');",
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 7, 'Fastest 10K');"]
 
 with open('runtracker_setup.sql', 'w') as setup_file:

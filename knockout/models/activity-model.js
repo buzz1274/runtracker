@@ -14,6 +14,7 @@ module.exports = (function () {
     this.activity_type = ko.observable();
     this.route = ko.observable();
     this.invalid_activity = ko.observable();
+    this.personal_best_id = ko.observable();
 
     this.save = function() {
       console.log('SAVE ACTIVITY MODEL');
