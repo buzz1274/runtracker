@@ -120,6 +120,7 @@ div#control_panel {
 }
 div.table_title {
     width:50%;
+    min-height:15px;
     margin:auto;
     text-align:center;
     font-weight:bold;

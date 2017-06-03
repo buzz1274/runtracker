@@ -91,7 +91,6 @@ class ActivityController extends Controller {
 
         }
 
-
         return response()->json(['activities' => ['data' => $pb]]);
 
     }

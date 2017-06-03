@@ -1,56 +1,63 @@
 <div id="sub_main">
-  <table class="runs table table-condensed table-hover">
-    <thead>
-      <tr class="table_nav">
-        <th class="title" colspan="7">
-          <div class="table_title" data-bind="text: activities.title()"></div>
-        </th>
-      </tr>
-      <tr class="table_nav">
-        <th class="text-center" style="width:20%">Date</th>
-        <th class="text-center" style="width:20%">Activity</th>
-        <th class="text-center">Time<br />(h:m:s)</th>
-        <th class="text-center">Distance<br />(km)</th>
-        <th class="text-center">Avg Pace<br />(h:m:s/km)</th>
-        <th class="text-center">Avg Speed<br />(km/hr)</th>
-      </tr>
-    </thead>
-    <!-- ko if: !activities.activities() -->
-      <tbody>
-        <tr>
-          <td colspan="7" class="text-center text-danger">
-            <strong>No activities found</strong>
-          </td>
+  <!-- ko if: !activities.request_complete()  -->
+    <div class="text-center" style="padding:50px 0 50px 0;">
+      <img id="loader_spinner" width="35" src="/spinner.svg" />
+    </div>
+  <!-- /ko -->
+  <!-- ko if: activities.request_complete()  -->
+    <table class="runs table table-condensed table-hover">
+      <thead>
+        <tr class="table_nav">
+          <th class="title" colspan="7">
+            <div class="table_title" data-bind="text: activities.title()"></div>
+          </th>
         </tr>
-      </tbody>
-    <!-- /ko -->
-    <tbody>
-      <!-- ko foreach: activities.activities() -->
-        <tr>
-          <td>
-            <div data-bind="text: date('Do MMM, YYYY')"></div>
-          </td>
-          <td>
-            <div data-bind="text: activity_type()"></div>
-          </td>
-          <td>
-            <div class="text-right"
-                 data-bind="text: time()"></div>
-          </td>
-          <td>
-            <div class="text-right"
-                 data-bind="text: kilometres()"></div>
-          </td>
-          <td>
-            <div class="text-right"
-                 data-bind="text: average_pace_time()"></div>
-          </td>
-          <td>
-            <div class="text-right"
-                 data-bind="text: average_pace_distance()"></div>
-          </td>
+        <tr class="table_nav">
+          <th class="text-center" style="width:20%">Date</th>
+          <th class="text-center" style="width:20%">Activity</th>
+          <th class="text-center">Time<br />(h:m:s)</th>
+          <th class="text-center">Distance<br />(km)</th>
+          <th class="text-center">Avg Pace<br />(h:m:s/km)</th>
+          <th class="text-center">Avg Speed<br />(km/hr)</th>
         </tr>
+      </thead>
+      <!-- ko if: !activities.activities().length -->
+        <tbody>
+          <tr>
+            <td colspan="7" class="text-center text-danger">
+              <strong>No activities found</strong>
+            </td>
+          </tr>
+        </tbody>
       <!-- /ko -->
-    </tbody>
-  </table>
+      <tbody>
+        <!-- ko foreach: activities.activities() -->
+          <tr>
+            <td>
+              <div data-bind="text: date('Do MMM, YYYY')"></div>
+            </td>
+            <td>
+              <div data-bind="text: activity_type()"></div>
+            </td>
+            <td>
+              <div class="text-right"
+                   data-bind="text: time()"></div>
+            </td>
+            <td>
+              <div class="text-right"
+                   data-bind="text: kilometres()"></div>
+            </td>
+            <td>
+              <div class="text-right"
+                   data-bind="text: average_pace_time()"></div>
+            </td>
+            <td>
+              <div class="text-right"
+                   data-bind="text: average_pace_distance()"></div>
+            </td>
+          </tr>
+        <!-- /ko -->
+      </tbody>
+    </table>
+  <!-- /ko -->
 </div>
