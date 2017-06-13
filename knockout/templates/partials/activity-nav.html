@@ -1,9 +1,9 @@
-<!-- ko if: !activities.activities().length  -->
+<!-- ko if: !activities.request_complete()  -->
   <div class="text-center" style="padding-top:150px;">
     <img id="loader_spinner" width="35" src="/spinner.svg" />
   </div>
 <!-- /ko -->
-<!-- ko if: activities.activities().length  -->
+<!-- ko if: activities.request_complete()  -->
   <table class="runs table table-condensed table-hover">
     <thead>
       <tr class="table_nav">
@@ -37,26 +37,35 @@
       </tr>
     </thead>
     <tbody>
-      <!-- ko foreach: activities.activities() -->
-        <tr>
-          <td>
-            <div data-bind="text: date('Do MMM, YYYY')"></div>
-          </td>
-          <td>
-            <div data-bind="text: activity_type"></div>
-          </td>
-          <td>
-            <div class="text-right" data-bind="text: time()"></div>
-          </td>
-          <td>
-            <div class="text-right" data-bind="text: kilometres()"></div>
-          </td>
-          <td class="text-center">
-            <i class="glyphicon glyphicon-zoom-in" title="View activity"
-               data-bind="click: function(data, event) { $parent.page('/activity/'+id()); }">
-            </i>
-          </td>
-        </tr>
+      <!-- ko if: !activities.activities().length  -->
+      <tr>
+        <td colspan="7" class="text-center text-danger">
+          <strong>No activities found</strong>
+        </td>
+      </tr>
+      <!-- /ko -->
+      <!-- ko if: activities.activities().length  -->
+        <!-- ko foreach: activities.activities() -->
+          <tr>
+            <td>
+              <div data-bind="text: date('Do MMM, YYYY')"></div>
+            </td>
+            <td>
+              <div data-bind="text: activity_type"></div>
+            </td>
+            <td>
+              <div class="text-right" data-bind="text: time()"></div>
+            </td>
+            <td>
+              <div class="text-right" data-bind="text: kilometres()"></div>
+            </td>
+            <td class="text-center">
+              <i class="glyphicon glyphicon-zoom-in" title="View activity"
+                 data-bind="click: function(data, event) { $parent.page('/activity/'+id()); }">
+              </i>
+            </td>
+          </tr>
+        <!-- /ko -->
       <!-- /ko -->
     </tbody>
   </table>
