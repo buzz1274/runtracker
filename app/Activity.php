@@ -30,15 +30,17 @@ class activity extends Model {
         $activities = [];
         $summary = [];
 
-        $query = self::where('user_id', $userID)->
-                        join('activity_type',
-                             'activity.activity_id', '=', 'activity_type.id')->
-                        where(function($query) use ($activityID) {
+        $query = self::select(array('activity.id', 'activity_date', 'metres',
+                                    'seconds', 'activity_type.activity_type'))->
+                       where('user_id', $userID)->
+                       join('activity_type',
+                            'activity.activity_id', '=', 'activity_type.id')->
+                       where(function($query) use ($activityID) {
                             if($activityID) {
                                 $query->whereIn('activity_id', explode(',', $activityID))->
                                         orWhereIn('parent_id', explode(',', $activityID));
                             }
-                        });
+                       });
 
         if($year) {
             if($month) {
@@ -72,7 +74,7 @@ class activity extends Model {
                      'activities' =>
                          [['activity_id' => $activity->id,
                            'activity_count' => 1,
-                           'activity' => $activity->activity->activity_type,
+                           'activity' => $activity->activity_type,
                            'seconds' => $activity->seconds,
                            'km' => $km,
                            'display_average_km' => $km,

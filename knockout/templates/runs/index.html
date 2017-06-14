@@ -88,6 +88,9 @@
                     <th class="text-center">Avg Km</th>
                 <!-- /ko -->
                 <th class="text-center">Avg Pace(km/hr)(h:m:s/km)</th>
+                <!-- ko if: $component.month -->
+                  <th class="text-center">-</th>
+                <!-- /ko -->
             </tr>
         </thead>
         <!-- ko if: !$component.has_data -->
@@ -159,6 +162,13 @@
                                 (<span data-bind="text: display_average_pace_time"></span>)
                             </div>
                         </td>
+                      <!-- ko if: $component.month -->
+                        <td class="text-center">
+                          <i class="glyphicon glyphicon-zoom-in" title="View activity"
+                             data-bind="click: function(data, event) { $component.page('/activity/'+activity_id); }">
+                          </i>
+                        </td>
+                      <!-- /ko -->
                     </tr>
                 <!-- /ko -->
             <!-- /ko -->

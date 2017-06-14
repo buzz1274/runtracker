@@ -6,6 +6,7 @@ var Moment = require('moment'),
 
     function Runs() {
         this.component = 'runs';
+        this.page = page;
         this.has_data = false;
         this.runs = ko.observableArray();
         this.selected_activites = ko.observableArray();
