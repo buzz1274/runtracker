@@ -19,6 +19,7 @@
           <th class="text-center">Distance<br />(km)</th>
           <th class="text-center">Avg Pace<br />(h:m:s/km)</th>
           <th class="text-center">Avg Speed<br />(km/hr)</th>
+          <th class="text-center">-</th>
         </tr>
       </thead>
       <!-- ko if: !activities.activities().length -->
@@ -54,6 +55,11 @@
             <td>
               <div class="text-right"
                    data-bind="text: average_pace_distance()"></div>
+            </td>
+            <td class="text-center">
+              <i class="glyphicon glyphicon-zoom-in" title="View activity"
+                 data-bind="click: function(data, event) { $parent.page('/activity/'+id()); }">
+              </i>
             </td>
           </tr>
         <!-- /ko -->

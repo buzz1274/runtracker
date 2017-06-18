@@ -1,4 +1,5 @@
-var activityCollection = require('../collections/activity-collection.js');
+var activityCollection = require('../collections/activity-collection.js'),
+    page = require('page');
 
 module.exports = (function () {
     'use strict';
@@ -6,6 +7,7 @@ module.exports = (function () {
   function PersonalBests() {
       this.component = 'personal-bests';
       this.activities = new activityCollection();
+      this.page = page;
 
       ko.track(this);
 
