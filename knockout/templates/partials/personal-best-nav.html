@@ -39,9 +39,9 @@
                                      date('Do MMM, YYYY')">
                 </td>
                 <td style="width:1%">
-                  <a data-bind="attr: {href: '/activity/'+id()}" title="view activity">
-                    <i class="glyphicon glyphicon-zoom-in"></i>
-                  </a>
+                  <i class="glyphicon glyphicon-zoom-in" title="View activity"
+                     data-bind="click: function(data, event) { $parent.page('/activity/'+id()); }">
+                  </i>
                 </td>
               </tr>
             <!-- /ko -->
