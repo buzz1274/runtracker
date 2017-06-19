@@ -2,7 +2,7 @@
   <table class="runs table table-condensed table-hover">
     <thead>
       <tr class="table_nav">
-        <th class="title" colspan="4">
+        <th class="title" colspan="5">
           <i class="glyphicon glyphicon-refresh pull-right"
              style="padding-right:6px;"
              data-bind="click:reset_splits" title="Reset splits"></i>
@@ -13,6 +13,7 @@
         <th>Minutes</th>
         <th>Seconds</th>
         <th>Speed(Km/hr)</th>
+        <th>Km</th>
         <th class="text-center">-</th>
       </tr>
     </thead>
@@ -27,6 +28,9 @@
         <td>
           <input class="input speed" type="text">
         </td>
+        <td>
+          <strong class="cumulative_km"></strong>
+        </td>
         <td class="text-center">
           <p>
             <i id="add_split" class="glyphicon glyphicon-plus"
@@ -38,25 +42,25 @@
     <tfoot>
       <tr>
         <td class="text-right" colspan="2">Total Time</td>
-        <td class="text-left" colspan="2">
+        <td class="text-left" colspan="3">
           <strong id="total_time">-</strong>
         </td>
       </tr>
       <tr>
         <td class="text-right" colspan="2">Total Distance</td>
-        <td class="text-left" colspan="2">
+        <td class="text-left" colspan="3">
           <strong id="total_distance">-</strong>
         </td>
       </tr>
       <tr>
         <td class="text-right" colspan="2">Average Pace</td>
-        <td class="text-left" colspan="2">
+        <td class="text-left" colspan="3">
           <strong id="average_pace_km_hr">-</strong>
         </td>
       </tr>
       <tr>
         <td class="text-right" colspan="2">Average Pace</td>
-        <td class="text-left" colspan="2">
+        <td class="text-left" colspan="3">
           <strong id="average_pace_min_km">-</strong>
         </td>
       </tr>

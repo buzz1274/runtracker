@@ -33,6 +33,7 @@ module.exports = (function () {
           });
 
           row.after(clone.find('input:text').val('').end());
+          row.after(clone.find('.cumulative_km').html('').end());
 
         }
       }
@@ -56,6 +57,9 @@ module.exports = (function () {
 
           total_distance += distance;
           total_time += time;
+
+          $(this).children().find('.cumulative_km').html(total_distance.toFixed(2));
+
         }
 
       });
