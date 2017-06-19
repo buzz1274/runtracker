@@ -1,7 +1,7 @@
-var ErrorPage = (function () {
+module.exports = (function () {
     'use strict';
 
-    function ErrorPage() {
+    function Error() {
         this.title = 'Error';
         this.component = 'error_page';
         this.icon = 'warning';
@@ -22,18 +22,6 @@ var ErrorPage = (function () {
         ko.track(this);
     }
 
-    return ErrorPage;
+    return Error;
 
 })();
-
-ko.components.register('error_page', {
-    template: require('../templates/error_page.html'),
-    viewModel: {
-        createViewModel: function (params) {
-            'use strict';
-            return params instanceof ErrorPage ? params : ko.unwrap(params.option);
-        }
-    }
-});
-
-module.exports = ErrorPage;
