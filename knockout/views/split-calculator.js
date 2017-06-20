@@ -8,7 +8,7 @@ module.exports = (function () {
       $(':input').each(function () {
         $(this).val('');
       });
-    }
+    };
 
     this.add_split = function(data, event) {
       var element = $(event.target)
@@ -38,7 +38,7 @@ module.exports = (function () {
         }
       }
 
-    }
+    };
 
     this.update_splits = function() {
       var total_distance = 0,
@@ -94,6 +94,7 @@ module.exports = (function () {
     }
 
     ko.track(this);
+
   }
 
   return SplitCalculator;

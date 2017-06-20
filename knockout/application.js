@@ -7,6 +7,9 @@ require('./components/partials/header-nav-component.js');
 require('./components/partials/activity-nav-component.js');
 require('./components/partials/personal-best-nav-component.js');
 require('./components/personal-bests-component.js');
+require('./components/login-component.js');
+require('./components/register-component.js');
+require('./components/reset-password-component.js');
 
 var User = require('./models/user-model.js'),
     HeaderNav = require('./views/partials/header-nav.js'),
@@ -17,7 +20,7 @@ var User = require('./models/user-model.js'),
     Register = require('./views/register.js'),
     Login = require('./views/login.js'),
     Error = require('./views/error.js'),
-    ResetPassword = require('./views/reset_password.js'),
+    ResetPassword = require('./views/reset-password.js'),
     Runs = require('./views/runs/index.js'),
     SplitCalculator = require('./views/split-calculator.js'),
     PersonalBests = require('./views/personal-bests.js');
