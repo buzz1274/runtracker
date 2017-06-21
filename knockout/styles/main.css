@@ -221,7 +221,7 @@ div.form {
 
 div.form fieldset {
     padding:15px;
-    border:1px solid #000;
+    border:1px solid #DDD;
 }
 div.form legend {
     width:inherit;
