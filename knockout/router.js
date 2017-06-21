@@ -43,11 +43,8 @@ module.exports = (function () {
       } else {
         app.page = 'activity-view';
         app.pages['activity-view'].activity.load(ctx.params.activity_id);
-
       }
-
       app.display_left_nav = true;
-
     });
 
     page('personal_best/:personal_best_id/', function(ctx) {
