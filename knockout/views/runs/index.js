@@ -1,5 +1,5 @@
 var Moment = require('moment'),
-    ActivityTypes = require('../../models/activity_types'),
+    ActivityTypes = require('../../models/activity-type-model'),
     page = require('page'),
     Runs = (function () {
     'use strict';
@@ -13,7 +13,8 @@ var Moment = require('moment'),
         this.summary = false;
         this.year = '';
         this.month = '';
-        this.activity_types = ActivityTypes.activity_types;
+        this.activity_types = new ActivityTypes();
+        this.activity_types = this.activity_types.activity_types;
 
         var that = this;
 

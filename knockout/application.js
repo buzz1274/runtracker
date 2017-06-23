@@ -1,6 +1,7 @@
 require('./components/split-calculator-component.js');
 require('./components/activity-add-component.js');
 require('./components/activity-view-component.js');
+require('./components/activity-type-component.js');
 require('./components/index-component.js');
 require('./components/error-component.js');
 require('./components/partials/header-nav-component.js');
@@ -15,6 +16,7 @@ var User = require('./models/user-model.js'),
     HeaderNav = require('./views/partials/header-nav.js'),
     ActivityNav = require('./views/partials/activity-nav.js'),
     Activity = require('./views/activity.js'),
+    ActivityType = require('./views/activity-type.js'),
     PersonalBestNav = require('./views/partials/personal-best-nav.js'),
     Index = require('./views/index.js'),
     Register = require('./views/register.js'),
@@ -41,6 +43,7 @@ module.exports = (function() {
             'reset_password': new ResetPassword(),
             'activity-add': new Activity('activity-add'),
             'activity-view': new Activity('activity-view'),
+            'activity-type': new ActivityType(),
             'runs': new Runs(),
             'personal-bests': new PersonalBests(),
             'split-calculator': new SplitCalculator(),

@@ -37,6 +37,11 @@ module.exports = (function () {
       app.display_left_nav = true;
     });
 
+    page('activity_type', function() {
+      app.page = 'activity-type';
+      app.display_left_nav = true;
+    });
+
     page('activity/:activity_id', function(ctx) {
       if(ctx.params.activity_id === 'add') {
         app.page = 'activity-add';
