@@ -246,7 +246,8 @@ class activity extends Model {
                         return $query->where('metres', '<=', $maxDistance);
                     })->
                     when($type == 'longest', function($query) {
-                        return $query->orderBy('metres', 'desc');
+                       return $query->orderBy('metres', 'desc')->
+                                      orderBy(\DB::raw('(1.0 * metres) / seconds'), 'desc');
                     })->
                     when($type == 'fastest', function($query) {
                         return $query->orderBy(\DB::raw('(1.0 * metres) / seconds'), 'desc');
