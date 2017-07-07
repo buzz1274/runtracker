@@ -8,6 +8,9 @@ module.exports = (function () {
       $(':input').each(function () {
         $(this).val('');
       });
+      $('.cumulative_km').each(function() {
+        $(this).html('');
+      });
     };
 
     this.add_split = function(data, event) {

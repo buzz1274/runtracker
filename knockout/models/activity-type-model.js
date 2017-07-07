@@ -9,15 +9,14 @@ module.exports = (function () {
     this.load = function() {
       var that = this;
 
-      /*
       ajax.request('api/activities/type').then((response) => {
         console.log(response);
         for(var i = 0; i < response.length; i++) {
           that.activity_types.push(response[i]);
         }
       });
-      */
 
+      /*
       $.ajax({url: '//'+window.location.hostname+'/api/activities/type',
               type: 'get',
               dataType: 'json',
@@ -32,6 +31,7 @@ module.exports = (function () {
           //page('/error/500');
         }
       });
+      */
 
     };
 
