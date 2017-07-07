@@ -2,7 +2,7 @@
   <table class="runs table table-condensed table-hover">
     <thead>
       <tr class="table_nav">
-        <th class="title" colspan="5">
+        <th class="title" colspan="6">
           <i class="glyphicon glyphicon-refresh pull-right"
              style="padding-right:6px;"
              data-bind="click:reset_splits" title="Reset splits"></i>
@@ -10,26 +10,30 @@
         </th>
       </tr>
       <tr class="table_nav">
-        <th>Minutes</th>
-        <th>Seconds</th>
-        <th>Speed(Km/hr)</th>
-        <th>Km</th>
-        <th class="text-center">-</th>
+        <th style="width:20%">Minutes</th>
+        <th style="width:20%">Seconds</th>
+        <th style="width:20%">Speed(Km/hr)</th>
+        <th style="width:10%">Km</th>
+        <th style="width:29%">Time</th>
+        <th style="width:1%"class="text-center">-</th>
       </tr>
     </thead>
     <tbody data-bind="click:add_split, event:{change:update_splits}">
       <tr class="segment">
         <td>
-          <input class="input minutes" type="text">
+          <input class="input minutes" size="5" type="text">
         </td>
         <td>
-          <input class="input seconds" type="text">
+          <input class="input seconds" size="5" type="text">
         </td>
         <td>
-          <input class="input speed" type="text">
+          <input class="input speed" size="5" type="text">
         </td>
         <td>
           <strong class="cumulative_km"></strong>
+        </td>
+        <td>
+          <strong class="cumulative_time"></strong>
         </td>
         <td class="text-center">
           <p>
@@ -41,25 +45,25 @@
     </tbody>
     <tfoot>
       <tr>
-        <td class="text-right" colspan="2">Total Time</td>
+        <td class="text-right" colspan="3">Total Time</td>
         <td class="text-left" colspan="3">
           <strong id="total_time">-</strong>
         </td>
       </tr>
       <tr>
-        <td class="text-right" colspan="2">Total Distance</td>
+        <td class="text-right" colspan="3">Total Distance</td>
         <td class="text-left" colspan="3">
           <strong id="total_distance">-</strong>
         </td>
       </tr>
       <tr>
-        <td class="text-right" colspan="2">Average Pace</td>
+        <td class="text-right" colspan="3">Average Pace</td>
         <td class="text-left" colspan="3">
           <strong id="average_pace_km_hr">-</strong>
         </td>
       </tr>
       <tr>
-        <td class="text-right" colspan="2">Average Pace</td>
+        <td class="text-right" colspan="3">Average Pace</td>
         <td class="text-left" colspan="3">
           <strong id="average_pace_min_km">-</strong>
         </td>

@@ -11,6 +11,9 @@ module.exports = (function () {
       $('.cumulative_km').each(function() {
         $(this).html('');
       });
+      $('.cumulative_time').each(function() {
+        $(this).html('');
+      });
     };
 
     this.add_split = function(data, event) {
@@ -37,6 +40,7 @@ module.exports = (function () {
 
           row.after(clone.find('input:text').val('').end());
           row.after(clone.find('.cumulative_km').html('').end());
+          row.after(clone.find('.cumulative_time').html('').end());
 
         }
       }
@@ -61,7 +65,14 @@ module.exports = (function () {
           total_distance += distance;
           total_time += time;
 
+          total_time_display = parseInt(total_time / 60) + ' minutes';
+
+          if(total_time % 60) {
+            total_time_display += ' ' + (total_time % 60) + ' seconds';
+          }
+
           $(this).children().find('.cumulative_km').html(total_distance.toFixed(2));
+          $(this).children().find('.cumulative_time').html(total_time_display);
 
         }
 
