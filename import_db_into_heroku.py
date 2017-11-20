@@ -55,6 +55,7 @@ local('export `heroku config -s` && '
       'sudo docker exec -it postgres bash -c '
       '"export PGPASSWORD=$DB_PASSWORD; psql -U$DB_USERNAME -h$DB_HOST $DB_DATABASE '
       '< /tmp/runtracker_setup.sql"')
+local('sudo docker exec -it postgres bash -c "rm -f /tmp/*.sql"')
 local('rm runtracker.zz50.co.uk.sql')
 local('rm runtracker_setup.sql')
 local('rm runtracker.tar.gz')
