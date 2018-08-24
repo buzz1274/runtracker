@@ -219,40 +219,44 @@ class activity extends Model {
     }
 
     public static function personalBests($userID, $type, $activityID, $limit,
-                                         $minDistance, $maxDistance) {
+                                         $minDistance, $maxDistance, $minSpeed)
+    {
 
-        if(!is_array($activityID)) {
+        if (!is_array($activityID)) {
             $activityID = explode(',', $activityID);
         }
 
         $pb = self::select(array('activity.id', 'activity_date', 'metres',
-                                 'seconds',
-                                 'activity_type.activity_type'))->
-                    join('activity_type',
-                         'activity.activity_id', '=', 'activity_type.id')->
-                    join('activity_type as parent_activity_type',
-                         'activity_type.parent_id', '=', 'parent_activity_type.id')->
-                    where('user_id', $userID)->
-                    where(function($query) use ($activityID) {
-                        if($activityID) {
-                            $query->whereIn('activity_type.id', $activityID)->
-                                    orWhereIn('parent_activity_type.id', $activityID);
-                        }
-                    })->
-                    when($minDistance, function($query) use($minDistance) {
-                        return $query->where('metres', '>=', $minDistance);
-                    })->
-                    when($maxDistance, function($query) use($maxDistance) {
-                        return $query->where('metres', '<=', $maxDistance);
-                    })->
-                    when($type == 'longest', function($query) {
-                       return $query->orderBy('metres', 'desc')->
-                                      orderBy(\DB::raw('(1.0 * metres) / seconds'), 'desc');
-                    })->
-                    when($type == 'fastest', function($query) {
-                        return $query->orderBy(\DB::raw('(1.0 * metres) / seconds'), 'desc');
-                    })->
-                    limit($limit)->get();
+            'seconds',
+            'activity_type.activity_type'))->
+        join('activity_type',
+            'activity.activity_id', '=', 'activity_type.id')->
+        join('activity_type as parent_activity_type',
+            'activity_type.parent_id', '=', 'parent_activity_type.id')->
+        where('user_id', $userID)->
+        where(function ($query) use ($activityID) {
+            if ($activityID) {
+                $query->whereIn('activity_type.id', $activityID)->
+                orWhereIn('parent_activity_type.id', $activityID);
+            }
+        })->
+        when($minDistance, function ($query) use ($minDistance) {
+            return $query->where('metres', '>=', $minDistance);
+        })->
+        when($maxDistance, function ($query) use ($maxDistance) {
+            return $query->where('metres', '<=', $maxDistance);
+        })->
+        when($minSpeed, function ($query) use ($minSpeed) {
+            return $query->where(\DB::raw('((1.0 * metres) / seconds) * 3600'), '>=', $minSpeed);
+        })->
+        when($type == 'longest', function($query) {
+           return $query->orderBy('metres', 'desc')->
+                          orderBy(\DB::raw('(1.0 * metres) / seconds'), 'desc');
+        })->
+        when($type == 'fastest', function($query) {
+            return $query->orderBy(\DB::raw('(1.0 * metres) / seconds'), 'desc');
+        })->
+        limit($limit)->get();
 
         if($pb && $limit == 1) {
             return $pb->pop();

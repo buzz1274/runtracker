@@ -74,7 +74,8 @@ class ActivityController extends Controller {
             $activity = activity::personalBests(USER_ID, $personalBest->type,
                                                 $personalBest->activity_ids, $limit,
                                                 $personalBest->min_distance,
-                                                $personalBest->max_distance);
+                                                $personalBest->max_distance,
+                                                $personalBest->min_speed);
 
             if(!$id) {
                 $pb[$i] = $activity;

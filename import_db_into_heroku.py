@@ -9,10 +9,11 @@ import os
 
 personal_bests =\
     ["INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 1, 'Longest run');",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Hiking'), Null, Null, 2, 'Longest hike');",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Casual walking'), Null, Null, 3, 'Longest walk');",
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, 5100, 5, 'Fastest 5K');",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 7, 'Fastest 10K');"]
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 7, 'Fastest 10K');",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 16100, 16200, 8, 'Fastest 16.1K');"
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Hiking'), Null, Null, 2, 'Longest hike');",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Casual walking'), Null, Null, 3, 'Longest walk');"]
 
 with open('runtracker_setup.sql', 'w') as setup_file:
     for line in personal_bests:
