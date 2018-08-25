@@ -9,7 +9,7 @@ import os
 
 personal_bests =\
     ["INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 1, 'Longest run', Null);",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 2, 'Longest @ 12K', 12);"
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 2, 'Longest >12K', 12);"
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, 5100, 3, 'Fastest 5K', Null);",
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 4, 'Fastest 10K', Null);",
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 16100, 16200, 5, 'Fastest 16.1K', Null);"

@@ -28,13 +28,13 @@
           <!-- ko if: personal_bests.activities().length  -->
             <!-- ko foreach: personal_bests.activities() -->
               <tr>
-                <td style="width:30%" class="stats_title">
+                <td style="width:28%" class="stats_title">
                   <a data-bind="text: title(),
                                 attr: {href: '/personal_best/'+personal_best_id()}"
                      title="view more">
                   </a>
                 </td>
-                <td style="width:61%"
+                <td style="width:69%"
                     data-bind="text: kilometres() + 'km in ' + time() + ' on ' +
                                      date('Do MMM, YYYY')">
                 </td>

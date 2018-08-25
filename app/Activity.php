@@ -247,7 +247,7 @@ class activity extends Model {
             return $query->where('metres', '<=', $maxDistance);
         })->
         when($minSpeed, function ($query) use ($minSpeed) {
-            return $query->where(\DB::raw('((1.0 * metres) / seconds) * 3600'), '>=', $minSpeed);
+            return $query->where(\DB::raw('((1.0 * metres) / seconds) * 3600'), '>=', ($minSpeed * 1000));
         })->
         when($type == 'longest', function($query) {
            return $query->orderBy('metres', 'desc')->
