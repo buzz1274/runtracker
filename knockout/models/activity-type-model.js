@@ -7,9 +7,14 @@ module.exports = (function () {
     this.activity_types = ko.observableArray();
 
     this.load = function() {
-      //var that = this;
+      var that = this;
 
-      ajax.request('api/activities/type', {}, this);
+      ajax.request('api/activities/type').then((response) => {
+        //console.log(response);
+        for(var i = 0; i < response.length; i++) {
+          that.activity_types.push(response[i]);
+        }
+      });
 
       /*
       .then((response) => {
