@@ -8,12 +8,13 @@ import tarfile
 import os
 
 personal_bests =\
-    ["INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 1, 'Longest run');",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, 5100, 5, 'Fastest 5K');",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 7, 'Fastest 10K');",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 16100, 16200, 8, 'Fastest 16.1K');"
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Hiking'), Null, Null, 2, 'Longest hike');",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Casual walking'), Null, Null, 3, 'Longest walk');"]
+    ["INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 1, 'Longest run', Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 2, 'Longest @ 12K', 12);"
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, 5100, 3, 'Fastest 5K', Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 4, 'Fastest 10K', Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 16100, 16200, 5, 'Fastest 16.1K', Null);"
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Hiking'), Null, Null, 6, 'Longest hike', Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Casual walking'), Null, Null, 7, 'Longest walk', Null);"]
 
 with open('runtracker_setup.sql', 'w') as setup_file:
     for line in personal_bests:
@@ -56,7 +57,7 @@ local('export `heroku config -s` && '
       'sudo docker exec -it postgres bash -c '
       '"export PGPASSWORD=$DB_PASSWORD; psql -U$DB_USERNAME -h$DB_HOST $DB_DATABASE '
       '< /tmp/runtracker_setup.sql"')
-local('sudo docker exec -it postgres bash -c "rm -f /tmp/*.sql"')
+#local('sudo docker exec -it postgres bash -c "rm -f /tmp/*.sql"')
 local('rm runtracker.zz50.co.uk.sql')
 local('rm runtracker_setup.sql')
 local('rm runtracker.tar.gz')
