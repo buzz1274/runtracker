@@ -9,7 +9,7 @@ import os
 
 personal_bests =\
     ["INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 1, 'Longest run', Null);",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 2, 'Longest >12K', 12);"
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, Null, 2, 'Longest >12K', 12);"
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, 5100, 3, 'Fastest 5K', Null);",
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 4, 'Fastest 10K', Null);",
      "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 16100, 16200, 5, 'Fastest 16.1K', Null);"
@@ -25,7 +25,7 @@ with open('runtracker_setup.sql', 'w') as setup_file:
         sys.exit()
 
 with settings(warn_only=True, host_string='icarus.zz50.co.uk', user='dave'):
-    run('sudo /var/docker/docker/containers/runtracker.zz50.co.uk/backup.sh')
+    run('sudo /var/docker/docker/containers/websites/runtracker.zz50.co.uk/scripts/backup.sh')
     filename = 'runtracker.zz50.co.uk_%d-%02d-%02d.tar.gz' % (datetime.datetime.now().year,
                                                               datetime.datetime.now().month,
                                                               datetime.datetime.now().day,)
