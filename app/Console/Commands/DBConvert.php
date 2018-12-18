@@ -42,16 +42,19 @@ class DBConvert extends Command {
         foreach($runs as $run) {
             $activity = new Activity;
 
-            $activity->user_id = $this->getUserID($run->who);
-            $activity->route_id = $this->getRouteID($run->route);
-            $activity->seconds = $run->seconds;
-            $activity->metres = $run->metres;
-            $activity->activity_date = $run->date;
             $activity->activity_id = $this->getActivityTypeID($run->type,
                                                               $run->treadmill,
                                                               $run->run);
 
-            $activity->save();
+            if($activity->activity_id) {
+                $activity->user_id = $this->getUserID($run->who);
+                $activity->route_id = $this->getRouteID($run->route);
+                $activity->seconds = $run->seconds;
+                $activity->metres = $run->metres;
+                $activity->activity_date = $run->date;
+
+                $activity->save();
+            }
 
         }
 
@@ -92,8 +95,7 @@ class DBConvert extends Command {
             $activityType = 'Treadmill running';
             $parentActivityType = 'Running';
         } else {
-            $activityType = 'Treadmill walking';
-            $parentActivityType = 'Walking';
+            return false;
         }
 
         return $this->activityID($activityType, $parentActivityType);
