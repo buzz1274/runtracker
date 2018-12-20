@@ -8,13 +8,14 @@ import tarfile
 import os
 
 personal_bests =\
-    ["INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 1, 'Longest run', Null);",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, Null, 2, 'Longest >13K', 13);"
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, 5100, 3, 'Fastest 5K', Null);",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 4, 'Fastest 10K', Null);",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 16100, 16200, 5, 'Fastest 16.1K', Null);"
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Hiking'), Null, Null, 6, 'Longest hike', Null);",
-     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Casual walking'), Null, Null, 7, 'Longest walk', Null);"]
+    ["INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed, max_seconds) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 1, 'Longest run', Null, Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed, max_seconds) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, Null, 2, 'Longest >13K', 13, Null);"
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed, max_seconds) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 5000, 5100, 3, 'Fastest 5K', Null, Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed, max_seconds) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 10000, 10100, 4, 'Fastest 10K', Null, Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed, max_seconds) VALUES (1, 'fastest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), 16100, 16200, 5, 'Fastest 16.1K', Null, Null);"
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed, max_seconds) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Hiking'), Null, Null, 6, 'Longest hike', Null, Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed, max_seconds) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Casual walking'), Null, Null, 7, 'Longest walk', Null, Null);",
+     "INSERT INTO personal_bests (user_id, type, activity_ids, min_distance, max_distance, display_order, title, min_speed, max_seconds) VALUES (1, 'longest', (SELECT id FROM activity_type WHERE activity_type = 'Running'), Null, Null, 7, 'Longest walk', Null, 3600);"]
 
 with open('runtracker_setup.sql', 'w') as setup_file:
     for line in personal_bests:

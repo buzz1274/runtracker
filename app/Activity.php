@@ -219,8 +219,8 @@ class activity extends Model {
     }
 
     public static function personalBests($userID, $type, $activityID, $limit,
-                                         $minDistance, $maxDistance, $minSpeed)
-    {
+                                         $minDistance, $maxDistance, $minSpeed,
+                                         $maxSeconds) {
 
         if (!is_array($activityID)) {
             $activityID = explode(',', $activityID);
@@ -242,6 +242,9 @@ class activity extends Model {
         })->
         when($minDistance, function ($query) use ($minDistance) {
             return $query->where('metres', '>=', $minDistance);
+        })->
+        when($maxSeconds, function ($query) use ($maxSeconds) {
+            return $query->where('seconds', '<=', $maxSeconds);
         })->
         when($maxDistance, function ($query) use ($maxDistance) {
             return $query->where('metres', '<=', $maxDistance);
