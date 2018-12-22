@@ -11,6 +11,9 @@ module.exports = (function () {
       $('.cumulative_km').each(function() {
         $(this).html('');
       });
+      $('.cumulative_pace').each(function() {
+        $(this).html('');
+      });
       $('.cumulative_time').each(function() {
         $(this).html('');
       });
@@ -40,6 +43,7 @@ module.exports = (function () {
 
           row.after(clone.find('input:text').val('').end());
           row.after(clone.find('.cumulative_km').html('').end());
+          row.after(clone.find('.cumulative_pace').html('').end());
           row.after(clone.find('.cumulative_time').html('').end());
 
         }
@@ -71,7 +75,10 @@ module.exports = (function () {
             total_time_display += ' ' + (total_time % 60) + ' seconds';
           }
 
+          average_pace_min_km = parseInt((3600 / total_time) * total_distance).toFixed(2) + ' Km/hr';
+
           $(this).children().find('.cumulative_km').html(total_distance.toFixed(2));
+          $(this).children().find('.cumulative_pace').html(average_pace_min_km);
           $(this).children().find('.cumulative_time').html(total_time_display);
 
         }
