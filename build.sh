@@ -4,5 +4,4 @@ DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
 cd "$DIR"
 composer install
-npm install
-grunt build
+npm install && grunt build
