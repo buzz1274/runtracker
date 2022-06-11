@@ -1,0 +1,234 @@
+<div id="sub_main">
+    <div id="activity_graph" class="text-center">
+        <strong>activity graph</strong>
+    </div>
+    <table class="runs table table-condensed table-hover">
+        <thead>
+            <tr class="table_nav">
+                <th class="title" colspan="7">
+                    <div class="table_title">
+                        <!-- ko if: !$component.year -->
+                            Annual Activity Summary
+                        <!-- /ko -->
+                        <!-- ko if: $component.year && !$component.month -->
+                            Monthly Activity Summary
+                            (<span data-bind="text: $component.formatDate($component.year)"></span>)
+                            <a class="glyphicon glyphicon-triangle-top" href="runs/"
+                               title="Return to annual activity summary"></a>
+                        <!-- /ko -->
+                        <!-- ko if: $component.year && $component.month -->
+                            Monthly Activities
+                            (<span data-bind="text: $component.formatDate($component.year+'-'+$component.month)"></span>)
+                            <a class="glyphicon glyphicon-triangle-top"
+                               data-bind="attr: {href: 'runs/'+$component.year+'/'}"
+                               title="Return to monthly activity summary"></a>
+                        <!-- /ko -->
+                    </div>
+                </th>
+            </tr>
+            <tr class="table_nav">
+                <th style="width:20%">
+                    Date
+                    <!-- ko if: $component.flattenedActivityDisplay('All') && $component.has_data -->
+                        <i data-bind="click: $component.toggleActivityData.bind(false, 'all'),
+                                      attr: {id: 'toggle_date_all'}"
+                           class="glyphicon glyphicon-menu-down pull-right"
+                           title="Expand all dates"></i>
+                    <!-- /ko -->
+                </th>
+                <th style="width:20%">
+                    Activity
+                    <div class="dropdown pull-right">
+                        <span class="dropdown-toggle"
+                              id="activity_filter_dropdown" data-toggle="dropdown">
+                            <span id="activity_filter_icon"
+                                  class="glyphicon glyphicon-filter pull-right"
+                                  title="Filter by activity"></span>
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="filter_dropdown"
+                            style="cursor:pointer">
+                            <!-- ko if: $component.activity_types.length == 0 -->
+                              <li>
+                                <a role="menuitem">Loading......</a>
+                              </li>
+                            <!-- /ko -->
+                            <!-- ko if: $component.activity_types.length > 0 -->
+                              <!-- ko foreach: $component.activity_types -->
+                              <li>
+                                  <a role="menuitem"
+                                     data-bind="click: function(data, event) { $component.filterActivities(id, parent_id);}">
+                                      <span class="glyphicon glyphicon-ok"
+                                            data-bind="style: {visibility: $component.selected_activites.indexOf(id) == -1 ? 'hidden' : 'visible' }"></span>&nbsp;
+                                      <span role="menuitem"
+                                            data-bind="text: activity_type,
+                                                       style: {padding: parent_id ? '0 0 0 10px' : '' }">
+
+                                      </span>
+                                  </a>
+                              </li>
+                              <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko if: $component.selected_activites.length > 0 -->
+                            <li>
+                                <a role="menuitem" style="padding-left:40px;"
+                                   data-bind="click: function(data, event) { $component.filterActivities(false, false);}">
+                                    <strong>Clear activity filters</strong>
+                                </a>
+                            </li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
+                </th>
+                <!-- ko if: !$component.month -->
+                    <th style="width:8%">Count</th>
+                <!-- /ko -->
+                <th class="text-center">Time(h:m:s)</th>
+                <th class="text-center">Km</th>
+                <!-- ko if: !$component.month -->
+                    <th class="text-center">Avg Km</th>
+                <!-- /ko -->
+                <th class="text-center">Avg Pace(km/hr)(h:m:s/km)</th>
+                <!-- ko if: $component.month -->
+                  <th class="text-center">-</th>
+                <!-- /ko -->
+            </tr>
+        </thead>
+        <!-- ko if: !$component.has_data -->
+            <tbody>
+                <tr>
+                    <td colspan="7" class="text-center text-danger">
+                        <strong>No activities found</strong>
+                    </td>
+                </tr>
+            </tbody>
+        <!-- /ko -->
+        <tbody>
+            <!-- ko foreach: runs -->
+                <!-- ko foreach: activities -->
+                    <tr>
+                        <!-- ko if: $index() === 0 -->
+                            <td data-bind="attr: {rowspan: function(){return $parent.activities.length;}()}">
+                                <!-- ko if: !$component.month -->
+                                    <a data-bind="text: $component.formatDate($parent.date),
+                                                  attr: {href: 'runs/'+$parent.date+'/'}"></a>
+                                <!-- /ko -->
+                                <!-- ko if: $component.month -->
+                                    <span data-bind="text: $component.formatDate($parent.date)"></span>
+                                <!-- /ko -->
+                                <!-- ko if: $component.flattenedActivityDisplay('All') -->
+                                    <i data-bind="click: $component.toggleActivityData.bind($data, $parent.date),
+                                                  attr: {id: 'toggle_date_'+$parent.date}"
+                                       class="glyphicon glyphicon-menu-down pull-right"></i>
+                                <!-- /ko -->
+                            </td>
+                        <!-- /ko -->
+                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                       attr: {'class': 'date_'+$parent.date,
+                                              'data-activity': activity}">
+                            <span data-bind="text: activity"></span>
+                        </td>
+                        <!-- ko if: !$component.month -->
+                            <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                           attr: {'class': 'date_'+$parent.date,
+                                                  'data-activity': activity}">
+                                <div class="text-right"
+                                     data-bind="text: activity_count"></div>
+                            </td>
+                        <!-- /ko -->
+                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                       attr: {'class': 'date_'+$parent.date,
+                                              'data-activity': activity}">
+                            <div class="text-right"
+                                 data-bind="text: display_seconds"></div>
+                        </td>
+                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                       attr: {'class': 'date_'+$parent.date,
+                                              'data-activity': activity}">
+                            <div class="text-right" data-bind="text: km"></div>
+                        </td>
+                        <!-- ko if: !$component.month  -->
+                            <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                               attr: {'class': 'date_'+$parent.date,
+                                                      'data-activity': activity}">
+                                <div class="text-right"
+                                     data-bind="text: display_average_km"></div>
+                            </td>
+                        <!-- /ko -->
+                        <td data-bind="visible: $component.flattenedActivityDisplay(activity),
+                                       attr: {'class': 'date_'+$parent.date,
+                                              'data-activity': activity}">
+                            <div class="text-right">
+                                <span data-bind="text: display_average_pace_distance"></span>
+                                (<span data-bind="text: display_average_pace_time"></span>)
+                            </div>
+                        </td>
+                      <!-- ko if: $component.month -->
+                        <td class="text-center">
+                          <i class="glyphicon glyphicon-zoom-in" title="View activity"
+                             data-bind="click: function(data, event) { $component.page('/activity/'+activity_id); }">
+                          </i>
+                        </td>
+                      <!-- /ko -->
+                    </tr>
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: $component.has_data -->
+                <tr>
+                    <td class="text-left"><strong>Total</strong></td>
+                    <td class="text-center">-</td>
+                    <!-- ko if: !$component.month -->
+                        <td>
+                            <div class="text-right"
+                                 data-bind="text: summary.total_activity_count">
+                            </div>
+                        </td>
+                    <!-- /ko -->
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_display_seconds">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_km">
+                        </div>
+                    </td>
+                    <!-- ko if: !$component.month -->
+                        <td>
+                            <div class="text-right"
+                                 data-bind="text: summary.total_display_average_distance_per_activity">
+                            </div>
+                        </td>
+                    <!-- /ko -->
+                    <td>
+                        <div class="text-right">
+                            <span data-bind="text: summary.total_display_average_pace_distance"></span>
+                            (<span data-bind="text: summary.total_display_average_pace_time"></span>)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left"><strong>Average per activity</strong></td>
+                    <td class="text-center">-</td>
+                    <!-- ko if: !$component.month -->
+                        <td class="text-center">-</td>
+                    <!-- /ko -->
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_display_average_time_per_activity">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-right"
+                             data-bind="text: summary.total_display_average_distance_per_activity">
+                        </div>
+                    </td>
+                    <!-- ko if: !$component.month -->
+                        <td class="text-center">-</td>
+                    <!-- /ko -->
+                    <td class="text-center">-</td>
+                </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
+</div>

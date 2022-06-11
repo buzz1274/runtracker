@@ -1,0 +1,77 @@
+<div id="sub_main">
+  <table class="runs table table-condensed table-hover">
+    <thead>
+      <tr class="table_nav">
+        <th class="title" colspan="7">
+          <i class="glyphicon glyphicon-refresh pull-right"
+             style="padding-right:6px;"
+             data-bind="click:reset_splits" title="Reset splits"></i>
+          <div class="table_title">Split calculator</div>
+        </th>
+      </tr>
+      <tr class="table_nav">
+        <th style="width:10%">Minutes</th>
+        <th style="width:10%">Seconds</th>
+        <th style="width:15%">Speed(Km/hr)</th>
+        <th style="width:10%">Km</th>
+        <th style="width:15%">Avg. Pace</th>
+        <th style="width:29%">Time</th>
+        <th style="width:1%"class="text-center">-</th>
+      </tr>
+    </thead>
+    <tbody data-bind="click:add_split, event:{change:update_splits}">
+      <tr class="segment">
+        <td>
+          <input class="input minutes" size="5" type="text">
+        </td>
+        <td>
+          <input class="input seconds" size="5" type="text">
+        </td>
+        <td>
+          <input class="input speed" size="5" type="text">
+        </td>
+        <td>
+          <strong class="cumulative_km"></strong>
+        </td>
+        <td>
+          <strong class="cumulative_pace"></strong>
+        </td>
+        <td>
+          <strong class="cumulative_time"></strong>
+        </td>
+        <td class="text-center">
+          <p>
+            <i id="add_split" class="glyphicon glyphicon-plus"
+               title="Add split" tabindex="-1"></i>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class="text-right" colspan="3">Total Time</td>
+        <td class="text-left" colspan="4">
+          <strong id="total_time">-</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right" colspan="3">Total Distance</td>
+        <td class="text-left" colspan="4">
+          <strong id="total_distance">-</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right" colspan="3">Average Pace</td>
+        <td class="text-left" colspan="4">
+          <strong id="average_pace_km_hr">-</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right" colspan="3">Average Pace</td>
+        <td class="text-left" colspan="4">
+          <strong id="average_pace_min_km">-</strong>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

@@ -1,0 +1,52 @@
+<!-- ko if: !personal_bests.request_complete()  -->
+  <div class="text-center" style="padding:50px 0 50px 0;">
+    <img id="loader_spinner" width="35" src="/spinner.svg" />
+  </div>
+<!-- /ko -->
+
+<!-- ko if: personal_bests.request_complete()  -->
+    <div id="control_panel">
+      <table class="runs table table-condensed table-hover">
+        <thead>
+          <tr class="table_nav">
+            <td colspan="3">
+              <i id="configure_personal_bests" title="Configure personal bests"
+                 data-bind="click: function(data, event) { managePersonalBests(); }"
+                 class="glyphicon glyphicon-plus pull-right"></i>
+              <div class="table_title">Personal Bests</div>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ko if: !personal_bests.activities().length  -->
+            <tr>
+              <td colspan="7" class="text-center text-danger">
+                <strong>No personal bests found</strong>
+              </td>
+            </tr>
+          <!-- /ko -->
+          <!-- ko if: personal_bests.activities().length  -->
+            <!-- ko foreach: personal_bests.activities() -->
+              <tr>
+                <td style="width:28%" class="stats_title">
+                  <a data-bind="text: title(),
+                                attr: {href: '/personal_best/'+personal_best_id()}"
+                     title="view more">
+                  </a>
+                </td>
+                <td style="width:69%"
+                    data-bind="text: kilometres() + 'km in ' + time() + ' on ' +
+                                     date('Do MMM, YYYY')">
+                </td>
+                <td style="width:1%">
+                  <i class="glyphicon glyphicon-zoom-in" title="View activity"
+                     data-bind="click: function(data, event) { $parent.page('/activity/'+id()); }">
+                  </i>
+                </td>
+              </tr>
+            <!-- /ko -->
+          <!-- /ko -->
+        </tbody>
+      </table>
+    </div>
+<!-- /ko -->

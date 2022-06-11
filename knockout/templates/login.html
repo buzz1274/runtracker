@@ -1,0 +1,38 @@
+<div class="form">
+    <fieldset>
+        <legend>Login</legend>
+        <form>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input class="form-control" data-bind="value: Email" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control"
+                       data-bind="value: Password" />
+            </div>
+        </form>
+        <div class="buttons">
+            <a data-bind="attr.href:href" href="">
+                <button type="button" class="btn btn-default">
+                    Cancel
+                </button>
+            </a>
+            <a data-bind="attr.href:href" href="register">
+                <button type="button" class="btn btn-default">
+                    Register
+                </button>
+            </a>
+            <button type="button" class="btn btn-primary">
+                Login
+            </button>
+        </div>
+        <span class="pull-left">
+            <a data-bind="attr.href:href" href="reset_password">
+                <button type="button" class="btn btn-default">
+                    Reset Password
+                </button>
+            </a>
+        </span>
+    </fieldset>
+</div>
